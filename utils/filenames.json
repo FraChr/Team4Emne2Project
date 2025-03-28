@@ -1,14 +1,13 @@
 {
-  "controller":
-  [
+  "controllers": [
     {
       "filename": "example",
       "type": "script",
       "ext": ".js"
     }
   ],
-  "styles":
-  [
+  "views": [],
+  "styles": [
     {
       "filename": "example",
       "type": "link",
