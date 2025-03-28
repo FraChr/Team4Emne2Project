@@ -1,0 +1,18 @@
+{
+  "controller":
+  [
+    {
+      "filename": "example",
+      "type": "script",
+      "ext": ".js"
+    }
+  ],
+  "styles":
+  [
+    {
+      "filename": "example",
+      "type": "link",
+      "ext": ".css"
+    }
+  ]
+}
