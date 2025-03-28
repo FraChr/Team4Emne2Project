@@ -42,11 +42,6 @@ async function addToHead(filePath, type) {
     });
 }
 
-// function addToHead(filePath, type) {
-//         let element = makeLinkOrScriptElem(filePath, type);
-//         document.head.appendChild(element);
-// }
-
 function makeLinkOrScriptElem(filePath, type) {
     if(!type) throw new Error("Type must be defined.");
     const elementAttrs = {
