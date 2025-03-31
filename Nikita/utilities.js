@@ -5,10 +5,19 @@ function createButtonHTML(name, onclick) {
     `;
 }
 
-function createButtonsHTML(names) {
+function createButtonsHTML(type, datas) {
     let html = '';
-    for (let name of names) {
-        html += createButtonHTML(name, 'handle' + capitalizeFirstLetter(removeAllSpaces(name)) + '()');
+    let onClick = ''
+    switch (type) {
+        case 'cours':
+            onClick = 'handleCours';
+            break;
+        case 'event':
+            onClick = 'handleEvent';
+            break;
+    }
+    for (let data of datas) {
+        html += createButtonHTML(data.name, onClick + `(${data.id})`);
     }
 
     return html;
