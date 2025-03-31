@@ -17,7 +17,7 @@ function createButtonsHTML(type, datas) {
             break;
     }
     for (let data of datas) {
-        html += createButtonHTML(data.name, onClick + `(${data.id})`);
+        html += createButtonHTML(data.name, `${onClick}(${data.id})`);
     }
 
     return html;

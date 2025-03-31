@@ -11,12 +11,12 @@ function mainPageChrisView() {
     return /*html*/ `
     <div class="buttons">
         <div>
-            ${createButtonsHTML('', model.data.courses)} 
+            ${createButtonsHTML('cours', model.data.courses)} 
             ${createButtonHTML('Se alle kurs', 'handleSeAlleKurs()')}
         </div>
 
         <div >
-            ${createButtonsHTML('', model.data.events)} 
+            ${createButtonsHTML('event', model.data.events)} 
             ${createButtonHTML('Se alle hendelser', 'handleSeAlleHendelser()')}
         </div>
     </div>
