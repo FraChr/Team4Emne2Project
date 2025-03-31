@@ -1,6 +1,16 @@
 studentView();
 function studentView(){
     let app = document.getElementById('app');
+
+    /*
+    let studentData = null;
+    for(let student of model.data.students){
+        if (student.id === model.app.selectedProfile){
+            studentData = student;
+            break;
+        }
+    }
+    */
     
     app.innerHTML = /*HTML*/`
         <div>
@@ -104,4 +114,8 @@ function drawHistory(){
             </tr>
         <table>
     `;
+}
+
+function drawHistoryRefactored(){
+    
 }
