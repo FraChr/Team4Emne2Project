@@ -1,20 +1,3 @@
-// function* getStudentStatus() {
-//     // let statuses = [];
-//     for (const status of model.data.studentStatus) {
-//         // statuses.push(status);
-//         yield status;
-//     }
-//     // return statuses;
-// }
-// function getStudentStatus(id) {
-//     for (const status of model.data.studentStatus) {
-//         if (status.id === id) {
-//             return status;
-//         }
-//     }
-// }
-
-
 function getStudents(id) {
 
     for (const student of model.data.students) {
