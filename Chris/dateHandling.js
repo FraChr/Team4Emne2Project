@@ -13,7 +13,7 @@ function toLocaleDate(date) {
         day: '2-digit'
     }
     let localeDate = dateObj.toLocaleString('no-NB', options);
-    console.log(localeDate);
+    return localeDate;
 }
 
 function convertIsoDate(date) {
