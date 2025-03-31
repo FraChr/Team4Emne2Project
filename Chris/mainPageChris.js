@@ -52,24 +52,4 @@ function makeTableRow() {
     `;
     }
     return rows;
-    // return /*html*/ `
-    //     <tr>
-    //         <td>${getStudentName()}</td>
-    //         <td>saf</td>
-    //         <td>saf</td>
-    //     </tr>
-    // `;
 }
-
-function getEventString() {
-
-}
-
-// function getStudentName(id) {
-//     for (const student of model.data.students) {
-//         if (student.id === id) {
-//             return student.name;
-//         }
-//     }
-// }
-
