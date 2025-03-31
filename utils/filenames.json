@@ -1,15 +1,21 @@
 {
-  "controllers": [
+  "utils": [
     {
-      "filename": "example",
+      "filename": "getData",
       "type": "script",
       "ext": ".js"
     }
   ],
-  "views": [],
-  "styles": [
+  "views": [
     {
-      "filename": "example",
+      "filename": "mainPageChris",
+      "type": "script",
+      "ext": ".js"
+    }
+  ],
+  "Chris": [
+    {
+      "filename": "mainPageChrisView",
       "type": "link",
       "ext": ".css"
     }

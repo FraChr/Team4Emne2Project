@@ -26,8 +26,14 @@ async function loadFromJson() {
 async function load(directory, files) {
     if (!isNonEmptyList(files, directory)) return;
     for (const file of files) {
-        const filePath = `${directory}/${file.filename}${file.ext}`
+        const filePath = directory === 'root'
+            ? `/${file.filename}${file.ext}`
+            : `/${directory}/${file.filename}${file.ext}`
+        // const filePath = `${directory}/${file.filename}${file.ext}`
         await addToHead(filePath, file.type);
+
+        console.log(`Loading from: /${directory}/${file.filename}${file.ext}`);
+
     }
 }
 
