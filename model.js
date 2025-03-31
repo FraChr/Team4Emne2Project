@@ -82,11 +82,11 @@ const model = {
         ],
 
         events: [
-            { id: 1, name: 'applied' },
-            { id: 2, name: 'approved' },
-            { id: 3, name: 'started' },
-            { id: 4, name: 'cancelled' },
-            { id: 5, name: 'completed' },
+            { id: 1, name: 'Søkt' },
+            { id: 2, name: 'Godkjent' },
+            { id: 3, name: 'Startet' },
+            { id: 4, name: 'Avbrutt' },
+            { id: 5, name: 'Fullført' },
         ],
 
         payments: [

@@ -42,3 +42,29 @@ function getStatus(id) {
     }
     return null;
 }
+
+function getStudentStatus(id) {
+    let statusData = '';
+    for (const status of model.data.studentStatus) {
+        if (status.studentId === id) {
+            statusData += /*html*/ `
+                ${getEvents(status.eventId).name} | ${getCourses(status.courseId).name} <br>
+                ${toLocaleDate(status.date)}
+            `;
+        }
+    }
+    return statusData;
+}
+
+function getStudentPayment(id) {
+    let paymentData = '';
+    for (const payment of model.data.payments) {
+        if (payment.studentId === id) {
+            paymentData += /*html*/ `
+                ${payment.amount},- 
+                ${toLocaleDate(payment.date)} <br>       
+            `;
+        }
+    }
+    return paymentData;
+}
