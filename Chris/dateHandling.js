@@ -8,8 +8,8 @@ function getNewDate() {
 function toLocaleDate(date) {
     let dateObj = convertIsoDate(date);
     const options = {
-        year: 'numeric',
-        month: '2-digit',
+        year: '2-digit',
+        month: 'short',
         day: '2-digit'
     }
     let localeDate = dateObj.toLocaleString('no-NB', options);

@@ -35,31 +35,50 @@ function mainPageChrisView() {
 }
 
 function makeTableRow() {
-
     let rows = '';
     for (const student of model.data.students) {
-        let date = getStatus(student.id).date
-        // console.log(toLocaleDate(getStatus(student.id).date))
-        console.log(date);
-        rows += /*html*/ `
-        <tr>
-            <td><input type="checkbox"></td>
-            <td>${student.name}</td>
+        rows += /*html*/`
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>
+                    ${student.name}
+                </td>
+                <td>
+                    ${makePaymentCol(student.id)}
+                </td>
+                <td>
+                    ${makeStatusColHtml(student.id)}
+                </td>
+                
+            </tr>
+       `
 
-            <td>
-                ${getEvents(student.id).name},
-            </td>
-            
-        </tr>
-    `;
     }
     return rows;
 }
 
-// looped status
-{/* <td>
-                kr: ${getPayments(student.studentId).amount ?? 'N/A'},- 
-                <br> ${toLocaleDate(getPayments(student.studentId).date)}
-            </td> */}
+function makeStatusColHtml(id) {
+    let statusCol = '';
+    for (const status of model.data.studentStatus) {
+        if (status.studentId === id) {
+            statusCol += /*html*/ `
+                ${getEvents(status.eventId).name} | ${getCourses(status.courseId).name} <br>
+                ${toLocaleDate(status.date)}
+            `;
+        }
+    }
+    return statusCol;
+}
 
-// <td>${getEvents(student.eventId).name}, ${toLocaleDate(student.date)}</td>
+function makePaymentCol(id) {
+    let paymentCol = '';
+    for (const payment of model.data.payments) {
+        if (payment.studentId === id) {
+            paymentCol += /*html*/ `
+                ${payment.amount},- 
+                ${toLocaleDate(payment.date)} <br>       
+            `;
+        }
+    }
+    return paymentCol;
+}
