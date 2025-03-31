@@ -44,41 +44,14 @@ function makeTableRow() {
                     ${student.name}
                 </td>
                 <td>
-                    ${makePaymentCol(student.id)}
+                    ${getStudentPayment(student.id)}
                 </td>
                 <td>
-                    ${makeStatusColHtml(student.id)}
+                    ${getStudentStatus(student.id)}
                 </td>
                 
             </tr>
        `
-
     }
     return rows;
-}
-
-function makeStatusColHtml(id) {
-    let statusCol = '';
-    for (const status of model.data.studentStatus) {
-        if (status.studentId === id) {
-            statusCol += /*html*/ `
-                ${getEvents(status.eventId).name} | ${getCourses(status.courseId).name} <br>
-                ${toLocaleDate(status.date)}
-            `;
-        }
-    }
-    return statusCol;
-}
-
-function makePaymentCol(id) {
-    let paymentCol = '';
-    for (const payment of model.data.payments) {
-        if (payment.studentId === id) {
-            paymentCol += /*html*/ `
-                ${payment.amount},- 
-                ${toLocaleDate(payment.date)} <br>       
-            `;
-        }
-    }
-    return paymentCol;
 }
