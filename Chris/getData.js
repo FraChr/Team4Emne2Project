@@ -36,3 +36,11 @@ function getPayments(id) {
     }
     return null;
 }
+
+function getStatus(id) {
+    for (const status of model.data.studentStatus) {
+        if (status.id === id) {
+            return status;
+        }
+    }
+}

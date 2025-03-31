@@ -37,19 +37,29 @@ function mainPageChrisView() {
 function makeTableRow() {
 
     let rows = '';
-    for (const status of model.data.studentStatus) {
-
+    for (const student of model.data.students) {
+        let date = getStatus(student.id).date
+        // console.log(toLocaleDate(getStatus(student.id).date))
+        console.log(date);
         rows += /*html*/ `
         <tr>
             <td><input type="checkbox"></td>
-            <td>${getStudents(status.studentId).name}</td>
+            <td>${student.name}</td>
+
             <td>
-                kr: ${getPayments(status.studentId).amount ?? 'N/A'},- 
-                <br> ${toLocaleDate(getPayments(status.studentId).date)}
+                ${getEvents(student.id).name},
             </td>
-            <td>${getEvents(status.eventId).name}, ${toLocaleDate(status.date)}</td>
+            
         </tr>
     `;
     }
     return rows;
 }
+
+// looped status
+{/* <td>
+                kr: ${getPayments(student.studentId).amount ?? 'N/A'},- 
+                <br> ${toLocaleDate(getPayments(student.studentId).date)}
+            </td> */}
+
+// <td>${getEvents(student.eventId).name}, ${toLocaleDate(student.date)}</td>
