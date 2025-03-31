@@ -1,6 +1,16 @@
 studentView();
 function studentView(){
     let app = document.getElementById('app');
+
+    /*
+    let studentData = null;
+    for(let student of model.data.students){
+        if (student.id === model.app.selectedProfile){
+            studentData = student;
+            break;
+        }
+    }
+    */
     
     app.innerHTML = /*HTML*/`
         <div>
@@ -103,5 +113,28 @@ function drawHistory(){
                 <td> 23.06.24 - Søkt Start IT </td> 
             </tr>
         <table>
+    `;
+}
+
+
+// idk about this. ikke noe som heter event description
+// må også sjekke studentId is studentStatus til rikitg studentId på profil
+function drawHistoryRefactored(){ 
+    let row = '';
+    for (let event of model.data.studentStatus){
+        row += /*HTML*/ `
+            <tr>
+                <td> ${event.date} - event description?</td>
+            </tr>
+        `;
+    }
+
+    return /*HTML*/ `
+        <table> 
+            <tr>
+                <th> Historikk <button> ↑↓ </button> </th> 
+            </tr>
+            ${row}
+        </table>
     `;
 }
