@@ -1,0 +1,21 @@
+table,
+tr,
+th,
+td {
+    width: 500px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th,
+td {
+    border-bottom: 1px solid;
+}
+
+.buttons{
+    display:flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 15px;
+}
