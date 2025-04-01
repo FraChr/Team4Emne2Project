@@ -12,12 +12,14 @@ th,
 td {
     border-bottom: 1px solid;
 }
-tr:nth-child(even) {
-    background-color: antiquewhite;
-}
+
 .buttons{
     display:flex;
     flex-direction: column;
     gap: 5px;
     margin: 15px;
+}
+
+.pushedButton{
+    background-color: darkgray;
 }

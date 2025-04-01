@@ -1,24 +1,16 @@
 function mainPageChrisView() {
-    let courses = [];
-    let events = [];
-    for (let cours of model.data.courses) {
-        courses.push(cours.name);
-    }
-    for (let event of model.data.events) {
-        events.push(event.name);
-    }
 
     return /*html*/ `
     <div class="buttons">
         <div>
-            ${createButtonsHTML(courses)} 
-            ${createButtonHTML('Se alle kurs', 'handleSeAlleKurs()')}
+            ${createButtonsHTML('courses')} 
         </div>
-        <div>
-            ${createButtonsHTML(events)} 
-            ${createButtonHTML('Se alle hendelser', 'handleSeAlleHendelser()')}
+
+        <div >
+            ${createButtonsHTML('events')} 
         </div>
     </div>
+
         <table>
             <tr>
                 <th><input type="checkbox" id="checkAll" onclick="checkAll(this)"/></th>
@@ -40,7 +32,7 @@ function makeTableRow() {
             <tr>
                 <td><input type="checkbox" class="checkbox" onclick="updateCheckAll()"/></td>
                 <td>
-                    <span onclick="studentPage(${student.id})">${student.name}</span>
+                    <span>${student.name}</span>
                 </td>
                 <td>
                     ${getStudentPayment(student.id)}
@@ -53,7 +45,6 @@ function makeTableRow() {
     }
     return rows;
 }
-
 
 
 // Makes table based on filteredStudents array in model;
