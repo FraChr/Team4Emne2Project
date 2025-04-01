@@ -65,10 +65,7 @@ const model = {
             },
         ],
 
-        filteredStudents: [
-            { id: 1, eventId: 1, courseId: 1, studentId: 1, date: '2024-12-14' },
-            { id: 2, eventId: 5, courseId: 2, studentId: 1, date: '2024-02-04' },
-        ],
+        filteredStudents: [],
 
         studentStatus: [
             { id: 1, eventId: 1, courseId: 1, studentId: 1, date: '2024-12-14' },
