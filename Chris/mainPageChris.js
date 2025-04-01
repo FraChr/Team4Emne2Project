@@ -14,13 +14,11 @@ function mainPageChrisView() {
             ${createButtonsHTML(courses)} 
             ${createButtonHTML('Se alle kurs', 'handleSeAlleKurs()')}
         </div>
-
-        <div >
+        <div>
             ${createButtonsHTML(events)} 
             ${createButtonHTML('Se alle hendelser', 'handleSeAlleHendelser()')}
         </div>
     </div>
-
         <table>
             <tr>
                 <th><input type="checkbox"></th>
@@ -37,11 +35,11 @@ function mainPageChrisView() {
 function makeTableRow() {
     let rows = '';
     for (const student of model.data.students) {
-        rows += /*html*/`
+        rows += /*html*/ `
             <tr>
                 <td><input type="checkbox"></td>
                 <td>
-                    ${student.name}
+                    <a href="">${student.name}</a>
                 </td>
                 <td>
                     ${getStudentPayment(student.id)}
@@ -49,9 +47,8 @@ function makeTableRow() {
                 <td>
                     ${getStudentStatus(student.id)}
                 </td>
-                
             </tr>
-       `
+       `;
     }
     return rows;
 }

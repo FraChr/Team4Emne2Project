@@ -1,4 +1,4 @@
-function getStudents(id) {
+function getStudent(id) {
     for (const student of model.data.students) {
         if (student.id === id) {
             return student;
@@ -7,7 +7,7 @@ function getStudents(id) {
     return null;
 }
 
-function getCourses(id) {
+function getCourse(id) {
     for (const course of model.data.courses) {
         if (course.id === id) {
             return course;
@@ -16,7 +16,7 @@ function getCourses(id) {
     return null;
 }
 
-function getEvents(id) {
+function getEvent(id) {
     for (const event of model.data.events) {
         if (event.id === id) {
             return event;
@@ -25,7 +25,7 @@ function getEvents(id) {
     return null;
 }
 
-function getPayments(id) {
+function getPayment(id) {
     for (const payment of model.data.payments) {
         if (payment.id === id) {
             return payment;
@@ -44,12 +44,13 @@ function getStatus(id) {
 }
 
 function getStudentStatus(id) {
+    const setLocaleDate = 'no-NB'
     let statusData = '';
     for (const status of model.data.studentStatus) {
         if (status.studentId === id) {
             statusData += /*html*/ `
-                ${getEvents(status.eventId).name} | ${getCourses(status.courseId).name} <br>
-                ${toLocaleDate(status.date)}
+                ${getEvent(status.eventId).name} | ${getCourse(status.courseId).name} <br>
+                ${toLocaleDate(status.date, setLocaleDate)}
             `;
         }
     }
@@ -57,12 +58,13 @@ function getStudentStatus(id) {
 }
 
 function getStudentPayment(id) {
+    const setLocaleDate = 'no-NB'
     let paymentData = '';
     for (const payment of model.data.payments) {
         if (payment.studentId === id) {
             paymentData += /*html*/ `
                 ${payment.amount},- 
-                ${toLocaleDate(payment.date)} <br>       
+                ${toLocaleDate(payment.date, setLocaleDate)} <br>       
             `;
         }
     }

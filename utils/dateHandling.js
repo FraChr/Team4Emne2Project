@@ -5,14 +5,15 @@ function getNewDate() {
     return dateOnly;
 }
 
-function toLocaleDate(date) {
+function toLocaleDate(date, locale = 'no-NB') {
+    if (!date) return;
     let dateObj = convertIsoDate(date);
     const options = {
         year: '2-digit',
         month: 'short',
         day: '2-digit'
     }
-    let localeDate = dateObj.toLocaleString('no-NB', options);
+    let localeDate = dateObj.toLocaleString(locale, options);
     return localeDate;
 }
 
