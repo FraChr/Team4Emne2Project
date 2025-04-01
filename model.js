@@ -65,12 +65,17 @@ const model = {
             },
         ],
 
+        filteredStudents: [
+            { id: 1, eventId: 1, courseId: 1, studentId: 1, date: '2024-12-14' },
+            { id: 2, eventId: 5, courseId: 2, studentId: 1, date: '2024-02-04' },
+        ],
+
         studentStatus: [
             { id: 1, eventId: 1, courseId: 1, studentId: 1, date: '2024-12-14' },
-            { id: 1, eventId: 1, courseId: 2, studentId: 1, date: '2024-02-04' },
-            { id: 2, eventId: 3, courseId: 1, studentId: 2, date: '2024-12-14' },
-            { id: 3, eventId: 3, courseId: 3, studentId: 3, date: '2024-12-14' },
-            { id: 4, eventId: 4, courseId: 3, studentId: 4, date: '2024-12-14' }
+            { id: 2, eventId: 5, courseId: 2, studentId: 1, date: '2024-02-04' },
+            { id: 3, eventId: 3, courseId: 1, studentId: 2, date: '2024-12-14' },
+            { id: 4, eventId: 3, courseId: 3, studentId: 3, date: '2024-12-14' },
+            { id: 5, eventId: 4, courseId: 3, studentId: 4, date: '2024-12-14' },
         ],
 
         courses: [
