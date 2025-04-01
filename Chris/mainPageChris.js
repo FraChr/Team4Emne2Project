@@ -40,7 +40,7 @@ function makeTableRow() {
             <tr>
                 <td><input type="checkbox" class="checkbox" onclick="updateCheckAll()"/></td>
                 <td>
-                    <span>${student.name}</span>
+                    <span onclick="studentPage(${student.id})">${student.name}</span>
                 </td>
                 <td>
                     ${getStudentPayment(student.id)}
@@ -53,6 +53,7 @@ function makeTableRow() {
     }
     return rows;
 }
+
 
 
 // Makes table based on filteredStudents array in model;
