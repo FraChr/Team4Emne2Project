@@ -1,4 +1,5 @@
 function getStudent(id) {
+    if(!id) return setError('Student id not defined');
     for (const student of model.data.students) {
         if (student.id === id) {
             return student;
@@ -8,6 +9,7 @@ function getStudent(id) {
 }
 
 function getCourse(id) {
+    if(!id) return setError('Course id not defined');
     for (const course of model.data.courses) {
         if (course.id === id) {
             return course;
@@ -17,6 +19,7 @@ function getCourse(id) {
 }
 
 function getEvent(id) {
+    if(!id) return setError('Event id not defined');
     for (const event of model.data.events) {
         if (event.id === id) {
             return event;
@@ -26,6 +29,7 @@ function getEvent(id) {
 }
 
 function getPayment(id) {
+    if(!id) return setError('Payment id not defined');
     for (const payment of model.data.payments) {
         if (payment.id === id) {
             return payment;
@@ -35,6 +39,7 @@ function getPayment(id) {
 }
 
 function getStatus(id) {
+    if(!id) return setError('Status id not defined');
     for (const status of model.data.studentStatus) {
         if (status.studentId === id) {
             return status;
@@ -64,7 +69,7 @@ function getStudentPayment(id) {
         if (payment.studentId === id) {
             paymentData += /*html*/ `
                 ${payment.amount},- 
-                ${toLocaleDate(payment.date, setLocaleDate)} <br>       
+                ${toLocaleDate(payment.date, setLocaleDate)}    
             `;
         }
     }
