@@ -67,11 +67,14 @@ const model = {
             },
         ],
 
+        filteredStudents: [],
+
         studentStatus: [
             { id: 1, eventId: 1, courseId: 1, studentId: 1, date: '2024-12-14' },
-            { id: 2, eventId: 3, courseId: 1, studentId: 2, date: '2024-12-14' },
-            { id: 3, eventId: 3, courseId: 3, studentId: 3, date: '2024-12-14' },
-            { id: 4, eventId: 4, courseId: 3, studentId: 4, date: '2024-12-14' }
+            { id: 2, eventId: 5, courseId: 2, studentId: 1, date: '2024-02-04' },
+            { id: 3, eventId: 3, courseId: 1, studentId: 2, date: '2024-12-14' },
+            { id: 4, eventId: 3, courseId: 3, studentId: 3, date: '2024-12-14' },
+            { id: 5, eventId: 4, courseId: 3, studentId: 4, date: '2024-12-14' },
         ],
 
         courses: [
@@ -83,11 +86,11 @@ const model = {
         ],
 
         events: [
-            { id: 1, name: 'applied' },
-            { id: 2, name: 'approved' },
-            { id: 3, name: 'started' },
-            { id: 4, name: 'cancelled' },
-            { id: 5, name: 'completed' },
+            { id: 1, name: 'Søkt' },
+            { id: 2, name: 'Godkjent' },
+            { id: 3, name: 'Startet' },
+            { id: 4, name: 'Avbrutt' },
+            { id: 5, name: 'Fullført' },
         ],
 
         payments: [

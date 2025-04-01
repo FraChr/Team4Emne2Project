@@ -1,33 +1,82 @@
-function createButtonHTML(name, onclick, style) {
+function createButtonHTML(name, id, buttonsType, buttonClass) {
 
     return /*HTML*/ `
-    <button class='${style ?? ''}' onclick='${onclick ?? ''}'>${name}</button>
+    <button class='${buttonClass ?? ''}' onclick='handleOnclick(${id}, "${buttonsType}")'>${name}</button>
     `;
 }
 
-function createButtonsHTML(type, datas) {
+function createButtonsHTML(buttonsType) {
     let html = '';
-    let onClick = ''
     let selectedButtons;
-    switch (type) {
-        case 'cours':
-            onClick = 'handleCours';
+    let dataSet;
+    let nameForShowAllButton;
+
+    switch (buttonsType) {
+        case 'courses':
+            nameForShowAllButton = 'Sa alle kurs';
+            selectedButtons = model.inputs.mainPage.selectedCurses;
+            dataSet = model.data.courses;
+            break;
+        case 'events':
+            nameForShowAllButton = 'Sa alle hendelser';
+            selectedButtons = model.inputs.mainPage.selectedEvents;
+            dataSet = model.data.events;
+            break;
+    }
+
+    for (const data of dataSet) {
+        let buttonClass = '';
+        if (selectedButtons.includes(data.id) || selectedButtons[0] === 0) {
+            buttonClass = 'pushedButton';
+        }
+        html += /*HTML*/` ${createButtonHTML(data.name, data.id, buttonsType, buttonClass)}`;
+    }
+
+    let buttonClass = selectedButtons[0] === 0 ? 'pushedButton' : '';
+    html += /*HTML*/` ${createButtonHTML(nameForShowAllButton, 0, buttonsType, buttonClass)}`;
+
+    return html;
+}
+
+
+function handleOnclick(id, buttonsType) {
+    let selectedButtons;
+
+    switch (buttonsType) {
+        case 'courses':
             selectedButtons = model.inputs.mainPage.selectedCurses;
             break;
-        case 'event':
-            onClick = 'handleEvent';
+        case 'events':
             selectedButtons = model.inputs.mainPage.selectedEvents;
             break;
     }
-    for (let data of datas) {
-        let style = '';
-        if (selectedButtons.includes(data.id)) {
-            style = 'pushedButton';
+
+    if (id === 0) {
+        if (selectedButtons[0] !== 0) {
+            selectedButtons.splice(1);
+            selectedButtons[0] = 0;
         }
-        html += /*HTML*/` ${createButtonHTML(data.name, onClick + '(' + data.id + ')', style)}`;
+        else {
+            selectedButtons[0] = 1;
+        }
+    }
+    
+    else {
+        if (selectedButtons.includes(id)) {
+            let index = selectedButtons.indexOf(id);
+            selectedButtons.splice(index, 1);
+            if(selectedButtons.length < 1){
+                selectedButtons[0] = 1;  
+            }
+        }
+        else {
+            if (selectedButtons[0] !== 0) {
+                selectedButtons.push(id);
+            }
+        }
     }
 
-    return html;
+    updateView();
 }
 
 function capitalizeFirstLetter(str) {
@@ -38,19 +87,4 @@ function capitalizeFirstLetter(str) {
 function removeAllSpaces(str) {
 
     return str.split(" ").join("");
-}
-
-function handleCours(id) {
-    if (model.inputs.mainPage.selectedCurses.includes(id)) {
-        let index = model.inputs.mainPage.selectedCurses.indexOf(id);
-        model.inputs.mainPage.selectedCurses.splice(index, 1);
-    }
-    else {
-        model.inputs.mainPage.selectedCurses.push(id);
-    }
-    updateView();
-}
-
-function handleEvent(id) {
-
 }
