@@ -35,7 +35,6 @@ function test() {
   const seenStudentIds = new Set();
 
     for (const student of filtered) {
-        // const uniqueKey = `${student.courseId}-${student.eventId}`;
         if (!seenStudentIds.has(student.studentId)) {
             unique.push(student);
             seenStudentIds.add(student.studentId);
