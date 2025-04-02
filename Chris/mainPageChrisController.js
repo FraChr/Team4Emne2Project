@@ -1,36 +1,38 @@
-function filter(param, courseId, eventId) {
-    const filters = {
-        event: (status, eventId) => status.eventId === eventId,
-        course: (status, courseId) => status.courseId === courseId,
-    };
-
-    if(!filters[param]) {
-        setError(`Invalid filter parameter ${param}`);
-        return;
-    }
-
-    return model.data.studentStatus.filter(status =>  {
-        return filters[param](status, courseId, eventId);
-    });
-}
+// function filter(param, id) {
+//     const filters = {
+//         event: (status, eventId) => status.eventId === id,
+//         course: (status, courseId) => status.courseId === id,
+//     };
+//
+//     if(!filters[param]) {
+//         setError(`Invalid filter parameter ${param}`);
+//         return;
+//     }
+//
+//     return model.data.studentStatus.filter(status =>  {
+//         return filters[param](status, id);
+//     });
+// }
 
 function filterEvents() {
-    return model.inputs.mainPage.selectedEvents.flatMap(event => filter('event', event));
+    let courses = filterCourses();
+    let events = model.inputs.mainPage.selectedEvents;
+    return courses.filter(course => events.includes(course.eventId))
 }
 
 function filterCourses() {
-    return model.inputs.mainPage.selectedCurses.flatMap(course => filter('course', course));
+    let courses = model.inputs.mainPage.selectedCurses;
+    return model.data.studentStatus.filter(status => courses.includes(status.courseId));
 }
 
 
 function removeDuplicateStudentId() {
+  const filtered = [...filterEvents()];
 
-  const filtered = [...filterCourses(), ...filterEvents()];
-
-
-
+  console.log('courseIds', model.inputs.mainPage.selectedCurses);
+  console.log('eventIds', model.inputs.mainPage.selectedEvents);
+    console.log('events', filterEvents());
   console.log('filtered', filtered);
-
 
   const unique = [];
   const seenStudentIds = new Set();
