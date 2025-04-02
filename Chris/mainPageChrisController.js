@@ -16,12 +16,18 @@
 
 function filterEvents() {
     let courses = filterCourses();
+    console.log("courses in filterEvents() ",courses);
     let events = model.inputs.mainPage.selectedEvents;
     return courses.filter(course => events.includes(course.eventId))
 }
 
 function filterCourses() {
     let courses = model.inputs.mainPage.selectedCurses;
+    const allSelected = 0;
+    console.log(courses);
+    if(courses.includes(allSelected)) {
+        return model.data.studentStatus;
+    }
     return model.data.studentStatus.filter(status => courses.includes(status.courseId));
 }
 
