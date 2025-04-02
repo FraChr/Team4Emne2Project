@@ -1,12 +1,12 @@
 function mainPageView() {
-
+    filterStudentStatus();
     return /*html*/ `
     <div class="buttons">
         <div>
             ${createButtonsHTML('courses')} 
         </div>
 
-        <div >
+        <div>
             ${createButtonsHTML('events')} 
         </div>
     </div>
@@ -31,7 +31,7 @@ function mainPageView() {
     </select>
 
     <button disabled id="statusButton" onclick="changeStudentStatus(document.getElementById('userChoiceStatus').value, document.getElementById('userChoiceCourse').value)">Oppdater</button>
-    
+
         <table>
             <tr>
                 <th><input type="checkbox" id="checkAll" onclick="checkAll(this)"/></th>
@@ -92,7 +92,6 @@ function createButtonsHTML(buttonsType) {
     let selectedButtons;
     let dataSet;
     let nameForShowAllButton;
-    let selectAllButtonId = 0;
 
     switch (buttonsType) {
         case 'courses':
@@ -109,14 +108,14 @@ function createButtonsHTML(buttonsType) {
 
     for (const data of dataSet) {
         let buttonClass = '';
-        if (selectedButtons.includes(data.id) || selectedButtons[0] === selectAllButtonId) {
+        if (selectedButtons.includes(data.id) || selectedButtons[0] === 0) {
             buttonClass = 'pushedButton';
         }
         html += /*HTML*/` ${createButtonHTML(data.name, data.id, buttonsType, buttonClass)}`;
     }
 
-    let buttonClass = selectedButtons[0] === selectAllButtonId ? 'pushedButton' : '';
-    html += /*HTML*/` ${createButtonHTML(nameForShowAllButton, selectAllButtonId, buttonsType, buttonClass)}`;
+    let buttonClass = selectedButtons[0] === 0 ? 'pushedButton' : '';
+    html += /*HTML*/` ${createButtonHTML(nameForShowAllButton, 0, buttonsType, buttonClass)}`;
 
     return html;
 }

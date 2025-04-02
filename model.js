@@ -1,7 +1,6 @@
 const model = {
     app: {
         currentPage: 'mainPage',
-        selectedStudent: null,
     },
 
     inputs: {
