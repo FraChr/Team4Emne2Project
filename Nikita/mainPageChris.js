@@ -25,37 +25,14 @@ function mainPageChrisView() {
 }
 
 // Makes table of all students;
-function makeTableRow() {
-    let rows = '';
-    for (const student of model.data.students) {
-        rows += /*html*/ `
-            <tr>
-                <td><input type="checkbox" class="checkbox" onclick="updateCheckAll()"/></td>
-                <td>
-                    <span>${student.name}</span>
-                </td>
-                <td>
-                    ${getStudentPayment(student.id)}
-                </td>
-                <td>
-                    ${getStudentStatus(student.id)}
-                </td>
-            </tr>
-       `;
-    }
-    return rows;
-}
-
-
-// Makes table based on filteredStudents array in model;
 // function makeTableRow() {
 //     let rows = '';
-//     for (const student of model.data.filteredStudents) {
+//     for (const student of model.data.students) {
 //         rows += /*html*/ `
 //             <tr>
 //                 <td><input type="checkbox" class="checkbox" onclick="updateCheckAll()"/></td>
 //                 <td>
-//                     <span>${getStudent(student.studentId).name}</span>
+//                     <span>${student.name}</span>
 //                 </td>
 //                 <td>
 //                     ${getStudentPayment(student.id)}
@@ -68,6 +45,30 @@ function makeTableRow() {
 //     }
 //     return rows;
 // }
+
+
+// Makes table based on filteredStudents array in model;
+function makeTableRow() {
+    removeDuplicateStudentId();
+    let rows = '';
+    for (const student of model.data.filteredStudents) {
+        rows += /*html*/ `
+            <tr>
+                <td><input type="checkbox" class="checkbox" onclick="updateCheckAll()"/></td>
+                <td>
+                    <span>${getStudent(student.studentId).name}</span>
+                </td>
+                <td>
+                    ${getStudentPayment(student.id)}
+                </td>
+                <td>
+                    ${getStudentStatus(student.id)}
+                </td>
+            </tr>
+       `;
+    }
+    return rows;
+}
 
 function checkAll(source) {
     document.querySelectorAll('.checkbox').forEach(checkbox => {

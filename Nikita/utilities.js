@@ -10,6 +10,7 @@ function createButtonsHTML(buttonsType) {
     let selectedButtons;
     let dataSet;
     let nameForShowAllButton;
+    let selectAllButtonId = 0;
 
     switch (buttonsType) {
         case 'courses':
@@ -26,14 +27,14 @@ function createButtonsHTML(buttonsType) {
 
     for (const data of dataSet) {
         let buttonClass = '';
-        if (selectedButtons.includes(data.id) || selectedButtons[0] === 0) {
+        if (selectedButtons.includes(data.id) || selectedButtons[0] === selectAllButtonId) {
             buttonClass = 'pushedButton';
         }
         html += /*HTML*/` ${createButtonHTML(data.name, data.id, buttonsType, buttonClass)}`;
     }
 
-    let buttonClass = selectedButtons[0] === 0 ? 'pushedButton' : '';
-    html += /*HTML*/` ${createButtonHTML(nameForShowAllButton, 0, buttonsType, buttonClass)}`;
+    let buttonClass = selectedButtons[0] === selectAllButtonId ? 'pushedButton' : '';
+    html += /*HTML*/` ${createButtonHTML(nameForShowAllButton, selectAllButtonId, buttonsType, buttonClass)}`;
 
     return html;
 }
@@ -41,6 +42,8 @@ function createButtonsHTML(buttonsType) {
 
 function handleOnclick(id, buttonsType) {
     let selectedButtons;
+    let selectAllButtonId = 0;
+    let firstButtonId = 1;
 
     switch (buttonsType) {
         case 'courses':
@@ -51,26 +54,26 @@ function handleOnclick(id, buttonsType) {
             break;
     }
 
-    if (id === 0) {
-        if (selectedButtons[0] !== 0) {
+    if (id === selectAllButtonId) {
+        if (selectedButtons[0] !== selectAllButtonId) {
             selectedButtons.splice(1);
-            selectedButtons[0] = 0;
+            selectedButtons[0] = selectAllButtonId;
         }
         else {
-            selectedButtons[0] = 1;
+            selectedButtons[0] = firstButtonId;
         }
     }
-    
+
     else {
         if (selectedButtons.includes(id)) {
             let index = selectedButtons.indexOf(id);
             selectedButtons.splice(index, 1);
             if(selectedButtons.length < 1){
-                selectedButtons[0] = 1;  
+                selectedButtons[0] = firstButtonId;  
             }
         }
         else {
-            if (selectedButtons[0] !== 0) {
+            if (selectedButtons[0] !== selectAllButtonId) {
                 selectedButtons.push(id);
             }
         }

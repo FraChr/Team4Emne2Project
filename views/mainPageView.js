@@ -92,6 +92,7 @@ function createButtonsHTML(buttonsType) {
     let selectedButtons;
     let dataSet;
     let nameForShowAllButton;
+    let selectAllButtonId = 0;
 
     switch (buttonsType) {
         case 'courses':
@@ -108,14 +109,14 @@ function createButtonsHTML(buttonsType) {
 
     for (const data of dataSet) {
         let buttonClass = '';
-        if (selectedButtons.includes(data.id) || selectedButtons[0] === 0) {
+        if (selectedButtons.includes(data.id) || selectedButtons[0] === selectAllButtonId) {
             buttonClass = 'pushedButton';
         }
         html += /*HTML*/` ${createButtonHTML(data.name, data.id, buttonsType, buttonClass)}`;
     }
 
-    let buttonClass = selectedButtons[0] === 0 ? 'pushedButton' : '';
-    html += /*HTML*/` ${createButtonHTML(nameForShowAllButton, 0, buttonsType, buttonClass)}`;
+    let buttonClass = selectedButtons[0] === selectAllButtonId ? 'pushedButton' : '';
+    html += /*HTML*/` ${createButtonHTML(nameForShowAllButton, selectAllButtonId, buttonsType, buttonClass)}`;
 
     return html;
 }

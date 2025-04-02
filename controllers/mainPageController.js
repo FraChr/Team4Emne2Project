@@ -46,6 +46,8 @@ function pushStudentId(studentId) {
 
 function handleOnclick(id, buttonsType) {
     let selectedButtons;
+    let selectAllButtonId = 0;
+    let firstButtonId = 1;
 
     switch (buttonsType) {
         case 'courses':
@@ -56,13 +58,13 @@ function handleOnclick(id, buttonsType) {
             break;
     }
 
-    if (id === 0) {
-        if (selectedButtons[0] !== 0) {
+    if (id === selectAllButtonId) {
+        if (selectedButtons[0] !== selectAllButtonId) {
             selectedButtons.splice(1);
-            selectedButtons[0] = 0;
+            selectedButtons[0] = selectAllButtonId;
         }
         else {
-            selectedButtons[0] = 1;
+            selectedButtons[0] = firstButtonId;
         }
     }
 
@@ -70,12 +72,12 @@ function handleOnclick(id, buttonsType) {
         if (selectedButtons.includes(id)) {
             let index = selectedButtons.indexOf(id);
             selectedButtons.splice(index, 1);
-            if (selectedButtons.length < 1) {
-                selectedButtons[0] = 1;
+            if(selectedButtons.length < 1){
+                selectedButtons[0] = firstButtonId;  
             }
         }
         else {
-            if (selectedButtons[0] !== 0) {
+            if (selectedButtons[0] !== selectAllButtonId) {
                 selectedButtons.push(id);
             }
         }
