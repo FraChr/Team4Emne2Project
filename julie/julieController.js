@@ -225,28 +225,28 @@ function removeAllSpaces(str) {
 
 //JULIE
 
-function checkButtonStatus(){
+function checkButtonStatus() {
     let userChoiceStatus = document.getElementById('userChoiceStatus');
     let userChoiceCourse = document.getElementById('userChoiceCourse');
-    if(userChoiceStatus.value && userChoiceCourse.value){
+    if (userChoiceStatus.value && userChoiceCourse.value) {
         statusButton.disabled = false;
     }
-    else{
+    else {
         statusButton.disabled = true;
     }
 }
 
-function changeStudentStatus(newStudentStatus, studentCourse){
-    let statusID = model.data.studentStatus[model.data.studentStatus.length -1].id;
+function changeStudentStatus(newStudentStatus, studentCourse) {
+    let statusID = model.data.studentStatus[model.data.studentStatus.length - 1].id;
     let todaysDate = getNewDate();
     statusID++;
 
-    if(newStudentStatus == 'addPayment'){
+    if (newStudentStatus == 'addPayment') {
         addPayment();
     }
-    else{
-        for(const chosenStudent of model.inputs.mainPage.studentIds){
-            model.data.studentStatus.push({id: statusID, eventId: parseInt(newStudentStatus), courseId: parseInt(studentCourse), studentId: parseInt(chosenStudent), date: todaysDate});
+    else {
+        for (const chosenStudent of model.inputs.mainPage.studentIds) {
+            model.data.studentStatus.push({ id: statusID, eventId: parseInt(newStudentStatus), courseId: parseInt(studentCourse), studentId: parseInt(chosenStudent), date: todaysDate });
             statusID++;
         }
     }
@@ -254,18 +254,18 @@ function changeStudentStatus(newStudentStatus, studentCourse){
     updateView();
 }
 
-function addPayment(){
+function addPayment() {
     //Må finne ut om vi skal ha pop up eller ei
 }
 
-function pushStudentId(studentId){
+function pushStudentId(studentId) {
 
 
-    if(model.inputs.mainPage.studentIds.includes(studentId)){
+    if (model.inputs.mainPage.studentIds.includes(studentId)) {
         index = model.inputs.mainPage.studentIds.indexOf(studentId);
         model.inputs.mainPage.studentIds.splice(index, 1);
     }
-    else{
+    else {
         model.inputs.mainPage.studentIds.push(studentId);
     }
     console.log(model.inputs.mainPage.studentIds);
