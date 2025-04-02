@@ -72,8 +72,8 @@ function handleOnclick(id, buttonsType) {
         if (selectedButtons.includes(id)) {
             let index = selectedButtons.indexOf(id);
             selectedButtons.splice(index, 1);
-            if(selectedButtons.length < 1){
-                selectedButtons[0] = firstButtonId;  
+            if (selectedButtons.length < 1) {
+                selectedButtons[0] = firstButtonId;
             }
         }
         else {
@@ -82,7 +82,7 @@ function handleOnclick(id, buttonsType) {
             }
         }
     }
-
+    filterStudentStatus();
     updateView();
 }
 
@@ -90,7 +90,7 @@ function handleOnclick(id, buttonsType) {
 function filterStudentStatus() {
     const filtered = [...filterEvents()];
     model.data.filteredStudents = removeDuplicateStudent(filtered);
-    updateView();
+    // updateView();
 }
 
 function filterEvents() {
@@ -104,9 +104,9 @@ function filterEvents() {
 }
 
 function filterCourses() {
-    const allSelected = 0;
+    const allCourses = 0;
     const courses = model.inputs.mainPage.selectedCurses;
-    if (courses.includes(allSelected)) {
+    if (courses.includes(allCourses)) {
         return model.data.studentStatus;
     }
     return model.data.studentStatus.filter(status => courses.includes(status.courseId));
