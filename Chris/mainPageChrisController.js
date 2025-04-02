@@ -1,7 +1,7 @@
-function filterStudents(param, id) {
+function filter(param, courseId, eventId) {
     const filters = {
-        event: (status, id) => status.eventId === id,
-        course: (status, id) => status.courseId === id,
+        event: (status, eventId) => status.eventId === eventId,
+        course: (status, courseId) => status.courseId === courseId,
     };
 
     if(!filters[param]) {
@@ -9,10 +9,47 @@ function filterStudents(param, id) {
         return;
     }
 
-    model.data.filteredStudents = model.data.studentStatus.filter(status =>  {
-        return filters[param](status, id);
+    return model.data.studentStatus.filter(status =>  {
+        return filters[param](status, courseId, eventId);
     });
 }
+
+function filterEvents() {
+    return model.inputs.mainPage.selectedEvents.flatMap(event => filter('event', event));
+}
+
+function filterCourses() {
+    return model.inputs.mainPage.selectedCurses.flatMap(course => filter('course', course));
+}
+
+function test() {
+
+  const filtered = [...filterCourses(), ...filterEvents()];
+
+
+
+  console.log('filtered', filtered);
+
+
+  const unique = [];
+  const seenStudentIds = new Set();
+
+    for (const student of filtered) {
+        // const uniqueKey = `${student.courseId}-${student.eventId}`;
+        if (!seenStudentIds.has(student.studentId)) {
+            unique.push(student);
+            seenStudentIds.add(student.studentId);
+        }
+    }
+
+    console.log(`unique array: `,unique);
+    console.log(`seenStudentIds: `, seenStudentIds);
+    model.data.filteredStudents = unique;
+
+    updateView();
+}
+
+
 
 // Move to individual student page;
 function studentPage(studentId) {
