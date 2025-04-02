@@ -22,7 +22,8 @@ function filterCourses() {
     return model.inputs.mainPage.selectedCurses.flatMap(course => filter('course', course));
 }
 
-function test() {
+
+function removeDuplicateStudentId() {
 
   const filtered = [...filterCourses(), ...filterEvents()];
 
