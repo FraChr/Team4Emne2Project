@@ -40,7 +40,7 @@ function mainPageJulieView() {
     </div>
 
 
-    <select onchange="changeStudentStatus()">
+    <select id="userChoiceStatus" onchange="checkButtonStatus()">
         <option value="" disabled selected>Legg til hendelse</option>
         <option value="1">Søkt</option>
         <option value="2">Godkjent</option>
@@ -49,6 +49,17 @@ function mainPageJulieView() {
         <option value="5">Fullført</option>
         <option value="addPayment">Betal</option>
     </select>
+
+    <select id="userChoiceCourse" onchange="checkButtonStatus()">
+        <option value="" disabled selected>Velg kurs</option>
+        <option value="1">Start IT</option>
+        <option value="2">Frontend</option>
+        <option value="3">Fagskolen</option>
+        <option value="4">Get Prepared</option>
+        <option value="5">Get IT</option>
+    </select>
+
+    <button disabled id="statusButton" onclick="changeStudentStatus(document.getElementById('userChoiceStatus').value, document.getElementById('userChoiceCourse').value)">Oppdater</button>
 
 
         <table>
@@ -161,7 +172,7 @@ function getStudentPayment(id) {
 
 function getNewDate() {
     let date = new Date();
-    isoDate = date.toISOString();
+    let isoDate = date.toISOString();
     let dateOnly = isoDate.split('T')[0];
     return dateOnly;
 }
@@ -214,25 +225,37 @@ function removeAllSpaces(str) {
 
 //JULIE
 
-function changeStudentStatus(newStudentStatus){
+function checkButtonStatus(){
+    let userChoiceStatus = document.getElementById('userChoiceStatus');
+    let userChoiceCourse = document.getElementById('userChoiceCourse');
+    if(userChoiceStatus.value && userChoiceCourse.value){
+        statusButton.disabled = false;
+    }
+    else{
+        statusButton.disabled = true;
+    }
+}
+
+function changeStudentStatus(newStudentStatus, studentCourse){
+    let statusID = model.data.studentStatus[model.data.studentStatus.length -1].id;
+    let todaysDate = getNewDate();
+    statusID++;
+
     if(newStudentStatus == 'addPayment'){
         addPayment();
     }
     else{
         for(const chosenStudent of model.inputs.mainPage.studentIds){
-            for(const potentialStudent of model.data.studentStatus){
-                if(chosenStudent === potentialStudent.studentId){
-                    potentialStudent.id = newStudentStatus;
-                }
-            }
+            model.data.studentStatus.push({id: statusID, eventId: parseInt(newStudentStatus), courseId: parseInt(studentCourse), studentId: parseInt(chosenStudent), date: todaysDate});
+            statusID++;
         }
-        
     }
-    // updateView();
+    console.log(model.data.studentStatus)
+    updateView();
 }
 
 function addPayment(){
-
+    //Må finne ut om vi skal ha pop up eller ei
 }
 
 function pushStudentId(studentId){
