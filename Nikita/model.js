@@ -1,6 +1,6 @@
 const model = {
     app: {
-        currentPage: 'mainPageChris',
+        currentPage: 'mainPage',
     },
 
     inputs: {
@@ -8,8 +8,9 @@ const model = {
             studentIds: [],
             selectedCurses: [1],
             selectedEvents: [1],
-            toDate: '',
-            fromDate: '',
+            toDate: '2018-01-20',
+            fromDate: '2017-01-20',
+            semesterId: 1,
         },
         payment: {
             amount: '',
@@ -98,6 +99,27 @@ const model = {
             { id: 2, courseId: 1, studentId: 1, amount: 200, date: '2024-09-28' },
             { id: 3, courseId: 2, studentId: 1, amount: 3000, date: '2024-11-17' },
             { id: 4, courseId: 3, studentId: 2, amount: 5500, date: '2024-11-18' },
+        ],
+
+        semesters: [
+            {id: 1, name:'Vår 2017', start:'2017-01-20', end:'2017-07-20'},
+            {id: 2, name:'Høst 2017', start:'2017-09-20', end:'2018-01-20'},
+            {id: 3, name:'Vår 2018', start:'2018-01-20', end:'2018-07-20'},
+            {id: 4, name:'Høst 2018', start:'2018-09-20', end:'2019-01-20'},
+            {id: 5, name:'Vår 2019', start:'2019-01-20', end:'2019-07-20'},
+            {id: 6, name:'Høst 2019', start:'2019-09-20', end:'2020-01-20'},
+            {id: 7, name:'Vår 2020', start:'2020-01-20', end:'2020-07-20'},
+            {id: 8, name:'Høst 2020', start:'2020-09-20', end:'2021-01-20'},
+            {id: 9, name:'Vår 2021', start:'2021-01-20', end:'2021-07-20'},
+            {id: 10, name:'Høst 2021', start:'2021-09-20', end:'2022-01-20'},
+            {id: 11, name:'Vår 2022', start:'2022-01-20', end:'2022-07-20'},
+            {id: 12, name:'Høst 2022', start:'2022-09-20', end:'2023-01-20'},
+            {id: 13, name:'Vår 2023', start:'2023-01-20', end:'2023-07-20'},
+            {id: 14, name:'Høst 2023', start:'2023-09-20', end:'2024-01-20'},
+            {id: 15, name:'Vår 2024', start:'2024-01-20', end:'2024-07-20'},
+            {id: 16, name:'Høst 2024', start:'2024-09-20', end:'2025-01-20'},
+            {id: 17, name:'Vår 2025', start:'2025-01-20', end:'2025-07-20'},
+            {id: 18, name:'Høst 2025', start:'2025-09-20', end:'2026-01-20'},
         ],
     },
 }

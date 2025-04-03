@@ -1,86 +1,3 @@
-function createButtonHTML(name, id, buttonsType, buttonClass) {
-
-    return /*HTML*/ `
-    <button class='${buttonClass ?? ''}' onclick='handleOnclick(${id}, "${buttonsType}")'>${name}</button>
-    `;
-}
-
-function createButtonsHTML(buttonsType) {
-    let html = '';
-    let selectedButtons;
-    let dataSet;
-    let nameForShowAllButton;
-    let selectAllButtonId = 0;
-
-    switch (buttonsType) {
-        case 'courses':
-            nameForShowAllButton = 'Sa alle kurs';
-            selectedButtons = model.inputs.mainPage.selectedCurses;
-            dataSet = model.data.courses;
-            break;
-        case 'events':
-            nameForShowAllButton = 'Sa alle hendelser';
-            selectedButtons = model.inputs.mainPage.selectedEvents;
-            dataSet = model.data.events;
-            break;
-    }
-
-    for (const data of dataSet) {
-        let buttonClass = '';
-        if (selectedButtons.includes(data.id) || selectedButtons[0] === selectAllButtonId) {
-            buttonClass = 'pushedButton';
-        }
-        html += /*HTML*/` ${createButtonHTML(data.name, data.id, buttonsType, buttonClass)}`;
-    }
-
-    let buttonClass = selectedButtons[0] === selectAllButtonId ? 'pushedButton' : '';
-    html += /*HTML*/` ${createButtonHTML(nameForShowAllButton, selectAllButtonId, buttonsType, buttonClass)}`;
-
-    return html;
-}
-
-
-function handleOnclick(id, buttonsType) {
-    let selectedButtons;
-    let selectAllButtonId = 0;
-    let firstButtonId = 1;
-
-    switch (buttonsType) {
-        case 'courses':
-            selectedButtons = model.inputs.mainPage.selectedCurses;
-            break;
-        case 'events':
-            selectedButtons = model.inputs.mainPage.selectedEvents;
-            break;
-    }
-
-    if (id === selectAllButtonId) {
-        if (selectedButtons[0] !== selectAllButtonId) {
-            selectedButtons.splice(1);
-            selectedButtons[0] = selectAllButtonId;
-        }
-        else {
-            selectedButtons[0] = firstButtonId;
-        }
-    }
-
-    else {
-        if (selectedButtons.includes(id)) {
-            let index = selectedButtons.indexOf(id);
-            selectedButtons.splice(index, 1);
-            if(selectedButtons.length < 1){
-                selectedButtons[0] = firstButtonId;  
-            }
-        }
-        else {
-            if (selectedButtons[0] !== selectAllButtonId) {
-                selectedButtons.push(id);
-            }
-        }
-    }
-
-    updateView();
-}
 
 function capitalizeFirstLetter(str) {
 
@@ -90,4 +7,34 @@ function capitalizeFirstLetter(str) {
 function removeAllSpaces(str) {
 
     return str.split(" ").join("");
+}
+
+function createDateAndSemestrInputHTML() {
+    let list = '';
+    for (const semester of model.data.semesters) {
+        list += /*HTML*/`
+        <option ${semester.id === model.inputs.mainPage.semesterId ? "selected" : ""} value=${semester.id}>
+            ${semester.name}
+        </option>
+        `;
+    }
+    return /*HTML*/ `
+        <input type='date' oninput='model.inputs.mainPage.fromDate = this.value' value='${model.inputs.mainPage.fromDate}'>
+        <input type='date' oninput='model.inputs.mainPage.toDate = this.value' value='${model.inputs.mainPage.toDate}'>
+        <select onchange= 'fillDateInputs(Number(this.value))'>
+            ${list}
+        </select>
+    `;
+}
+
+function fillDateInputs(selectedSemesterId) {
+    model.inputs.mainPage.semesterId = selectedSemesterId;
+    for (const semester of model.data.semesters) {
+        if (semester.id === selectedSemesterId) {
+            model.inputs.mainPage.fromDate = semester.start;
+            model.inputs.mainPage.toDate = semester.end;
+            break;
+        }
+    }
+    updateView();
 }
