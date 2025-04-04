@@ -47,7 +47,6 @@ function mainPageChrisView() {
             ${makeTableRow()}
         </table>
     `;
-
 }
 
 // Makes table based on filteredStudents array in model;
@@ -69,10 +68,20 @@ function makeTableRow() {
                     <span>${getStudent(status.studentId).name}</span>
                 </td>
                 <td>
-                    ${getStudentPayment(status.studentId)}
+                    ${getPaymentData(status.studentId).map((event) => {
+                        return `
+                            ${event.date} - ${event.amount},-
+                            <br> 
+                        `
+                    }).join('')}
                 </td>
                 <td>
-                    ${getStudentStatus(status.studentId)}
+                    ${getStatusData(status.studentId).map((event) => {
+                        return `
+                            ${event.eventName} - ${event.courseName} - ${event.date}
+                            <br>
+                        `
+                    }).join('')}
                 </td>
             </tr>
        `;
