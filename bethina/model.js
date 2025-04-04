@@ -15,7 +15,7 @@ const model = {
         },
         // kanskje fjerne studentPage
         studentPage: {
-            studendId: 4,
+            studendId: 1,
             paymentAmount: '',
             paymentDate: '',
         },
@@ -72,19 +72,19 @@ const model = {
         ],
 
         courses: [
-            { id: 1, name: 'Start It' },
+            { id: 1, name: 'Start IT' },
             { id: 2, name: 'Frontend' },
             { id: 3, name: 'Fagskolen' },
             { id: 4, name: 'Get Prepared' },
-            { id: 5, name: 'Get It' },
+            { id: 5, name: 'Get IT' },
         ],
 
         events: [
-            { id: 1, name: 'applied' },
-            { id: 2, name: 'approved' },
-            { id: 3, name: 'started' },
-            { id: 4, name: 'cancelled' },
-            { id: 5, name: 'completed' },
+            { id: 1, name: 'Søkt' },
+            { id: 2, name: 'Godkjent' },
+            { id: 3, name: 'Startet' },
+            { id: 4, name: 'Avbrutt' },
+            { id: 5, name: 'Fullført' },
         ],
 
         payments: [

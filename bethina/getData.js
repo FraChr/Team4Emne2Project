@@ -54,8 +54,8 @@ function getStudentStatus(id) {
     for (const status of model.data.studentStatus) {
         if (status.studentId === id) {
             statusData += /*html*/ `
-                ${getEvent(status.eventId).name} | ${getCourse(status.courseId).name} <br>
-                ${toLocaleDate(status.date, setLocaleDate)}
+            ${toLocaleDate(status.date, setLocaleDate)} - ${getEvent(status.eventId).name} ${getCourse(status.courseId).name} <br>
+                
             `;
         }
     }
@@ -74,4 +74,22 @@ function getStudentPayment(id) {
         }
     }
     return paymentData;
+}
+
+function toLocaleDate(date, locale = 'no-NB') {
+    if (!date) return;
+    let dateObj = convertIsoDate(date);
+    const options = {
+        year: '2-digit',
+        month: 'short',
+        day: '2-digit'
+    }
+    let localeDate = dateObj.toLocaleString(locale, options);
+    return localeDate;
+}
+function convertIsoDate(date) {
+    const time = 'T00:00:00Z'
+    let isoDate = date + time;
+    let dateObj = new Date(isoDate);
+    return dateObj;
 }

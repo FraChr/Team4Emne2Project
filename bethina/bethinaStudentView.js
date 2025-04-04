@@ -12,7 +12,7 @@ function studentView(){
                 <div> ${drawStudentInfo()} </div>
                 <div> ${drawCourseInfo()} </div>
             </div>
-            <div> ${drawHistory()} </div>
+            <div> ${makeHistory()} </div>
         </div>
     `;
 
@@ -82,49 +82,17 @@ function drawCourseInfo(){
     `;
 }
 
-//skal ikke brukes, bare hardkodet sånn at jeg har noe å gå etter
-function drawHistory(){
-    return /*HTML*/ `
-        
-        <table>
-            <tr>
-                <th> Historikk <button> ↑↓ </button> </th> 
-            </tr>
-            <tr>
-                <td> 12.01.25 - Begynt på Fagskole </td> 
-            </tr>
-            <tr>
-                <td> 10.01.25 - Fullført Start IT </td> 
-            </tr>
-            <tr>
-                <td> 05.01.25 - Godkjent Fagskole søknad </td> 
-            </tr>
-            <tr>
-                <td> 01.01.25 - Søkt Fagskole </td> 
-            </tr>
-            <tr>
-                <td> 09.08.24 - Begynt på Start IT </td> 
-            </tr>
-            <tr>
-                <td> 01.07.24 - Godkjent Start IT søknad </td> 
-            </tr>
-            <tr>
-                <td> 23.06.24 - Søkt Start IT </td> 
-            </tr>
-        <table>
-    `;
-}
-
-
 
 function makeHistory(){ 
     let row = '';
     for (let student of model.data.studentStatus){
-        row += /*HTML*/ `
+        if (student.studentId === model.inputs.studentPage.studendId){
+            row += /*HTML*/ `
             <tr>
-                <td> ${getStudentStatus(student.id)}</td>
+                <td> ${getStudentStatus(student.studentId)}</td>
             </tr>
         `;
+        }
     }
 
     return /*HTML*/ `
