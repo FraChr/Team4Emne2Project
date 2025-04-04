@@ -56,14 +56,11 @@ function drawStudentInfo(){
 function drawCourseInfo(){
     return /*HTML*/ `
         <table id="studentCourseInfo"> 
-            <tr>
-                <th> Kurs: </th>
-                <td> Fagskolen </td>
-            </tr>
+            
             <tr>
                 <th> Status: </th>
                 <td> 
-                    Startet, Fagskole 10.01.25 
+                    Fagskole - Startet - 10.01.25 
                     <button> Legg til hendelse </button>
                 </td>
             </tr>

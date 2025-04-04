@@ -15,7 +15,7 @@ const model = {
         },
         // kanskje fjerne studentPage
         studentPage: {
-            studendId: 1,
+            studendId: 3,
             paymentAmount: '',
             paymentDate: '',
         },
@@ -66,7 +66,7 @@ const model = {
         ],
 
         studentStatus: [
-            { id: 1, eventId: 1, courseId: 1, studentId: 1, date: '2024-12-14' },
+            { id: 1, eventId: 1, courseId: 1, studentId: 1, date: '2024-08-10' },
             { id: 2, eventId: 3, courseId: 1, studentId: 2, date: '2024-12-14' },
             { id: 3, eventId: 3, courseId: 3, studentId: 3, date: '2024-12-14' }
         ],
