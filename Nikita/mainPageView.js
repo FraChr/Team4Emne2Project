@@ -98,12 +98,12 @@ function createButtonsHTML(buttonsType) {
 
     switch (buttonsType) {
         case 'courses':
-            nameForShowAllButton = 'Sa alle kurs';
+            nameForShowAllButton = 'Se alle kurs';
             selectedButtons = model.inputs.mainPage.selectedCurses;
             dataSet = model.data.courses;
             break;
         case 'events':
-            nameForShowAllButton = 'Sa alle hendelser';
+            nameForShowAllButton = 'Se alle hendelser';
             selectedButtons = model.inputs.mainPage.selectedEvents;
             dataSet = model.data.events;
             break;

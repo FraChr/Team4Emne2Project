@@ -2,16 +2,6 @@ studentView();
 function studentView(){
     let app = document.getElementById('app');
 
-    /*
-    let studentData = null;
-    for(let student of model.data.students){
-        if (student.id === model.app.selectedProfile){
-            studentData = student;
-            break;
-        }
-    }
-    */
-    
     app.innerHTML = /*HTML*/`
         <div>
             <button> ← </button>
@@ -22,34 +12,42 @@ function studentView(){
                 <div> ${drawStudentInfo()} </div>
                 <div> ${drawCourseInfo()} </div>
             </div>
-            <div> ${drawHistory()} </div>
+            <div> ${makeHistory()} </div>
         </div>
     `;
 
 }
 
 function drawStudentInfo(){
+    let studentInfo = model.data.students;
+    for (let student of model.data.students){
+        if(student.id === model.inputs.studentPage.studendId){
+            studentInfo = student;
+            break;
+        }
+    }
+    
     return /*HTML*/ `
         <table id="studentPeronalInfo"> 
             <tr> 
                 <th> Navn: </th>
-                <td> Fornavn Etternavn </td>
+                <td> ${studentInfo.name} </td>
             </tr>
             <tr> 
                 <th> Get Academy Mail: </th>
-                <td> fornavn@getacademy.no </td>
+                <td> ${studentInfo.getAcademyMail} </td>
             </tr>
             <tr> 
                 <th> Discord: </th>
-                <td> discordUsername </td>
+                <td> ${studentInfo.discord} </td>
             </tr>
             <tr> 
                 <th> Mobil: </th>
-                <td> +47 000 00 000 </td>
+                <td> ${studentInfo.tlf} </td>
             </tr>
             <tr> 
                 <th> Privat Mail: </th>
-                <td> fornavnetternavn@gmail.no </td>
+                <td> ${studentInfo.privateMail} </td>
             </tr>
         </table>
     `;
@@ -58,14 +56,11 @@ function drawStudentInfo(){
 function drawCourseInfo(){
     return /*HTML*/ `
         <table id="studentCourseInfo"> 
-            <tr>
-                <th> Kurs: </th>
-                <td> Fagskolen </td>
-            </tr>
+            
             <tr>
                 <th> Status: </th>
                 <td> 
-                    Startet, Fagskole 10.01.25 
+                    Fagskole - Startet - 10.01.25 
                     <button> Legg til hendelse </button>
                 </td>
             </tr>
@@ -84,49 +79,17 @@ function drawCourseInfo(){
     `;
 }
 
-function drawHistory(){
-    return /*HTML*/ `
-        
-        <table>
-            <tr>
-                <th> Historikk <button> ↑↓ </button> </th> 
-            </tr>
-            <tr>
-                <td> 12.01.25 - Begynt på Fagskole </td> 
-            </tr>
-            <tr>
-                <td> 10.01.25 - Fullført Start IT </td> 
-            </tr>
-            <tr>
-                <td> 05.01.25 - Godkjent Fagskole søknad </td> 
-            </tr>
-            <tr>
-                <td> 01.01.25 - Søkt Fagskole </td> 
-            </tr>
-            <tr>
-                <td> 09.08.24 - Begynt på Start IT </td> 
-            </tr>
-            <tr>
-                <td> 01.07.24 - Godkjent Start IT søknad </td> 
-            </tr>
-            <tr>
-                <td> 23.06.24 - Søkt Start IT </td> 
-            </tr>
-        <table>
-    `;
-}
 
-
-// idk about this. ikke noe som heter event description
-// må også sjekke studentId is studentStatus til rikitg studentId på profil
-function drawHistoryRefactored(){ 
+function makeHistory(){ 
     let row = '';
-    for (let event of model.data.studentStatus){
-        row += /*HTML*/ `
+    for (let student of model.data.studentStatus){
+        if (student.studentId === model.inputs.studentPage.studendId){
+            row += /*HTML*/ `
             <tr>
-                <td> ${event.date} - event description?</td>
+                <td> ${getStudentStatus(student.studentId)}</td>
             </tr>
         `;
+        }
     }
 
     return /*HTML*/ `
