@@ -2,16 +2,6 @@ studentView();
 function studentView(){
     let app = document.getElementById('app');
 
-    /*
-    let studentData = null;
-    for(let student of model.data.students){
-        if (student.id === model.app.selectedProfile){
-            studentData = student;
-            break;
-        }
-    }
-    */
-    
     app.innerHTML = /*HTML*/`
         <div>
             <button> ← </button>
@@ -29,27 +19,35 @@ function studentView(){
 }
 
 function drawStudentInfo(){
+    let studentInfo = model.data.students;
+    for (let student of model.data.students){
+        if(student.id === model.inputs.studentPage.studendId){
+            studentInfo = student;
+            break;
+        }
+    }
+    
     return /*HTML*/ `
         <table id="studentPeronalInfo"> 
             <tr> 
                 <th> Navn: </th>
-                <td> Fornavn Etternavn </td>
+                <td> ${studentInfo.name} </td>
             </tr>
             <tr> 
                 <th> Get Academy Mail: </th>
-                <td> fornavn@getacademy.no </td>
+                <td> ${studentInfo.getAcademyMail} </td>
             </tr>
             <tr> 
                 <th> Discord: </th>
-                <td> discordUsername </td>
+                <td> ${studentInfo.discord} </td>
             </tr>
             <tr> 
                 <th> Mobil: </th>
-                <td> +47 000 00 000 </td>
+                <td> ${studentInfo.tlf} </td>
             </tr>
             <tr> 
                 <th> Privat Mail: </th>
-                <td> fornavnetternavn@gmail.no </td>
+                <td> ${studentInfo.privateMail} </td>
             </tr>
         </table>
     `;
@@ -84,6 +82,7 @@ function drawCourseInfo(){
     `;
 }
 
+//skal ikke brukes, bare hardkodet sånn at jeg har noe å gå etter
 function drawHistory(){
     return /*HTML*/ `
         
@@ -117,14 +116,13 @@ function drawHistory(){
 }
 
 
-// idk about this. ikke noe som heter event description
-// må også sjekke studentId is studentStatus til rikitg studentId på profil
-function drawHistoryRefactored(){ 
+
+function makeHistory(){ 
     let row = '';
-    for (let event of model.data.studentStatus){
+    for (let student of model.data.studentStatus){
         row += /*HTML*/ `
             <tr>
-                <td> ${event.date} - event description?</td>
+                <td> ${getStudentStatus(student.id)}</td>
             </tr>
         `;
     }

@@ -1,8 +1,6 @@
 const model = {
     app: {
         currentPage: 'mainPageChris',
-
-        // selectedProfile: null, 
     },
 
     inputs: {
@@ -17,7 +15,7 @@ const model = {
         },
         // kanskje fjerne studentPage
         studentPage: {
-            studendId: '',
+            studendId: 4,
             paymentAmount: '',
             paymentDate: '',
         },
