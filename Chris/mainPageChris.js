@@ -53,7 +53,7 @@ function mainPageChrisView() {
 // Makes table based on filteredStudents array in model;
 function makeTableRow() {
     let rows = '';
-    for (const status of model.data.filteredStatus) {
+    for (const status of model.data.filteredStudents) {
         rows += /*html*/ `
             <tr>
                 <td>
