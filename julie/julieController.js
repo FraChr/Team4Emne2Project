@@ -142,19 +142,19 @@ function getStatus(id) {
     return null;
 }
 
-function getStudentStatus(id) {
-    const setLocaleDate = 'no-NB'
-    let statusData = '';
-    for (const status of model.data.studentStatus) {
-        if (status.studentId === id) {
-            statusData += /*html*/ `
-                ${getEvent(status.eventId).name} | ${getCourse(status.courseId).name} <br>
-                ${toLocaleDate(status.date, setLocaleDate)}
-            `;
-        }
-    }
-    return statusData;
-}
+// function getStudentStatus(id) {
+//     const setLocaleDate = 'no-NB'
+//     let statusData = '';
+//     for (const status of model.data.studentStatus) {
+//         if (status.studentId === id) {
+//             statusData += /*html*/ `
+//                 ${getEvent(status.eventId).name} | ${getCourse(status.courseId).name} <br>
+//                 ${toLocaleDate(status.date, setLocaleDate)}
+//             `;
+//         }
+//     }
+//     return statusData;
+// }
 
 function getStudentPayment(id) {
     const setLocaleDate = 'no-NB'
@@ -236,10 +236,12 @@ function checkButtonStatus() {
     }
 }
 
+//HUSK Å GJØR INDEX I PUSHSTUDEN ID TIL LET
 function changeStudentStatus(newStudentStatus, studentCourse) {
     let statusID = model.data.studentStatus[model.data.studentStatus.length - 1].id;
     let todaysDate = getNewDate();
     statusID++;
+    let index;
 
     if (newStudentStatus == 'addPayment') {
         addPayment();
@@ -248,8 +250,21 @@ function changeStudentStatus(newStudentStatus, studentCourse) {
         for (const chosenStudent of model.inputs.mainPage.studentIds) {
             model.data.studentStatus.push({ id: statusID, eventId: parseInt(newStudentStatus), courseId: parseInt(studentCourse), studentId: parseInt(chosenStudent), date: todaysDate });
             statusID++;
+            //bytt ut currentStudentStatus med den nye statusen
+            //Splice?
+            for(const student of model.data.currentStudentStatus){
+                index = model.data.currentStudentStatus.indexOf(student)
+                console.log(index);
+                if(student.studentId === chosenStudent.studentId){
+                    model.data.currentStudentStatus.splice(index, 1)
+                    model.data.currentStudentStatus.push({ id: statusID, eventId: parseInt(newStudentStatus), courseId: parseInt(studentCourse), studentId: parseInt(chosenStudent), date: todaysDate })
+                    
+                    // student.statusId = parseInt(newStudentStatus);
+                }
+            }
         }
     }
+    
     console.log(model.data.studentStatus)
     updateView();
 }
@@ -270,3 +285,44 @@ function pushStudentId(studentId) {
     }
     console.log(model.inputs.mainPage.studentIds);
 }
+
+function getStudentStatus(id) {
+    const setLocaleDate = 'no-NB'
+    let newestDate = new Date(0);
+    let statusData = '';
+    // for(const status of model.data.studentStatus){
+    //     if(status.studentId === id && new Date(status.date) > newestDate){
+    //         newestDate = new Date(status.date);
+    //         statusData += /*html*/ `
+    //         ${getEvent(status.eventId).name} | ${getCourse(status.courseId).name} <br>
+    //         ${toLocaleDate(status.date, setLocaleDate)}
+    //         `;
+    //     }
+    // }
+    for(const status of model.data.currentStudentStatus){
+        if(status.studentId === id){
+            statusData += /*html*/ `
+            ${getEvent(status.eventId).name} | ${getCourse(status.courseId).name} <br>
+            ${toLocaleDate(status.date, setLocaleDate)}
+            `;
+        }
+    }
+        // for (const status of model.data.studentStatus) {
+        //     if(status.date > newestDate){
+        //         newestDate = status.date
+        //     }
+        // if (status.studentId === id) {
+        //     statusData += /*html*/ `
+        //         ${getEvent(status.eventId).name} | ${getCourse(status.courseId).name} <br>
+        //         ${toLocaleDate(status.date, setLocaleDate)}
+        //     `;
+        // }
+        // }
+    return statusData;
+}
+
+/*Vise kun nyeste hendelse:
+- Sammenligne dato
+- Vise alle kurs hvis flere
+
+*/
