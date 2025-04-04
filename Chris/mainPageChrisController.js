@@ -25,7 +25,7 @@ function changeStudentStatus(newStudentStatus, studentCourse) {
     }
     console.log(model.data.studentStatus)
     updateView();
-    clearStudentIdsInputs();
+    clearInputMainStudentIds();
 }
 
 function addPayment() {
@@ -88,16 +88,16 @@ function handleOnclick(id, buttonsType) {
 
 function filterStudentStatus() {
     const filtered = [...filterEvents()];
-    model.data.filteredStudents = removeDuplicateStudent(filtered);
-    clearStudentIdsInputs();
-    // updateView();
+    // model.data.filteredStudents = removeDuplicateStudent(filtered);
+    setFilteredLogs(removeDuplicateStudent(filtered))
+    clearInputMainStudentIds();
 }
 
 function filterEvents() {
     const allEvents = 0;
     const courses = filterCourses();
     // const events = model.inputs.mainPage.selectedEvents;
-    const events = getSelectedEvents();
+    const events = getInputMainSelectedEvents();
     if (events.includes(allEvents)) {
         return courses;
     }
@@ -107,11 +107,11 @@ function filterEvents() {
 function filterCourses() {
     const allCourses = 0;
     // const courses = model.inputs.mainPage.selectedCurses;
-    const courses = getSelectedCurses();
+    const courses = getInputMainSelectedCourses();
     if (courses.includes(allCourses)) {
-        return model.data.studentStatus;
+        return getLogs();
     }
-    return model.data.studentStatus.filter(status => courses.includes(status.courseId));
+    return getLogs().filter(status => courses.includes(status.courseId));
 }
 
 function removeDuplicateStudent(filtered) {
