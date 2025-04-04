@@ -19,8 +19,8 @@ function createDateAndSemestrInputHTML() {
         `;
     }
     return /*HTML*/ `
-        <input type='date' oninput='model.inputs.mainPage.fromDate = this.value' value='${model.inputs.mainPage.fromDate}'>
-        <input type='date' oninput='model.inputs.mainPage.toDate = this.value' value='${model.inputs.mainPage.toDate}'>
+        <input type='date' onchange='handleFromDateInput(this.value)' value='${model.inputs.mainPage.fromDate}' max='${model.inputs.mainPage.toDate}'>
+        <input type='date' onchange='handleToDateInput(this.value)' value='${model.inputs.mainPage.toDate}' min='${model.inputs.mainPage.fromDate}'>
         <select onchange= 'fillDateInputs(Number(this.value))'>
             ${list}
         </select>
@@ -36,5 +36,15 @@ function fillDateInputs(selectedSemesterId) {
             break;
         }
     }
+    updateView();
+}
+
+function handleFromDateInput(inputedDate){
+    model.inputs.mainPage.fromDate = inputedDate;
+    updateView();
+}
+
+function handleToDateInput(inputedDate){
+    model.inputs.mainPage.toDate = inputedDate;
     updateView();
 }
