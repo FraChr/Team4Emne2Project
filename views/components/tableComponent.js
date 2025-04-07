@@ -52,11 +52,14 @@ function makeTableRow() {
 }
 
 function checkAll(source) {
+
     const eventType = 'change'
     document.querySelectorAll('.checkbox').forEach(checkbox => {
         checkbox.checked = source.checked;
         checkbox.dispatchEvent(new Event(eventType));
+
     });
+
 }
 
 function updateCheckAll() {

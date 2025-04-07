@@ -1,3 +1,8 @@
+function init() {
+    filterStudentStatus();
+    updateView();
+}
+
 function updateView() {
     let currentView = '';
     switch (model.app.currentPage) {
