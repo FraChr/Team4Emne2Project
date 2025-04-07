@@ -31,19 +31,19 @@ function makeTableRow() {
                 </td>
                 <td>
                     ${getPaymentData(status.studentId).map((event) => {
-            return `
+                        return `
                             ${event.date} - ${event.amount},-
                             <br> 
                         `
-        }).join('')}
+                    }).join('')}
                 </td>
                 <td>
                     ${getStatusData(status.studentId).map((event) => {
-            return `
+                        return `
                             ${event.eventName} - ${event.courseName} - ${event.date}
                             <br>
                         `
-        }).join('')}
+                    }).join('')}
                 </td>
             </tr>
        `;
@@ -52,14 +52,11 @@ function makeTableRow() {
 }
 
 function checkAll(source) {
-
     const eventType = 'change'
     document.querySelectorAll('.checkbox').forEach(checkbox => {
         checkbox.checked = source.checked;
         checkbox.dispatchEvent(new Event(eventType));
-
     });
-
 }
 
 function updateCheckAll() {

@@ -34,7 +34,7 @@ function addPayment() {
 
 function pushStudentId(studentId) {
     if (model.inputs.mainPage.studentIds.includes(studentId)) {
-        index = model.inputs.mainPage.studentIds.indexOf(studentId);
+        const index = model.inputs.mainPage.studentIds.indexOf(studentId);
         model.inputs.mainPage.studentIds.splice(index, 1);
     }
     else {
