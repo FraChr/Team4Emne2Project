@@ -10,9 +10,11 @@ function mainPageView() {
             ${createButtonsHTML('events')} 
         </div>
     </div>
+    <!-- Nikita: Move from here -->
     <div>
             ${createDateAndSemestrInputHTML()} 
     <div>
+     <!-- to here -->
 
     <select id="userChoiceStatus" onchange="checkButtonStatus()">
         <option value="" disabled selected>Legg til hendelse</option>

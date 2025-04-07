@@ -8,9 +8,11 @@ const model = {
             studentIds: [],
             selectedCurses: [1],
             selectedEvents: [1],
+            //Nikita: add to model from here
             toDate: '2018-01-20',
             fromDate: '2017-01-20',
             semesterId: 1,
+            //to here
         },
         payment: {
             amount: '',
@@ -100,7 +102,7 @@ const model = {
             { id: 3, courseId: 2, studentId: 1, amount: 3000, date: '2024-11-17' },
             { id: 4, courseId: 3, studentId: 2, amount: 5500, date: '2024-11-18' },
         ],
-
+        //Nikita: add to mmodel from here
         semesters: [
             {id: 1, name:'Vår 2017', start:'2017-01-20', end:'2017-07-20'},
             {id: 2, name:'Høst 2017', start:'2017-09-20', end:'2018-01-20'},
@@ -121,5 +123,6 @@ const model = {
             {id: 17, name:'Vår 2025', start:'2025-01-20', end:'2025-07-20'},
             {id: 18, name:'Høst 2025', start:'2025-09-20', end:'2026-01-20'},
         ],
+        // to here
     },
 }

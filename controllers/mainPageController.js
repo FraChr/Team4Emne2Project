@@ -142,3 +142,25 @@ function removeDuplicateStudent(filtered) {
     }
     return unique;
 }
+
+function uppdateDateAndSemesterInputs(selectedSemesterId) {
+    model.inputs.mainPage.semesterId = selectedSemesterId;
+    for (const semester of model.data.semesters) {
+        if (semester.id === selectedSemesterId) {
+            model.inputs.mainPage.fromDate = semester.start;
+            model.inputs.mainPage.toDate = semester.end;
+            break;
+        }
+    }
+    updateView();
+}
+
+function handleFromDateInput(inputedDate){
+    model.inputs.mainPage.fromDate = inputedDate;
+    updateView();
+}
+
+function handleToDateInput(inputedDate){
+    model.inputs.mainPage.toDate = inputedDate;
+    updateView();
+}
