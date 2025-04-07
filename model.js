@@ -12,13 +12,13 @@ const model = {
             fromDate: '',
         },
         payment: {
-            amount: '',
+            amount: 0,
             date: ''
         },
         // kanskje fjerne studentPage
         studentPage: {
-            studendId: '',
-            paymentAmount: '',
+            studentId: 0,
+            paymentAmount: 0,
             paymentDate: '',
         },
     },

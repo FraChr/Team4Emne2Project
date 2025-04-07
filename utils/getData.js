@@ -1,77 +1,51 @@
+function getEntity(collection, id, typeName) {
+    if(!id) return setError(`${typeName} id not defined`);
+    return collection.find(item => item.id === id || null);
+}
+
 function getStudent(id) {
-    if(!id) return setError('Student id not defined');
-    for (const student of model.data.students) {
-        if (student.id === id) {
-            return student;
-        }
-    }
-    return null;
+    const errorMsg = 'id is required';
+    if(nullOrUndefined(id, errorMsg)) return;
+    return getEntity(model.data.students, id, 'Student');
 }
 
 function getCourse(id) {
-    if(!id) return setError('Course id not defined');
-    for (const course of model.data.courses) {
-        if (course.id === id) {
-            return course;
-        }
-    }
-    return null;
+    const errorMsg = 'id is required';
+    if(nullOrUndefined(id, errorMsg)) return;
+    return getEntity(model.data.courses, id, 'Course');
 }
 
 function getEvent(id) {
-    if(!id) return setError('Event id not defined');
-    for (const event of model.data.events) {
-        if (event.id === id) {
-            return event;
-        }
-    }
-    return null;
+    const errorMsg = 'id is required';
+    if(nullOrUndefined(id, errorMsg)) return;
+    return getEntity(model.data.events, id, 'Event');
 }
 
-function getPayment(id) {
-    if(!id) return setError('Payment id not defined');
-    for (const payment of model.data.payments) {
-        if (payment.id === id) {
-            return payment;
-        }
-    }
-    return null;
-}
-
-function getStatus(id) {
-    if(!id) return setError('Status id not defined');
-    for (const status of model.data.studentStatus) {
-        if (status.studentId === id) {
-            return status;
-        }
-    }
-    return null;
-}
-
-function getStudentStatus(id) {
+function getStatusData(id) {
+    const errorMsg = 'id is required';
+    if(nullOrUndefined(id, errorMsg)) return;
     const setLocaleDate = 'no-NB'
-    let statusData = '';
-    for (const status of model.data.studentStatus) {
-        if (status.studentId === id) {
-            statusData += /*html*/ `
-                ${getEvent(status.eventId).name} | ${getCourse(status.courseId).name} <br>
-                ${toLocaleDate(status.date, setLocaleDate)}
-            `;
-        }
-    }
-    return statusData;
+    return model.data.studentStatus
+        .filter(status => status.studentId === id)
+        .map(status => {
+            return {
+                eventName: getEvent(status.eventId).name,
+                courseName: getCourse(status.courseId).name,
+                date: toLocaleDate(status.date, setLocaleDate)
+            }
+        });
 }
 
-function getStudentPayment(id) {
+function getPaymentData(id) {
+    const errorMsg = 'id is required';
+    if(nullOrUndefined(id, errorMsg)) return;
     const setLocaleDate = 'no-NB'
-    let paymentData = '';
-    for (const payment of model.data.payments) {
-        if (payment.studentId === id) {
-            paymentData += /*html*/ `
-                ${payment.amount},- 
-                ${toLocaleDate(payment.date, setLocaleDate)}    
-            `;
-        }
-    }
-    return paymentData;
+    return model.data.payments
+        .filter(payment => payment.studentId === id)
+        .map(payment => {
+            return {
+                amount: payment.amount,
+                date: toLocaleDate(payment.date, setLocaleDate)
+            }
+        });
 }

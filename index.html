@@ -1,18 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title></title>
         <link rel="stylesheet" href="Chris/mainPageChrisView.css"></link>
-        
-
-
-
         <script src="model.js"></script>
+
+
+
+
+        <script src = "Chris/inputUtils.js"></script>
+<!--        <script src="Chris/mainPageChris.js"></script>-->
+<!--        <script src = "Chris/mainPageChrisController.js"></script>-->
+
+<!--        <script src="Chris/getData.js"></script>-->
+
+
+
+
+        <script src="utils/errorUtils.js"></script>
+        <script src="utils/validationUtils.js"></script>
         <script src="utils/getData.js"></script>
         <script src="app.js"></script>
         <script src="utils/dateHandling.js"></script>
+        <script src="views/components/tableComponent.js"></script>
+        <script src="views/components/EventSelectComponent.js"></script>
+        <script src="views/components/filterButtonsComponent.js"></script>
         <script src="views/mainPageView.js"></script>
         <script src="controllers/mainPageController.js"></script>
         
@@ -20,7 +34,7 @@
         
         
     </head>
-    <body onload="updateView()">
+    <body onload="init()">
         <div id="app"></div>
     </body>
 </html>

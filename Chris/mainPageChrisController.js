@@ -25,8 +25,9 @@ function changeStudentStatus(newStudentStatus, studentCourse) {
     }
     console.log(model.data.studentStatus)
     updateView();
-    clearInputMainStudentIds();
+    model.inputs.mainPage.studentIds = [];
 }
+
 
 function addPayment() {
     //Må finne ut om vi skal ha pop up eller ei
@@ -38,6 +39,7 @@ function pushStudentId(studentId) {
         model.inputs.mainPage.studentIds.splice(index, 1);
     }
     else {
+        // setInputMainStudentIds(studentId);
         model.inputs.mainPage.studentIds.push(studentId);
     }
     console.log(model.inputs.mainPage.studentIds);
@@ -85,19 +87,21 @@ function handleOnclick(id, buttonsType) {
     updateView();
 }
 
-
 function filterStudentStatus() {
     const filtered = [...filterEvents()];
-    // model.data.filteredStudents = removeDuplicateStudent(filtered);
+    // model.data.filteredStudents = removeDuplicateStudent(filtered);model.inputs.mainPage.studentIds = [];
     setFilteredLogs(removeDuplicateStudent(filtered))
-    clearInputMainStudentIds();
+    // setInputByPath('mainPage.studentIds', []);
+    model.inputs.mainPage.studentIds = [];
 }
 
 function filterEvents() {
     const allEvents = 0;
     const courses = filterCourses();
     // const events = model.inputs.mainPage.selectedEvents;
-    const events = getInputMainSelectedEvents();
+    // const events = getInput('mainPage', 'selectedEvents');
+    const events = getInputByPath('mainPage.selectedEvents');
+
     if (events.includes(allEvents)) {
         return courses;
     }
@@ -106,8 +110,7 @@ function filterEvents() {
 
 function filterCourses() {
     const allCourses = 0;
-    // const courses = model.inputs.mainPage.selectedCurses;
-    const courses = getInputMainSelectedCourses();
+    const courses = model.inputs.mainPage.selectedCurses;
     if (courses.includes(allCourses)) {
         return getLogs();
     }

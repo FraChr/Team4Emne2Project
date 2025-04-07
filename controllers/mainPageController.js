@@ -36,6 +36,7 @@ function changeStudentStatus(newStudentStatus, studentCourse) {
     }
     console.log(model.data.studentStatus)
     updateView();
+    model.inputs.mainPage.studentIds = [];
 }
 
 function addPayment(studentCourse) {
@@ -51,8 +52,6 @@ function addPayment(studentCourse) {
 }
 
 function pushStudentId(studentId) {
-
-
     if (model.inputs.mainPage.studentIds.includes(studentId)) {
         index = model.inputs.mainPage.studentIds.indexOf(studentId);
         model.inputs.mainPage.studentIds.splice(index, 1);
@@ -109,7 +108,7 @@ function handleOnclick(id, buttonsType) {
 function filterStudentStatus() {
     const filtered = [...filterEvents()];
     model.data.filteredStudents = removeDuplicateStudent(filtered);
-    // updateView();
+    model.inputs.mainPage.studentIds = [];
 }
 
 function filterEvents() {
