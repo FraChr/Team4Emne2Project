@@ -19,6 +19,11 @@ function makeEventButtonsHtml() {
         <option value="5">Get IT</option>
     </select>
 
+    <label>Beløp:</label>
+    <input disabled type="number" id="paymentAmountInput">
+    <label>Dato:</label>
+    <input disabled type="date" id="paymentDateInput">
+
     <button disabled id="statusButton" 
     onclick="changeStudentStatus(document.getElementById('userChoiceStatus').value, 
     document.getElementById('userChoiceCourse').value)">
