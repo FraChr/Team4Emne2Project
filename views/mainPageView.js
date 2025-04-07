@@ -1,9 +1,7 @@
-function mainPageView() {
-    return /*html*/ `
-        ${makeFilterButtonHtml()}
-        ${makeEventButtonsHtml()}
-        ${makeTable()}}
+function mainPageView(){
+    return /*HTML*/`
+    ${makeFilterButtonHtml()}
+    ${makeEventButtonsHtml()}
+    ${makeTable()}
     `;
 }
-
-

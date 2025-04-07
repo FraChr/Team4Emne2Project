@@ -1,11 +1,22 @@
 function checkButtonStatus() {
     let userChoiceStatus = document.getElementById('userChoiceStatus');
     let userChoiceCourse = document.getElementById('userChoiceCourse');
+    let paymentAmountInput = document.getElementById('paymentAmountInput');
+    let paymentDateInput = document.getElementById('paymentDateInput');
     if (userChoiceStatus.value && userChoiceCourse.value) {
         statusButton.disabled = false;
     }
     else {
         statusButton.disabled = true;
+    }
+
+    if(userChoiceStatus.value === 'addPayment'){
+        paymentAmountInput.disabled = false;
+        paymentDateInput.disabled = false;
+    }
+    else{
+        paymentAmountInput.disabled = true;
+        paymentDateInput.disabled = true;
     }
 }
 
@@ -15,7 +26,7 @@ function changeStudentStatus(newStudentStatus, studentCourse) {
     statusID++;
 
     if (newStudentStatus == 'addPayment') {
-        addPayment();
+        addPayment(studentCourse);
     }
     else {
         for (const chosenStudent of model.inputs.mainPage.studentIds) {
@@ -28,8 +39,16 @@ function changeStudentStatus(newStudentStatus, studentCourse) {
     model.inputs.mainPage.studentIds = [];
 }
 
-function addPayment() {
-    //Må finne ut om vi skal ha pop up eller ei
+function addPayment(studentCourse) {
+    model.inputs.payment.amount = document.getElementById('paymentAmountInput').value
+    model.inputs.payment.date = document.getElementById('paymentDateInput').value
+    let paymentId = model.data.payments[model.data.payments.length - 1].id;
+    paymentId++;
+
+    for(const student of model.inputs.mainPage.studentIds){
+        model.data.payments.push({id: paymentId, courseId: parseInt(studentCourse), studentId: parseInt(student), amount: parseInt(model.inputs.payment.amount), date: model.inputs.payment.date});
+        paymentId++;
+    }
 }
 
 function pushStudentId(studentId) {
