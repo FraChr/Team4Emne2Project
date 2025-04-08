@@ -33,14 +33,53 @@ function addPayment() {
     //Må finne ut om vi skal ha pop up eller ei
 }
 
+// function pushStudentId(studentId) {
+//     if (model.inputs.mainPage.studentIds.includes(studentId)) {
+//         index = model.inputs.mainPage.studentIds.indexOf(studentId);
+//         model.inputs.mainPage.studentIds.splice(index, 1);
+//     }
+//     else {
+//         // setInputMainStudentIds(studentId);
+//         model.inputs.mainPage.studentIds.push(studentId);
+//     }
+//     console.log(model.inputs.mainPage.studentIds);
+// }
+
+function removeFromStudentIds(studentId) {
+    const index = model.inputs.mainPage.studentIds.indexOf(studentId);
+    model.inputs.mainPage.studentIds.splice(index, 1);
+}
+function addToStudentIds(studentId) {
+    const studentIds = model.inputs.mainPage.studentIds;
+    studentIds.push(studentId);
+}
+
 function pushStudentId(studentId) {
-    if (model.inputs.mainPage.studentIds.includes(studentId)) {
-        index = model.inputs.mainPage.studentIds.indexOf(studentId);
-        model.inputs.mainPage.studentIds.splice(index, 1);
+    const isCheckAll = model.inputs.mainPage.isCheckAll;
+    const studentIds = model.inputs.mainPage.studentIds;
+    const checkAllState = model.inputs.mainPage.checkAllState;
+    const included = studentIds.includes(studentId);
+
+    if(isCheckAll && !checkAllState) {
+        removeFromStudentIds(studentId);
+        console.log(model.inputs.mainPage.studentIds);
+        return;
     }
-    else {
-        // setInputMainStudentIds(studentId);
-        model.inputs.mainPage.studentIds.push(studentId);
+    if(isCheckAll && !included){
+        addToStudentIds(studentId);
+        console.log(model.inputs.mainPage.studentIds);
+        return;
+    }
+
+    if(!isCheckAll && included){
+        removeFromStudentIds(studentId);
+        console.log(model.inputs.mainPage.studentIds);
+        return;
+    }
+    if(!isCheckAll && !included) {
+        addToStudentIds(studentId);
+        console.log(model.inputs.mainPage.studentIds);
+        return;
     }
     console.log(model.inputs.mainPage.studentIds);
 }
@@ -115,6 +154,12 @@ function filterCourses() {
         return getLogs();
     }
     return getLogs().filter(status => courses.includes(status.courseId));
+}
+
+function filterTerms() {
+    const term = model.inputs.mainPage.semesterId;
+    console.log(term);
+    return model.data.studentStatus.filter(status => term === status.termId);
 }
 
 function removeDuplicateStudent(filtered) {

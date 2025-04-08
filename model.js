@@ -25,6 +25,8 @@ const model = {
     },
 
     data: {
+
+
         students: [
             {
                 id: 1,
@@ -103,9 +105,9 @@ const model = {
         filteredStudents: [],
 
         studentStatus: [
-            { id: 1, eventId: 1, courseId: 1, studentId: 1, date: '2024-04-17' },
-            { id: 2, eventId: 2, courseId: 1, studentId: 1, date: '2024-04-28' },
-            { id: 3, eventId: 3, courseId: 1, studentId: 1, date: '2024-08-06' },
+            { id: 1, eventId: 1, termId: 1, courseId: 1, studentId: 1, date: '2024-04-17' },
+            { id: 2, eventId: 2, termId: 1, courseId: 1, studentId: 1, date: '2024-04-28' },
+            { id: 3, eventId: 3, termId: 1, courseId: 1, studentId: 1, date: '2024-08-06' },
             { id: 4, eventId: 5, courseId: 1, studentId: 1, date: '2025-01-10' },
             { id: 5, eventId: 1, courseId: 2, studentId: 4, date: '2024-12-14' },
             { id: 6, eventId: 2, courseId: 2, studentId: 4, date: '2024-12-22' },

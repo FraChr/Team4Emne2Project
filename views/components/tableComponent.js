@@ -22,7 +22,7 @@ function makeTableRow() {
                     type="checkbox" 
                     class="checkbox" 
                     onchange="pushStudentId('${status.studentId}')" 
-                    value="${status.name}" 
+                    value="${status.studentId}" 
                     onclick="updateCheckAll()"
                     />
                 </td>
@@ -52,11 +52,16 @@ function makeTableRow() {
 }
 
 function checkAll(source) {
+    let isCheckAll = true;
+    let checkAllState = source.checked;
+
     const eventType = 'change'
     document.querySelectorAll('.checkbox').forEach(checkbox => {
         checkbox.checked = source.checked;
-        checkbox.dispatchEvent(new Event(eventType));
+        // checkbox.dispatchEvent(new Event(eventType));
+        pushStudentId(checkbox.value, isCheckAll, checkAllState);
     });
+    isCheckAll = false;
 }
 
 function updateCheckAll() {

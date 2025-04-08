@@ -51,15 +51,48 @@ function addPayment(studentCourse) {
     }
 }
 
-function pushStudentId(studentId) {
-    if (model.inputs.mainPage.studentIds.includes(studentId)) {
-        const index = model.inputs.mainPage.studentIds.indexOf(studentId);
-        model.inputs.mainPage.studentIds.splice(index, 1);
+// function pushStudentId(studentId) {
+//     if (model.inputs.mainPage.studentIds.includes(studentId)) {
+//         const index = model.inputs.mainPage.studentIds.indexOf(studentId);
+//         model.inputs.mainPage.studentIds.splice(index, 1);
+//     }
+//     else {
+//         model.inputs.mainPage.studentIds.push(studentId);
+//     }
+//     console.log(model.inputs.mainPage.studentIds);
+// }
+
+function pushStudentId(studentId, isCheckAll, checkAllState) {
+    const studentIds = model.inputs.mainPage.studentIds;
+    const included = studentIds.includes(studentId);
+
+    if(isCheckAll && !checkAllState) {
+        removeFromStudentIds(studentId, studentIds);
+        console.log(model.inputs.mainPage.studentIds);
+        return;
     }
-    else {
-        model.inputs.mainPage.studentIds.push(studentId);
+    if(isCheckAll && !included){
+        addToStudentIds(studentId, studentIds);
+        console.log(model.inputs.mainPage.studentIds);
+        return;
     }
-    console.log(model.inputs.mainPage.studentIds);
+
+    if(!isCheckAll && included){
+        removeFromStudentIds(studentId, studentIds);
+        console.log(model.inputs.mainPage.studentIds);
+        return;
+    }
+    if(!isCheckAll && !included) {
+        addToStudentIds(studentId, studentIds);
+        console.log(model.inputs.mainPage.studentIds);
+    }
+}
+function removeFromStudentIds(studentId, studentIds) {
+    const index = studentIds.indexOf(studentId);
+    studentIds.splice(index, 1);
+}
+function addToStudentIds(studentId, studentIds) {
+    studentIds.push(studentId);
 }
 
 function handleOnclick(id, buttonsType) {
@@ -124,10 +157,19 @@ function filterEvents() {
 function filterCourses() {
     const allCourses = 0;
     const courses = model.inputs.mainPage.selectedCurses;
+    // const terms = filterTerms();
     if (courses.includes(allCourses)) {
         return model.data.studentStatus;
+        // return terms;
     }
+    // return terms.filter(status => courses.includes(status.courseId));
     return model.data.studentStatus.filter(status => courses.includes(status.courseId));
+}
+
+function filterTerms() {
+    const term = model.inputs.mainPage.semesterId;
+    console.log(term);
+    return model.data.studentStatus.filter(status => term === status.termId);
 }
 
 function removeDuplicateStudent(filtered) {
