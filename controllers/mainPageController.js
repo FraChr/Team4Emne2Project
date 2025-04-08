@@ -143,25 +143,31 @@ function filterEvents() {
     if (events.includes(allEvents)) {
         return courses;
     }
-    return courses.filter(course => events.includes(course.eventId))
+    return courses.filter(course => events.includes(course.eventId));
 }
 
 function filterCourses() {
     const allCourses = 0;
     const courses = model.inputs.mainPage.selectedCurses;
-    // const terms = filterTerms();
+    const terms = filterTerms();
     if (courses.includes(allCourses)) {
-        return model.data.studentStatus;
-        // return terms;
+        return terms;
     }
-    // return terms.filter(status => courses.includes(status.courseId));
-    return model.data.studentStatus.filter(status => courses.includes(status.courseId));
+    return terms.filter(status => courses.includes(status.courseId));
 }
 
 function filterTerms() {
-    const term = model.inputs.mainPage.semesterId;
-    console.log(term);
-    return model.data.studentStatus.filter(status => term === status.termId);
+    const toDate = model.inputs.mainPage.toDate;
+    const fromDate = model.inputs.mainPage.fromDate;
+
+    const filtedStudentStatuses = [];
+    for (const status of model.data.studentStatus) {
+        if (status.date >= fromDate && status.date <= toDate) {
+            filtedStudentStatuses.push(status);
+        }
+    }
+    console.log(filtedStudentStatuses);
+    return filtedStudentStatuses;
 }
 
 function removeDuplicateStudent(filtered) {
@@ -186,6 +192,7 @@ function uppdateDateAndSemesterInputs(selectedSemesterId) {
             break;
         }
     }
+    filterStudentStatus();
     updateView();
 }
 
@@ -207,5 +214,6 @@ function filterSatusesBasedOnDateIut(fromDate, toDate) {
             filtedStudentStatuses.push(status);
         }
     }
+    console.log(filtedStudentStatuses);
     return filtedStudentStatuses;
 }

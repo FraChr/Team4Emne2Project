@@ -14,10 +14,12 @@ function makeTable() {
     `;
 }
 
+// filterSatusesBasedOnDateIut(model.inputs.mainPage.fromDate, model.inputs.mainPage.toDate)
+
 function makeTableRow() {
     let rows = '';
     //model.data.filteredStudents
-    for (const status of filterSatusesBasedOnDateIut(model.inputs.mainPage.fromDate, model.inputs.mainPage.toDate)) {
+    for (const status of model.data.filteredStudents) {
         rows += /*html*/ `
             <tr>
                 <td>
