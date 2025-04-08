@@ -198,3 +198,14 @@ function handleToDateInput(inputedDate) {
     model.inputs.mainPage.toDate = inputedDate;
     updateView();
 }
+
+function filterSatusesBasedOnDateIut(fromDate, toDate) {
+    //const semester = getSemester(semesterId);
+    const filtedStudentStatuses = [];
+    for (const status of model.data.filteredStudents) {
+        if (status.date >= fromDate && status.date <= toDate) {
+            filtedStudentStatuses.push(status);
+        }
+    }
+    return filtedStudentStatuses;
+}
