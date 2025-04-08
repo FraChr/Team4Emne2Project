@@ -6,8 +6,8 @@ const model = {
     inputs: {
         mainPage: {
             studentIds: [],
-            selectedCurses: [1],
-            selectedEvents: [1],
+            selectedCurses: [0],
+            selectedEvents: [0],
             toDate: '2018-01-20',
             fromDate: '2017-01-20',
             semesterId: 1,

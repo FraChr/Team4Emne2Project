@@ -38,14 +38,14 @@ function createButtonsHTML(buttonsType) {
     }
 
     for (const data of dataSet) {
-        let buttonClass = '';
+        let buttonClass = 'filterbuttons';
         if (selectedButtons.includes(data.id) || selectedButtons[0] === 0) {
             buttonClass = 'pushedButton';
         }
         html += /*HTML*/` ${createButtonHTML(data.name, data.id, buttonsType, buttonClass)}`;
     }
 
-    let buttonClass = selectedButtons[0] === 0 ? 'pushedButton' : '';
+    let buttonClass = selectedButtons[0] === 0 ? 'pushedButton' : 'filterbuttons';
     html += /*HTML*/` ${createButtonHTML(nameForShowAllButton, 0, buttonsType, buttonClass)}`;
 
     return html;

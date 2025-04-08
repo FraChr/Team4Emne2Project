@@ -81,23 +81,14 @@ function drawCourseInfo(){
 
 
 function makeHistory(){ 
-    let row = '';
-    for (let student of model.data.studentStatus){
-        if (student.studentId === model.inputs.studentPage.studendId){
-            row += /*HTML*/ `
-            <tr>
-                <td> ${getStudentStatus(student.studentId)}</td>
-            </tr>
-        `;
-        }
-    }
-
     return /*HTML*/ `
         <table> 
             <tr>
                 <th> Historikk <button> ↑↓ </button> </th> 
             </tr>
-            ${row}
+            <tr> 
+                <td> ${getStudentStatus(model.inputs.studentPage.studendId)} </td> 
+            </tr>
         </table>
     `;
 }

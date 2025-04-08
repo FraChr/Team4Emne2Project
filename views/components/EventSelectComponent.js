@@ -1,6 +1,6 @@
 function makeEventButtonsHtml() {
-    return `
-        <select id="userChoiceStatus" onchange="checkButtonStatus()">
+    return /*HTML*/`
+        <select id="userChoiceStatus" onchange="checkButtonStatus()" required>
         <option value="" disabled selected>Legg til hendelse</option>
         <option value="1">Søkt</option>
         <option value="2">Godkjent</option>
@@ -10,7 +10,7 @@ function makeEventButtonsHtml() {
         <option value="addPayment">Betal</option>
     </select>
 
-    <select id="userChoiceCourse" onchange="checkButtonStatus()">
+    <select id="userChoiceCourse" onchange="checkButtonStatus()" required>
         <option value="" disabled selected>Velg kurs</option>
         <option value="1">Start IT</option>
         <option value="2">Frontend</option>
@@ -19,9 +19,7 @@ function makeEventButtonsHtml() {
         <option value="5">Get IT</option>
     </select>
 
-    <label>Beløp:</label>
-    <input disabled type="number" id="paymentAmountInput">
-    <label>Dato:</label>
+    <input disabled type="number" id="paymentAmountInput" placeholder="Beløp">
     <input disabled type="date" id="paymentDateInput">
 
     <button disabled id="statusButton" 
