@@ -2,7 +2,9 @@ function makeTable() {
     return `
         <table>
             <tr>
-                <th class="firstColumnElement"><input type="checkbox" id="checkAll" onclick="checkAll(this)"/></th>
+                <th class="firstColumnElement">
+                    <input type="checkbox" id="checkAll" onclick="checkAll(this)"/>
+                </th>
                 <th>Navn</th>
                 <th>Betalt</th>
                 <th>Status</th>
@@ -32,6 +34,7 @@ function makeTableRow() {
                 <td>
                     ${getPaymentData(status.studentId).map((event) => {
                         return `
+                            ${getCourse(event.course).name} -                            
                             ${event.date} - ${event.amount},-
                             <br> 
                         `
@@ -58,7 +61,6 @@ function checkAll(source) {
     const eventType = 'change'
     document.querySelectorAll('.checkbox').forEach(checkbox => {
         checkbox.checked = source.checked;
-        // checkbox.dispatchEvent(new Event(eventType));
         pushStudentId(checkbox.value, isCheckAll, checkAllState);
     });
     isCheckAll = false;

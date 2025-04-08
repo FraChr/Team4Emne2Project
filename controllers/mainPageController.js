@@ -25,7 +25,7 @@ function changeStudentStatus(newStudentStatus, studentCourse) {
     let todaysDate = getNewDate();
     statusID++;
 
-    if (newStudentStatus == 'addPayment') {
+    if (newStudentStatus === 'addPayment') {
         addPayment(studentCourse);
     }
     else {

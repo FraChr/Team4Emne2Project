@@ -45,7 +45,8 @@ function getPaymentData(id) {
         .map(payment => {
             return {
                 amount: payment.amount,
-                date: toLocaleDate(payment.date, setLocaleDate)
+                date: toLocaleDate(payment.date, setLocaleDate),
+                course: payment.courseId
             }
         });
 }
