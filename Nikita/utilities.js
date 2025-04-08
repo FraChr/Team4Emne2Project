@@ -50,3 +50,24 @@ function handleToDateInput(inputedDate) {
     updateView();
 }
 //to here
+
+
+function filterSatusesBasedOnSemester(fromDate, toDate) {
+    //const semester = getSemester(semesterId);
+    const filtedStudentStatuses = [];
+    for (const status of model.data.studentStatus) {
+        if (status.date >= fromDate && status.date <= toDate) {
+            filtedStudentStatuses.push(status);
+        }
+    }
+    return filtedStudentStatuses;
+}
+
+function getSemester(id) {
+    for (const semester of model.data.semesters) {
+        if (semester.id === id) {
+
+            return semester;
+        }
+    }
+}

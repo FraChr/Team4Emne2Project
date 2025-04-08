@@ -14,7 +14,8 @@ function makeTable() {
 
 function makeTableRow() {
     let rows = '';
-    for (const status of model.data.filteredStudents) {
+    //model.data.filteredStudents
+    for (const status of filterSatusesBasedOnDateIut(model.inputs.mainPage.fromDate, model.inputs.mainPage.toDate)) {
         rows += /*html*/ `
             <tr>
                 <td>
