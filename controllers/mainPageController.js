@@ -86,7 +86,7 @@ function addToStudentIds(studentId, studentIds) {
 
 function handleOnclick(id, buttonsType) {
     let selectedButtons;
-    let selectAllButtonId = 0;
+    let selectAllButton = 0;
     let firstButtonId = 1;
 
     switch (buttonsType) {
@@ -98,10 +98,10 @@ function handleOnclick(id, buttonsType) {
             break;
     }
 
-    if (id === selectAllButtonId) {
-        if (selectedButtons[0] !== selectAllButtonId) {
+    if (id === selectAllButton) {
+        if (selectedButtons[0] !== selectAllButton) {
             selectedButtons.splice(1);
-            selectedButtons[0] = selectAllButtonId;
+            selectedButtons[0] = selectAllButton;
         }
         else {
             selectedButtons[0] = firstButtonId;
@@ -117,7 +117,7 @@ function handleOnclick(id, buttonsType) {
             }
         }
         else {
-            if (selectedButtons[0] !== selectAllButtonId) {
+            if (selectedButtons[0] !== selectAllButton) {
                 selectedButtons.push(id);
             }
         }
