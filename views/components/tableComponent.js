@@ -2,7 +2,7 @@ function makeTable() {
     return `
         <table>
             <tr>
-                <th><input type="checkbox" id="checkAll" onclick="checkAll(this)"/></th>
+                <th class="firstColumnElement"><input type="checkbox" id="checkAll" onclick="checkAll(this)"/></th>
                 <th>Navn</th>
                 <th>Betalt</th>
                 <th>Status</th>
