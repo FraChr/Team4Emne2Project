@@ -51,17 +51,6 @@ function addPayment(studentCourse) {
     }
 }
 
-// function pushStudentId(studentId) {
-//     if (model.inputs.mainPage.studentIds.includes(studentId)) {
-//         const index = model.inputs.mainPage.studentIds.indexOf(studentId);
-//         model.inputs.mainPage.studentIds.splice(index, 1);
-//     }
-//     else {
-//         model.inputs.mainPage.studentIds.push(studentId);
-//     }
-//     console.log(model.inputs.mainPage.studentIds);
-// }
-
 function pushStudentId(studentId, isCheckAll, checkAllState) {
     const studentIds = model.inputs.mainPage.studentIds;
     const included = studentIds.includes(studentId);
