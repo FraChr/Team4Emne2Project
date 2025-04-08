@@ -54,8 +54,13 @@ function getStudentStatus(id) {
     for (const status of model.data.studentStatus) {
         if (status.studentId === id) {
             statusData += /*html*/ `
-            ${toLocaleDate(status.date, setLocaleDate)} - ${getEvent(status.eventId).name} ${getCourse(status.courseId).name} <br>
-                
+            <tr> 
+                <td> 
+                    ${toLocaleDate(status.date, setLocaleDate)} 
+                    - ${getEvent(status.eventId).name} 
+                    ${getCourse(status.courseId).name} 
+                </td>
+            </tr>    
             `;
         }
     }
