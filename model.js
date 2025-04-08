@@ -8,9 +8,9 @@ const model = {
             studentIds: [],
             selectedCurses: [0],
             selectedEvents: [0],
-            toDate: '2018-01-20',
+            toDate: '',
             fromDate: '2017-01-20',
-            semesterId: 1,
+            semesterId: 0,
         },
         payment: {
             amount: 0,
@@ -180,6 +180,7 @@ const model = {
         ],
 
         semesters: [
+            {id: 0, name:'All time', start:'2017-01-20', end:''},
             {id: 1, name:'Vår 2017', start:'2017-01-20', end:'2017-07-20'},
             {id: 2, name:'Høst 2017', start:'2017-09-20', end:'2018-01-20'},
             {id: 3, name:'Vår 2018', start:'2018-01-20', end:'2018-07-20'},

@@ -1,4 +1,6 @@
 function init() {
+    model.data.semesters[0].end = getNewDate();
+    model.inputs.mainPage.toDate = getNewDate();
     filterStudentStatus();
     updateView();
 }
