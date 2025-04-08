@@ -10,11 +10,11 @@ function checkButtonStatus() {
         statusButton.disabled = true;
     }
 
-    if(userChoiceStatus.value === 'addPayment'){
+    if (userChoiceStatus.value === 'addPayment') {
         paymentAmountInput.disabled = false;
         paymentDateInput.disabled = false;
     }
-    else{
+    else {
         paymentAmountInput.disabled = true;
         paymentDateInput.disabled = true;
     }
@@ -45,8 +45,8 @@ function addPayment(studentCourse) {
     let paymentId = model.data.payments[model.data.payments.length - 1].id;
     paymentId++;
 
-    for(const student of model.inputs.mainPage.studentIds){
-        model.data.payments.push({id: paymentId, courseId: parseInt(studentCourse), studentId: parseInt(student), amount: parseInt(model.inputs.payment.amount), date: model.inputs.payment.date});
+    for (const student of model.inputs.mainPage.studentIds) {
+        model.data.payments.push({ id: paymentId, courseId: parseInt(studentCourse), studentId: parseInt(student), amount: parseInt(model.inputs.payment.amount), date: model.inputs.payment.date });
         paymentId++;
     }
 }
@@ -55,23 +55,23 @@ function pushStudentId(studentId, isCheckAll, checkAllState) {
     const studentIds = model.inputs.mainPage.studentIds;
     const included = studentIds.includes(studentId);
 
-    if(isCheckAll && !checkAllState) {
+    if (isCheckAll && !checkAllState) {
         removeFromStudentIds(studentId, studentIds);
         console.log(model.inputs.mainPage.studentIds);
         return;
     }
-    if(isCheckAll && !included){
+    if (isCheckAll && !included) {
         addToStudentIds(studentId, studentIds);
         console.log(model.inputs.mainPage.studentIds);
         return;
     }
 
-    if(!isCheckAll && included){
+    if (!isCheckAll && included) {
         removeFromStudentIds(studentId, studentIds);
         console.log(model.inputs.mainPage.studentIds);
         return;
     }
-    if(!isCheckAll && !included) {
+    if (!isCheckAll && !included) {
         addToStudentIds(studentId, studentIds);
         console.log(model.inputs.mainPage.studentIds);
     }
@@ -103,23 +103,26 @@ function handleOnclick(id, buttonsType) {
             selectedButtons.splice(1);
             selectedButtons[0] = selectAllButtonId;
         }
-        else {
-            selectedButtons[0] = firstButtonId;
-        }
+        // else {
+        //     selectedButtons[0] = firstButtonId;
+        // }
     }
 
     else {
         if (selectedButtons.includes(id)) {
-            let index = selectedButtons.indexOf(id);
-            selectedButtons.splice(index, 1);
-            if (selectedButtons.length < 1) {
-                selectedButtons[0] = firstButtonId;
+            if (selectedButtons.length > 1) {
+                let index = selectedButtons.indexOf(id);
+                selectedButtons.splice(index, 1);
             }
+            // if (selectedButtons.length < 1) {
+            //     selectedButtons[0] = firstButtonId;
+            // }
         }
         else {
-            if (selectedButtons[0] !== selectAllButtonId) {
-                selectedButtons.push(id);
+            if (selectedButtons[0] == selectAllButtonId) {
+                selectedButtons.splice(0,selectedButtons.length);
             }
+            selectedButtons.push(id);
         }
     }
     filterStudentStatus();
@@ -186,12 +189,12 @@ function uppdateDateAndSemesterInputs(selectedSemesterId) {
     updateView();
 }
 
-function handleFromDateInput(inputedDate){
+function handleFromDateInput(inputedDate) {
     model.inputs.mainPage.fromDate = inputedDate;
     updateView();
 }
 
-function handleToDateInput(inputedDate){
+function handleToDateInput(inputedDate) {
     model.inputs.mainPage.toDate = inputedDate;
     updateView();
 }

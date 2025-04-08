@@ -40,31 +40,13 @@ function uppdateDateAndSemesterInputs(selectedSemesterId) {
     updateView();
 }
 
-function handleFromDateInput(inputedDate){
+function handleFromDateInput(inputedDate) {
     model.inputs.mainPage.fromDate = inputedDate;
     updateView();
 }
 
-function handleToDateInput(inputedDate){
+function handleToDateInput(inputedDate) {
     model.inputs.mainPage.toDate = inputedDate;
     updateView();
 }
 //to here
-
-
-
-
-function getStudentStatus() {
-    const setLocaleDate = 'no-NB'
-    let statusData = '';
-
-    for (const status of model.data.studentStatus) {
-        if (status.studentId === id) {
-            statusData += /*html*/ `
-                ${getEvent(status.eventId).name} | ${getCourse(status.courseId).name} <br>
-                ${toLocaleDate(status.date, setLocaleDate)}
-            `;
-        }
-    }
-    return statusData;
-}
