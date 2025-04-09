@@ -103,3 +103,13 @@ input:focus{
 .eventSelect{
     margin: 10px;
 }
+
+#date{
+    color: white;
+}
+#course{
+    color: orange;
+}
+#event{
+    color: white;
+}

@@ -36,19 +36,19 @@ function makeTableRow() {
                 </td>
                 <td>
                     ${getPaymentData(status.studentId).map((event) => {
-                    return `
+                        return `
                             ${getCourse(event.course).name} -                            
                             ${event.date} - ${event.amount},-
                             <br> 
-                            `
-                     }).join('')}
+                        `
+                    }).join('')}
                 </td>
                 <td>
                     ${Object.values(findNewestStatusPerCourseForStudent(status.studentId)).map((x)=> {
-                     return `
-                        ${getEvent(x.eventId).name}|${getCourse(x.courseId).name}|${x.date}<br>
+                        return `
+                        <span id="event">${getEvent(x.eventId).name}</span> <span id="course">${getCourse(x.courseId).name}</span> <span id="date">${toLocaleDate(x.date)}</span><br>
                         `;
-                     }).join('')}
+                    }).join('')}
                 </td>
             </tr>
        `;
@@ -60,6 +60,7 @@ function checkAll(source) {
     let isCheckAll = true;
     let checkAllState = source.checked;
 
+    const eventType = 'change'
     document.querySelectorAll('.checkbox').forEach(checkbox => {
         checkbox.checked = source.checked;
         pushStudentId(checkbox.value, isCheckAll, checkAllState);
