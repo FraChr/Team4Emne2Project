@@ -71,3 +71,21 @@ function getSemester(id) {
         }
     }
 }
+
+function findNewestStatusPerCourseForStudent(studentId) {
+    let studentStatuses = model.data.studentStatus.filter(x => x.studentId === studentId);
+    const newestStatusPerCourse = {};
+    for(const status of studentStatuses){
+        const courseId = status.courseId.toString();
+        if (!newestStatusPerCourse[courseId]) {
+            newestStatusPerCourse[courseId] = status;
+        }
+        else {
+            if (status.date > newestStatusPerCourse[courseId].date) {
+                newestStatusPerCourse[courseId] = status;
+            }
+        }
+
+    }
+    return newestStatusPerCourse;
+}

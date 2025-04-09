@@ -32,21 +32,19 @@ function makeTableRow() {
                     />
                 </td>
                 <td>
-                    ${getStudent(status.studentId).name}
+                    <span>${getStudent(status.studentId).name}</span>
                 </td>
                 <td>
-                    ${getPaymentData(status.studentId).map((event) => {
-                        return `
-                            ${getCourse(event.course).name} -                            
-                            ${event.date} - ${event.amount},-
-                            <br> 
-                        `
+                    ${Object.values(findNewestStatusPerCourseForStudent(status.studentId)).map((x)=> {
+                    return `
+                        ${getEvent(x.eventId).name}|${getCourse(x.courseId).name}|${x.date}<br>
+                        `;
                     }).join('')}
                 </td>
                 <td>
                     ${getStatusData(status.studentId).map((event) => {
                         return `
-                            ${event.eventName.name} - ${event.courseName.name} - ${event.date}
+                            ${event.eventName} - ${event.courseName} - ${event.date}
                             <br>
                         `
                     }).join('')}

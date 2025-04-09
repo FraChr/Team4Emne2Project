@@ -171,23 +171,23 @@ function filterTerms() {
 }
 
 function removeDuplicateStudent(filtered) {
-    // const unique = [];
-    // const seenStudentIds = new Set();
-    // for (const student of filtered) {
-    //     if (!seenStudentIds.has(student.studentId)) {
-    //         unique.push(student);
-    //         seenStudentIds.add(student.studentId);
-    //     }
-    // }
-    // return unique;
-
-    return Object.values(filtered.reduce((acc, student) => {
-        const {studentId} = student;
-        if(!acc[studentId]) {
-            acc[studentId] = student;
+    const unique = [];
+    const seenStudentIds = new Set();
+    for (const student of filtered) {
+        if (!seenStudentIds.has(student.studentId)) {
+            unique.push(student);
+            seenStudentIds.add(student.studentId);
         }
-        return acc;
-    }, {}));
+    }
+    return unique;
+
+    // return Object.values(filtered.reduce((acc, student) => {
+    //     const {studentId} = student;
+    //     if(!acc[studentId]) {
+    //         acc[studentId] = student;
+    //     }
+    //     return acc;
+    // }, {}));
 
 }
 
@@ -224,4 +224,22 @@ function filterSatusesBasedOnDateIut(fromDate, toDate) {
     }
     console.log(filtedStudentStatuses);
     return filtedStudentStatuses;
+}
+
+function findNewestStatusPerCourseForStudent(studentId) {
+    let studentStatuses = model.data.studentStatus.filter(x => x.studentId === studentId);
+    const newestStatusPerCourse = {};
+    for(const status of studentStatuses){
+        const courseId = status.courseId.toString();
+        if (!newestStatusPerCourse[courseId]) {
+            newestStatusPerCourse[courseId] = status;
+        }
+        else {
+            if (status.date > newestStatusPerCourse[courseId].date) {
+                newestStatusPerCourse[courseId] = status;
+            }
+        }
+
+    }
+    return newestStatusPerCourse;
 }
