@@ -10,9 +10,9 @@ function studentView(){
         <div class="profile">
             <div>
                 <div> ${drawStudentInfo()} </div>
-                <div> ${drawCourseInfo()} </div>
+                <div> ${drawCourseInfo(1)} </div>
             </div>
-            <div> ${makeHistory()} </div>
+            <div> ${drawHistory()} </div>
         </div>
     `;
 
@@ -23,7 +23,6 @@ function drawStudentInfo(){
     for (let student of model.data.students){
         if(student.id === model.inputs.studentPage.studendId){
             studentInfo = student;
-            break;
         }
     }
     
@@ -53,7 +52,7 @@ function drawStudentInfo(){
     `;
 }
 
-function drawCourseInfo(){
+function makeCourseInfo(){
     return /*HTML*/ `
         <table id="studentCourseInfo"> 
             
@@ -79,8 +78,75 @@ function drawCourseInfo(){
     `;
 }
 
+function drawCourseInfo(studentId){
+    let payments = [];
+    for (let payment of model.data.payments){
+        if (payment.studentId === studentId){
+            payments.push(payment);
+        }
+    }
+   
+    let studentStatuses = [];
+    for (let status of model.data.studentStatus){
+        if (status.studentId === studentId){
+            studentStatuses.push(status);
+        }
+    }
 
-function makeHistory(){ 
+    studentStatuses.sort((a,b) => new Date(a.date) - new Date(b.date));
+    let latestStatus = studentStatuses[studentStatuses.length - 1];
+
+    let courseName = '';
+    for (let course of model.data.courses){
+        if (course.id === latestStatus.courseId){
+            courseName = course.name;
+        }
+    }
+
+    let eventName = '';
+    for (let event of model.data.events){
+        if (event.id === latestStatus.eventId){
+            eventName = event.name;
+        }
+    }
+
+    let paymentListHTML = '';
+    let totalPaid = 0;
+    
+    for (const payment of payments) {
+        paymentListHTML += /*HTML*/ `
+            <li>
+                ${payment.amount} kr - ${payment.date}
+            </li>
+        `;
+        totalPaid += payment.amount;
+    }
+
+    return /*HTML*/ `
+        <table id="studentCourseInfo"> 
+            <tr>
+                <th>Status:</th>
+                <td>
+                    ${courseName} - ${eventName} - ${latestStatus.date}
+                    <button>Legg til hendelse</button>
+                </td>
+            </tr>
+            <tr>
+                <th>Betalt:</th>
+                <td>
+                    Sum: ${totalPaid} kr
+                    <button>Legg til hendelse</button>
+                    <ul>
+                        ${paymentListHTML}
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    `;
+}
+
+
+function drawHistory(){ 
     return /*HTML*/ `
         <table> 
             <tr>

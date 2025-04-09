@@ -15,7 +15,7 @@ const model = {
         },
         // kanskje fjerne studentPage
         studentPage: {
-            studendId: 6,
+            studendId: 1,
             paymentAmount: '',
             paymentDate: '',
         },
