@@ -171,16 +171,24 @@ function filterTerms() {
 }
 
 function removeDuplicateStudent(filtered) {
-    const unique = [];
-    const seenStudentIds = new Set();
+    // const unique = [];
+    // const seenStudentIds = new Set();
+    // for (const student of filtered) {
+    //     if (!seenStudentIds.has(student.studentId)) {
+    //         unique.push(student);
+    //         seenStudentIds.add(student.studentId);
+    //     }
+    // }
+    // return unique;
 
-    for (const student of filtered) {
-        if (!seenStudentIds.has(student.studentId)) {
-            unique.push(student);
-            seenStudentIds.add(student.studentId);
+    return Object.values(filtered.reduce((acc, student) => {
+        const {studentId} = student;
+        if(!acc[studentId]) {
+            acc[studentId] = student;
         }
-    }
-    return unique;
+        return acc;
+    }, {}));
+
 }
 
 function uppdateDateAndSemesterInputs(selectedSemesterId) {

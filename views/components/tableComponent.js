@@ -32,7 +32,7 @@ function makeTableRow() {
                     />
                 </td>
                 <td>
-                    <span>${getStudent(status.studentId).name}</span>
+                    ${getStudent(status.studentId).name}
                 </td>
                 <td>
                     ${getPaymentData(status.studentId).map((event) => {
@@ -46,7 +46,7 @@ function makeTableRow() {
                 <td>
                     ${getStatusData(status.studentId).map((event) => {
                         return `
-                            ${event.eventName} - ${event.courseName} - ${event.date}
+                            ${event.eventName.name} - ${event.courseName.name} - ${event.date}
                             <br>
                         `
                     }).join('')}

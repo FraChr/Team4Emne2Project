@@ -25,15 +25,37 @@ function getStatusData(id) {
     const errorMsg = 'id is required';
     if(nullOrUndefined(id, errorMsg)) return;
     const setLocaleDate = 'no-NB'
-    return model.data.studentStatus
-        .filter(status => status.studentId === id)
+    // return model.data.studentStatus
+    //     .filter(status => status.studentId === id)
+    //     .map(status => {
+    //         return {
+    //             eventName: getEvent(status.eventId),
+    //             courseName: getCourse(status.courseId),
+    //             date: toLocaleDate(status.date, setLocaleDate)
+    //         }
+    //     });
+    return getNewestStatus(id)
         .map(status => {
             return {
-                eventName: getEvent(status.eventId).name,
-                courseName: getCourse(status.courseId).name,
+                eventName: getEvent(status.eventId),
+                courseName: getCourse(status.courseId),
                 date: toLocaleDate(status.date, setLocaleDate)
             }
         });
+}
+
+function getNewestStatus(id) {
+    return Object.values(model.data.studentStatus
+        .filter(status => status.studentId === id)
+        .reduce((acc, status) => {
+            const {courseId, date} = status;
+            if(!acc[courseId] || date > acc[courseId].date) {
+                acc[courseId] = status;
+            }
+            return acc;
+        },{}));
+
+
 }
 
 function getPaymentData(id) {
