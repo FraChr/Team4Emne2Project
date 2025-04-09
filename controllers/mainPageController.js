@@ -57,23 +57,19 @@ function pushStudentId(studentId, isCheckAll, checkAllState) {
 
     if (isCheckAll && !checkAllState) {
         removeFromStudentIds(studentId, studentIds);
-        console.log(model.inputs.mainPage.studentIds);
         return;
     }
     if (isCheckAll && !included) {
         addToStudentIds(studentId, studentIds);
-        console.log(model.inputs.mainPage.studentIds);
         return;
     }
 
     if (!isCheckAll && included) {
         removeFromStudentIds(studentId, studentIds);
-        console.log(model.inputs.mainPage.studentIds);
         return;
     }
     if (!isCheckAll && !included) {
         addToStudentIds(studentId, studentIds);
-        console.log(model.inputs.mainPage.studentIds);
     }
 }
 function removeFromStudentIds(studentId, studentIds) {
@@ -87,7 +83,6 @@ function addToStudentIds(studentId, studentIds) {
 function handleOnclick(id, buttonsType) {
     let selectedButtons;
     let selectAllButtonId = 0;
-    let firstButtonId = 1;
 
     switch (buttonsType) {
         case 'courses':
@@ -103,9 +98,6 @@ function handleOnclick(id, buttonsType) {
             selectedButtons.splice(1);
             selectedButtons[0] = selectAllButtonId;
         }
-        // else {
-        //     selectedButtons[0] = firstButtonId;
-        // }
     }
 
     else {
@@ -114,9 +106,6 @@ function handleOnclick(id, buttonsType) {
                 let index = selectedButtons.indexOf(id);
                 selectedButtons.splice(index, 1);
             }
-            // if (selectedButtons.length < 1) {
-            //     selectedButtons[0] = firstButtonId;
-            // }
         }
         else {
             if (selectedButtons[0] == selectAllButtonId) {
@@ -159,36 +148,24 @@ function filterCourses() {
 function filterTerms() {
     const toDate = model.inputs.mainPage.toDate;
     const fromDate = model.inputs.mainPage.fromDate;
-
-    const filtedStudentStatuses = [];
-    for (const status of model.data.studentStatus) {
-        if (status.date >= fromDate && status.date <= toDate) {
-            filtedStudentStatuses.push(status);
-        }
-    }
-    console.log(filtedStudentStatuses);
-    return filtedStudentStatuses;
+    return model.data.studentStatus.filter(status => status.date >= fromDate && status.date <= toDate);
 }
 
 function removeDuplicateStudent(filtered) {
-    const unique = [];
-    const seenStudentIds = new Set();
-    for (const student of filtered) {
-        if (!seenStudentIds.has(student.studentId)) {
-            unique.push(student);
-            seenStudentIds.add(student.studentId);
+     return Object.values(filtered.reduce((acc, student) => {
+        const {studentId} = student;
+        if(!acc[studentId]) {
+            acc[studentId] = student;
         }
-    }
-    return unique;
+        return acc;
+    }, {}))
+     .sort(sortByName);
+}
 
-    // return Object.values(filtered.reduce((acc, student) => {
-    //     const {studentId} = student;
-    //     if(!acc[studentId]) {
-    //         acc[studentId] = student;
-    //     }
-    //     return acc;
-    // }, {}));
-
+function sortByName(a, b) {
+    const name = getStudent(a.studentId).name;
+    const name2 = getStudent(b.studentId).name;
+    return name.localeCompare(name2);
 }
 
 function uppdateDateAndSemesterInputs(selectedSemesterId) {
@@ -212,18 +189,6 @@ function handleFromDateInput(inputedDate) {
 function handleToDateInput(inputedDate) {
     model.inputs.mainPage.toDate = inputedDate;
     updateView();
-}
-
-function filterSatusesBasedOnDateIut(fromDate, toDate) {
-    //const semester = getSemester(semesterId);
-    const filtedStudentStatuses = [];
-    for (const status of model.data.filteredStudents) {
-        if (status.date >= fromDate && status.date <= toDate) {
-            filtedStudentStatuses.push(status);
-        }
-    }
-    console.log(filtedStudentStatuses);
-    return filtedStudentStatuses;
 }
 
 function findNewestStatusPerCourseForStudent(studentId) {
