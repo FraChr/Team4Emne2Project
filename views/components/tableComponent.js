@@ -44,11 +44,10 @@ function makeTableRow() {
                     }).join('')}
                 </td>
                 <td>
-                    ${getStatusData(status.studentId).map((event) => {
+                    ${Object.values(findNewestStatusPerCourseForStudent(status.studentId)).map((x)=> {
                         return `
-                            ${event.eventName} - ${event.courseName} - ${event.date}
-                            <br>
-                        `
+                        ${getEvent(x.eventId).name}|${getCourse(x.courseId).name}|${x.date}<br>
+                        `;
                     }).join('')}
                 </td>
             </tr>
