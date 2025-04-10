@@ -31,8 +31,8 @@ function makeTableRow() {
                     onclick="updateCheckAll()"
                     />
                 </td>
-                <td>
-                    <span onclick="test(${status.studentId})">${getStudent(status.studentId).name}</span>
+                <td onclick="test(${status.studentId})">
+                    <span>${getStudent(status.studentId).name}</span>
                 </td>
                 <td>
                     ${getPaymentData(status.studentId).map((event) => {
