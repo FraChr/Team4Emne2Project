@@ -11,6 +11,9 @@ function updateView() {
         case 'mainPage':
             currentView = mainPageView();
             break;
+        case 'profilePage':
+            currentView = studentViewTest();
+            break;
     }
     const app = document.getElementById('app');
     app.innerHTML = /*html*/ `
