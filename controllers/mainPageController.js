@@ -14,6 +14,10 @@ function checkButtonStatus() {
         paymentAmountInput.disabled = false;
         paymentDateInput.disabled = false;
     }
+    else if(model.app.currentPage === 'profilePage'){
+        paymentAmountInput.disabled = false;
+        paymentDateInput.disabled = false;
+    }
     else {
         paymentAmountInput.disabled = true;
         paymentDateInput.disabled = true;
