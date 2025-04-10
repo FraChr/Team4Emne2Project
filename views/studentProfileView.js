@@ -169,15 +169,15 @@ function drawHistory(studentId){
                 ${getStatusData(studentId, true).map(x => {
                     return `
                     <tr>
-                    <td>
-                    ${x.event.name}
-                    </td>
-                    <td>
-                    ${x.course.name}
-                    </td>
-                    <td>
-                    ${x.date}
-                    </td>
+                        <td>
+                            ${x.event.name}
+                        </td>
+                        <td>
+                            ${x.course.name}
+                        </td>
+                        <td>
+                            ${x.date}
+                        </td>
                     </tr>
                     `
                 }).join('')}

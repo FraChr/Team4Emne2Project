@@ -24,11 +24,11 @@ function makeTableRow() {
             <tr>
                 <td>
                     <input 
-                    type="checkbox" 
-                    class="checkbox" 
-                    onchange="pushStudentId('${status.studentId}')" 
-                    value="${status.studentId}" 
-                    onclick="updateCheckAll()"
+                        type="checkbox" 
+                        class="checkbox" 
+                        onchange="pushStudentId('${status.studentId}')" 
+                        value="${status.studentId}" 
+                        onclick="updateCheckAll()"
                     />
                 </td>
                 <td onclick="test(${status.studentId})">
@@ -37,8 +37,8 @@ function makeTableRow() {
                 <td>
                     ${getPaymentData(status.studentId).map((event) => {
                         return `
-                            ${getCourse(event.course).name} -                            
-                            ${event.date} - ${event.amount},-
+                            ${getCourse(event.course).name} - 
+                              ${event.amount},- | ${event.date}
                             <br> 
                         `
                     }).join('')}
