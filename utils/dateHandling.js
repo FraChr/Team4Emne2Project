@@ -1,7 +1,7 @@
 function getNewDate() {
     let date = new Date();
     let isoDate = date.toISOString();
-    let dateOnly = isoDate.split('T')[0];
+    let dateOnly = isoDate.split('T').shift();
     return dateOnly;
 }
 

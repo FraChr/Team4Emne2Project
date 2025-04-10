@@ -21,19 +21,35 @@ function getEvent(id) {
     return getEntity(model.data.events, id, 'Event');
 }
 
-function getStatusData(id) {
+function getStatusData(id, allStudentData = false) {
     const errorMsg = 'id is required';
-    if(nullOrUndefined(id, errorMsg)) return;
-    const setLocaleDate = 'no-NB';
-    return model.data.studentStatus
-        .filter(status => status.studentId === id)
+    if (nullOrUndefined(id, errorMsg)) return;
+
+    const setLocaleDate = 'no-NB'
+    const currentStudentStatus = model.data.studentStatus.filter(x => x.studentId === id)
+    let studentStatus;
+
+    if(allStudentData) studentStatus = currentStudentStatus
+    else studentStatus = Object.values(getNewestStatus(currentStudentStatus));
+    return studentStatus
         .map(status => {
             return {
-                eventName: getEvent(status.eventId),
-                courseName: getCourse(status.courseId),
+                event: getEvent(status.eventId),
+                course: getCourse(status.courseId),
                 date: toLocaleDate(status.date, setLocaleDate)
             }
         });
+}
+
+function getNewestStatus(currentStudentStatus) {
+    const newestStatusPerCourse = {};
+    for(const status of currentStudentStatus){
+        const courseId = status.courseId.toString();
+        if (!newestStatusPerCourse[courseId] || status.date > newestStatusPerCourse[courseId].date) {
+            newestStatusPerCourse[courseId] = status;
+        }
+    }
+    return Object.values(newestStatusPerCourse);
 }
 
 function getPaymentData(id) {

@@ -196,14 +196,14 @@ function findNewestStatusPerCourseForStudent(studentId) {
     const newestStatusPerCourse = {};
     for(const status of studentStatuses){
         const courseId = status.courseId.toString();
-        if (!newestStatusPerCourse[courseId]) {
+        if (!newestStatusPerCourse[courseId] || status.date > newestStatusPerCourse[courseId].date) {
             newestStatusPerCourse[courseId] = status;
         }
-        else {
-            if (status.date > newestStatusPerCourse[courseId].date) {
-                newestStatusPerCourse[courseId] = status;
-            }
-        }
+        // else {
+        //     if (status.date > newestStatusPerCourse[courseId].date) {
+        //         newestStatusPerCourse[courseId] = status;
+        //     }
+        // }
 
     }
     return newestStatusPerCourse;
