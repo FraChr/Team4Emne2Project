@@ -140,23 +140,35 @@ function drawCourseInfo(studentId){
             <tr>
                 <th>Status:</th>
                 <td>
-                    ${courseName} - ${eventName} - ${latestStatus.date}
-                    <button>Legg til hendelse</button>
+                    ${courseName} - ${eventName} - ${toLocaleDate(latestStatus.date)}  
+                </td>
+                <td>
+                    ${createEventSelector()}
+                    ${createCourseSelector()}
+                    ${createUpdateStatusButton()}
                 </td>
             </tr>
             <tr>
                 <th>Betalt:</th>
                 <td>
                     Sum: ${totalPaid} kr
-                    <button>Legg til hendelse</button>
                     <ul>
                         ${paymentListHTML}
                     </ul>
                 </td>
+                <td>
+                    ${createCourseSelector()}
+                    ${createPaymentInput()}
+                    ${createUpdateStatusButton()}
+                </td>
+            </tr>
+            <tr>
+            
             </tr>
         </table>
     `;
 }
+
 
 
 function drawHistory(studentId){ 
