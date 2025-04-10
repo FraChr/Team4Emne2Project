@@ -32,7 +32,7 @@ function makeTableRow() {
                     />
                 </td>
                 <td>
-                    <span onclick="test()">${getStudent(status.studentId).name}</span>
+                    <span onclick="test(${status.studentId})">${getStudent(status.studentId).name}</span>
                 </td>
                 <td>
                     ${getPaymentData(status.studentId).map((event) => {

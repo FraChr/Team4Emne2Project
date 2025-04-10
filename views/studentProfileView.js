@@ -1,34 +1,41 @@
 // studentView(studentId);
-function studentViewTest(studentId){
-    model.inputs.studentPage.studentId = studentId;
+function studentViewTest(){
+    let studentId = model.inputs.studentPage.studentId;
+    console.log(studentId)
     // model.app.currentPage = 'profilePage';
 
 
-    app.innerHTML = /*HTML*/`
+    return /*HTML*/`
         <div>
-            <button> ← </button>
+            <button onclick="getMainView()"> ← </button>
         </div>
 
         <div class="profile">
             <div>
-                <div> ${drawStudentInfo()} </div>
+                <div> ${drawStudentInfo(studentId)} </div>
                 <div> ${drawCourseInfo(studentId)} </div>
             </div>
-            <div> ${drawHistory()} </div>
+            <div>${drawHistory(studentId)} </div>
         </div>
     `;
+    
+}
+
+function getMainView(){
+    model.app.currentPage = 'mainPage';
     updateView();
 }
 
-function test(){
+function test(studentId){
+    model.inputs.studentPage.studentId = studentId;
     model.app.currentPage = 'profilePage';
     updateView();
 }
 
-function drawStudentInfo(){
+function drawStudentInfo(studentId){
     let studentInfo = model.data.students;
     for (let student of model.data.students){
-        if(student.id === model.inputs.studentPage.studendId){
+        if(student.id === studentId){
             studentInfo = student;
         }
     }
@@ -101,8 +108,7 @@ function drawCourseInfo(studentId){
     }
 
     studentStatuses.sort((a,b) => new Date(a.date) - new Date(b.date));
-    let latestStatus = studentStatuses[studentStatuses.length - 1];
-
+    let latestStatus = studentStatuses.pop();
     let courseName = '';
     for (let course of model.data.courses){
         if (course.id === latestStatus.courseId){
@@ -153,15 +159,29 @@ function drawCourseInfo(studentId){
 }
 
 
-function drawHistory(){ 
+function drawHistory(studentId){ 
     return /*HTML*/ `
         <table> 
             <tr>
                 <th> Historikk <button> ↑↓ </button> </th> 
             </tr>
-            <tr> 
-                <td> ${getStudentStatus(model.inputs.studentPage.studendId)} </td> 
-            </tr>
+            
+                ${getStatusData(studentId, true).map(x => {
+                    return `
+                    <tr>
+                    <td>
+                    ${x.event.name}
+                    </td>
+                    <td>
+                    ${x.course.name}
+                    </td>
+                    <td>
+                    ${x.date}
+                    </td>
+                    </tr>
+                    `
+                }).join('')}
+            
         </table>
     `;
 }
