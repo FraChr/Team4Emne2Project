@@ -193,7 +193,6 @@ function drawHistory(studentId){
                     </tr>
                     `
                 }).join('')}
-            
         </table>
     `;
 }

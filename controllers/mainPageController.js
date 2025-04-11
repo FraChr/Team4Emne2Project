@@ -3,6 +3,7 @@ function checkButtonStatus() {
     let userChoiceCourse = document.getElementById('userChoiceCourse');
     let paymentAmountInput = document.getElementById('paymentAmountInput');
     let paymentDateInput = document.getElementById('paymentDateInput');
+    console.log(userChoiceCourse.value);
     if (userChoiceStatus.value && userChoiceCourse.value) {
         statusButton.disabled = false;
     }
