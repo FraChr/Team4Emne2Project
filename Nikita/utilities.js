@@ -75,7 +75,7 @@ function getSemester(id) {
 function findNewestStatusPerCourseForStudent(studentId) {
     let studentStatuses = model.data.studentStatus.filter(x => x.studentId === studentId);
     const newestStatusPerCourse = {};
-    for(const status of studentStatuses){
+    for (const status of studentStatuses) {
         const courseId = status.courseId.toString();
         if (!newestStatusPerCourse[courseId]) {
             newestStatusPerCourse[courseId] = status;
@@ -88,4 +88,15 @@ function findNewestStatusPerCourseForStudent(studentId) {
 
     }
     return newestStatusPerCourse;
+}
+
+function isStatusRelevant(status) {
+    for (const selectedEvent of model.inputs.mainPage.selectedEvents) {
+        if (status.eventId === selectedEvent.id) {
+            if (status.date > model.inputs.mainPage.toDate || status.date < model.inputs.mainPage.fromDate) {
+                return false;
+            }
+        }
+    }
+    return true;
 }

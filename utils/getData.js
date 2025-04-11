@@ -30,7 +30,8 @@ function getStatusData(id, allStudentData = false) {
     let studentStatus;
 
     if(allStudentData) studentStatus = currentStudentStatus
-    else studentStatus = Object.values(getNewestStatus(currentStudentStatus));
+    //else studentStatus = Object.values(getNewestStatus(currentStudentStatus));
+    else studentStatus = getNewestStatus(currentStudentStatus);
     return studentStatus
         .map(status => {
             return {
@@ -42,14 +43,28 @@ function getStatusData(id, allStudentData = false) {
 }
 
 function getNewestStatus(currentStudentStatus) {
-    const newestStatusPerCourse = {};
+    const newestStatusPerCourse = [];
     for(const status of currentStudentStatus){
-        const courseId = status.courseId.toString();
-        if (!newestStatusPerCourse[courseId] || status.date > newestStatusPerCourse[courseId].date) {
-            newestStatusPerCourse[courseId] = status;
+        if(model.inputs.mainPage.selectedCurses.includes(status.courseId) || model.inputs.mainPage.selectedCurses[0] === 0){
+            if(model.inputs.mainPage.selectedEvents.includes(status.eventId) || model.inputs.mainPage.selectedEvents[0] === 0){
+                if(status.date > model.inputs.mainPage.fromDate && status.date < model.inputs.mainPage.toDate){
+                    newestStatusPerCourse.push(status);
+                }
+            }
+        }
+        else{
+        courseIndex = newestStatusPerCourse.indexOf(newestStatusPerCourse.find(x => x.courseId === status.courseId));
+        if(courseIndex < 0){
+            newestStatusPerCourse.push(status);
+        }
+        else{
+            if(newestStatusPerCourse[courseIndex].date < status.date){
+                newestStatusPerCourse[courseIndex] = status;
+            }
         }
     }
-    return Object.values(newestStatusPerCourse);
+    }
+    return newestStatusPerCourse;
 }
 
 function getPaymentData(id) {
