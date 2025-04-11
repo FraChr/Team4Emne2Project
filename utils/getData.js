@@ -47,7 +47,7 @@ function getNewestStatus(currentStudentStatus) {
     for(const status of currentStudentStatus){
         if(model.inputs.mainPage.selectedCurses.includes(status.courseId) || model.inputs.mainPage.selectedCurses[0] === 0){
             if(model.inputs.mainPage.selectedEvents.includes(status.eventId) || model.inputs.mainPage.selectedEvents[0] === 0){
-                if(status.date > model.inputs.mainPage.fromDate && status.date < model.inputs.mainPage.toDate){
+                if(status.date >= model.inputs.mainPage.fromDate && status.date <= model.inputs.mainPage.toDate){
                     newestStatusPerCourse.push(status);
                 }
             }
