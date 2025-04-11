@@ -1,29 +1,60 @@
+// refactored checkbuttonStatus()
 function checkButtonStatus() {
-    let userChoiceStatus = document.getElementById('userChoiceStatus');
-    let userChoiceCourse = document.getElementById('userChoiceCourse');
-    let paymentAmountInput = document.getElementById('paymentAmountInput');
-    let paymentDateInput = document.getElementById('paymentDateInput');
-    console.log(userChoiceCourse.value);
-    if (userChoiceStatus.value && userChoiceCourse.value) {
-        statusButton.disabled = false;
-    }
-    else {
-        statusButton.disabled = true;
-    }
+    const {userChoiceStatus, userChoiceCourse} = model.inputs.mainPage;
 
-    if (userChoiceStatus.value === 'addPayment') {
-        paymentAmountInput.disabled = false;
-        paymentDateInput.disabled = false;
-    }
-    else if(model.app.currentPage === 'profilePage'){
-        paymentAmountInput.disabled = false;
-        paymentDateInput.disabled = false;
-    }
-    else {
-        paymentAmountInput.disabled = true;
-        paymentDateInput.disabled = true;
-    }
+    model.inputs.mainPage.statusButton = !!(userChoiceStatus && userChoiceCourse);
+    model.inputs.payment.enablePayment = userChoiceStatus === 'addPayment' || model.app.currentPage === 'profilePage';
+    updatePaymentInputs();
+    updateStatusButton();
 }
+
+function onStatusChange(value) {
+    model.inputs.mainPage.userChoiceStatus = value;
+    checkButtonStatus();
+}
+function onCourseChange(value) {
+    model.inputs.mainPage.userChoiceCourse = value;
+    checkButtonStatus();
+}
+function onPayAmountChange(value) {
+    model.inputs.payment.amount = value;
+    checkButtonStatus();
+}
+function onPaymentDateChange(value) {
+    model.inputs.payment.date = value;
+    checkButtonStatus();
+}
+
+// Kept original function
+// function checkButtonStatus() {
+//     let userChoiceStatus = document.getElementById('userChoiceStatus');
+//     let userChoiceCourse = document.getElementById('userChoiceCourse');
+//     let paymentAmountInput = document.getElementById('paymentAmountInput');
+//     let paymentDateInput = document.getElementById('paymentDateInput');
+//     if (userChoiceStatus.value && userChoiceCourse.value) {
+//         statusButton.disabled = false;
+//     }
+//     else {
+//         statusButton.disabled = true;
+//     }
+//
+//     if (userChoiceStatus.value === 'addPayment') {
+//         paymentAmountInput.disabled = false;
+//         paymentDateInput.disabled = false;
+//     }
+//     else if(model.app.currentPage === 'profilePage'){
+//         paymentAmountInput.disabled = false;
+//         paymentDateInput.disabled = false;
+//     }
+//     else {
+//         paymentAmountInput.disabled = true;
+//         paymentDateInput.disabled = true;
+//     }
+// }
+
+
+
+
 
 function changeStudentStatus(newStudentStatus, studentCourse) {
     let statusID = model.data.studentStatus[model.data.studentStatus.length - 1].id;
@@ -42,11 +73,15 @@ function changeStudentStatus(newStudentStatus, studentCourse) {
     console.log(model.data.studentStatus)
     updateView();
     model.inputs.mainPage.studentIds = [];
+
+    model.inputs.payment.enablePayment = false;
+    model.inputs.payment.date = '';
+    model.inputs.payment.amount = 0;
 }
 
 function addPayment(studentCourse) {
-    model.inputs.payment.amount = document.getElementById('paymentAmountInput').value
-    model.inputs.payment.date = document.getElementById('paymentDateInput').value
+    // model.inputs.payment.amount = document.getElementById('paymentAmountInput').value
+    // model.inputs.payment.date = document.getElementById('paymentDateInput').value
     let paymentId = model.data.payments[model.data.payments.length - 1].id;
     paymentId++;
 

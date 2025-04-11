@@ -26,10 +26,11 @@ function getStatusData(id, allStudentData = false) {
     if (nullOrUndefined(id, errorMsg)) return;
 
     const setLocaleDate = 'no-NB'
-    const currentStudentStatus = model.data.studentStatus.filter(x => x.studentId === id);
+    const currentStudentStatus = model.data.studentStatus.filter(x => x.studentId === id)
     let studentStatus;
 
     if(allStudentData) studentStatus = currentStudentStatus
+    //else studentStatus = Object.values(getNewestStatus(currentStudentStatus));
     else studentStatus = getNewestStatus(currentStudentStatus);
     return studentStatus
         .map(status => {
@@ -46,13 +47,13 @@ function getStatusData(id, allStudentData = false) {
 //     for(const status of currentStudentStatus){
 //         if(model.inputs.mainPage.selectedCurses.includes(status.courseId) || model.inputs.mainPage.selectedCurses[0] === 0){
 //             if(model.inputs.mainPage.selectedEvents.includes(status.eventId) || model.inputs.mainPage.selectedEvents[0] === 0){
-//                 if(status.date > model.inputs.mainPage.fromDate && status.date < model.inputs.mainPage.toDate){
+//                 if(status.date >= model.inputs.mainPage.fromDate && status.date <= model.inputs.mainPage.toDate){
 //                     newestStatusPerCourse.push(status);
 //                 }
 //             }
 //         }
 //         else{
-//         const courseIndex = newestStatusPerCourse.indexOf(newestStatusPerCourse.find(x => x.courseId === status.courseId));
+//         courseIndex = newestStatusPerCourse.indexOf(newestStatusPerCourse.find(x => x.courseId === status.courseId));
 //         if(courseIndex < 0){
 //             newestStatusPerCourse.push(status);
 //         }

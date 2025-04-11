@@ -11,8 +11,12 @@ const model = {
             toDate: '',
             fromDate: '2017-01-20',
             semesterId: 0,
+            statusButton: false,
+            userChoiceStatus: '',
+            userChoiceCourse: '',
         },
         payment: {
+            enablePayment: false,
             amount: 0,
             date: ''
         },
