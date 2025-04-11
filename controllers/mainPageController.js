@@ -81,9 +81,9 @@ function changeStudentStatus(newStudentStatus, studentCourse) {
     updateView();
     model.inputs.mainPage.studentIds = [];
 
-    // model.inputs.payment.enablePayment = false;
-    // model.inputs.payment.date = '';
-    // model.inputs.payment.amount = 0;
+    model.inputs.payment.enablePayment = false;
+    model.inputs.payment.date = '';
+    model.inputs.payment.amount = 0;
 }
 
 function addPayment(studentCourse) {
