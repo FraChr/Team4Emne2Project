@@ -11,7 +11,7 @@ const model = {
             toDate: '',
             fromDate: '2017-01-20',
             semesterId: 0,
-            statusButton: false,
+            enableStatusButton: false,
             userChoiceStatus: '',
             userChoiceCourse: '',
         },
