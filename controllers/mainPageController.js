@@ -1,9 +1,16 @@
 // refactored checkbuttonStatus()
 function checkButtonStatus() {
-    const {userChoiceStatus, userChoiceCourse} = model.inputs.mainPage;
+    // debugger;
+    // const {userChoiceStatus, userChoiceCourse} = model.inputs.mainPage;
 
-    model.inputs.mainPage.statusButton = !!(userChoiceStatus && userChoiceCourse);
+    let userChoiceStatus = model.inputs.mainPage.userChoiceStatus;
+    let userChoiceCourse = model.inputs.mainPage.userChoiceCourse;
+
+    model.inputs.mainPage.enableStatusButton = !!(userChoiceStatus && userChoiceCourse);
+
     model.inputs.payment.enablePayment = userChoiceStatus === 'addPayment' || model.app.currentPage === 'profilePage';
+
+
     updatePaymentInputs();
     updateStatusButton();
 }
@@ -74,9 +81,9 @@ function changeStudentStatus(newStudentStatus, studentCourse) {
     updateView();
     model.inputs.mainPage.studentIds = [];
 
-    model.inputs.payment.enablePayment = false;
-    model.inputs.payment.date = '';
-    model.inputs.payment.amount = 0;
+    // model.inputs.payment.enablePayment = false;
+    // model.inputs.payment.date = '';
+    // model.inputs.payment.amount = 0;
 }
 
 function addPayment(studentCourse) {

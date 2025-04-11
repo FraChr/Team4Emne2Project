@@ -15,6 +15,6 @@ function updatePaymentInputs() {
 }
 
 function updateStatusButton() {
-    const enable = model.inputs.mainPage.enableStatusButton;
+    let enable = model.inputs.mainPage.enableStatusButton;
     document.getElementById('statusButton').disabled = !enable;
 }

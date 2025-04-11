@@ -62,7 +62,6 @@ function checkAll(source) {
     let isCheckAll = true;
     let checkAllState = source.checked;
 
-    const eventType = 'change'
     document.querySelectorAll('.checkbox').forEach(checkbox => {
         checkbox.checked = source.checked;
         pushStudentId(checkbox.value, isCheckAll, checkAllState);

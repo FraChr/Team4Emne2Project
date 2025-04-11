@@ -12,8 +12,8 @@ const model = {
             fromDate: '2017-01-20',
             semesterId: 0,
             enableStatusButton: false,
-            userChoiceStatus: '',
-            userChoiceCourse: '',
+            userChoiceStatus: null,
+            userChoiceCourse: null,
         },
         payment: {
             enablePayment: false,
