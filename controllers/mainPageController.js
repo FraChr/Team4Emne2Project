@@ -1,10 +1,6 @@
 // refactored checkbuttonStatus()
 function checkButtonStatus() {
-    // debugger;
-    // const {userChoiceStatus, userChoiceCourse} = model.inputs.mainPage;
-
-    let userChoiceStatus = model.inputs.mainPage.userChoiceStatus;
-    let userChoiceCourse = model.inputs.mainPage.userChoiceCourse;
+    const {userChoiceStatus, userChoiceCourse} = model.inputs.mainPage;
 
     model.inputs.mainPage.enableStatusButton = !!(userChoiceStatus && userChoiceCourse);
 
@@ -15,23 +11,10 @@ function checkButtonStatus() {
     updateStatusButton();
 }
 
-function onStatusChange(value) {
-    model.inputs.mainPage.userChoiceStatus = value;
+function eventSelectionInput(input, value) {
+    setInputByPath(input, value);
     checkButtonStatus();
 }
-function onCourseChange(value) {
-    model.inputs.mainPage.userChoiceCourse = value;
-    checkButtonStatus();
-}
-function onPayAmountChange(value) {
-    model.inputs.payment.amount = value;
-    checkButtonStatus();
-}
-function onPaymentDateChange(value) {
-    model.inputs.payment.date = value;
-    checkButtonStatus();
-}
-
 // Kept original function
 // function checkButtonStatus() {
 //     let userChoiceStatus = document.getElementById('userChoiceStatus');
@@ -164,7 +147,6 @@ function handleOnclick(id, buttonsType) {
     filterStudentStatus();
     updateView();
 }
-
 
 function filterStudentStatus() {
     const filtered = [...filterEvents()];

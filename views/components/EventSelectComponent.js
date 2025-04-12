@@ -37,7 +37,7 @@ function makeEventButtonsHtml() {
 
 function createEventSelector(payment){
     return /*HTML*/`
-        <select id="userChoiceStatus" onchange="onStatusChange(this.value)" required>
+        <select id="userChoiceStatus" onchange="eventSelectionInput('inputs.mainPage.userChoiceStatus', this.value)" required>
             <option value="" disabled selected>Legg til hendelse</option>
             <option value="1">Søkt</option>
             <option value="2">Godkjent</option>
@@ -51,7 +51,7 @@ function createEventSelector(payment){
 
 function createCourseSelector(){
     return /*HTML */`
-            <select id="userChoiceCourse" onchange="onCourseChange(this.value)" required>
+            <select id="userChoiceCourse" onchange="eventSelectionInput('inputs.mainPage.userChoiceCourse', this.value)" required>
             <option value="" disabled selected>Velg kurs</option>
             <option value="1">Start IT</option>
             <option value="2">Frontend</option>
@@ -66,8 +66,8 @@ function createCourseSelector(){
 
 function createPaymentInput(){
     return /*HTML*/`
-        <input disabled type="number" id="paymentAmountInput" onchange="onPayAmountChange(this.value)" placeholder="Beløp" >
-        <input disabled type="date" onchange="onPaymentDateChange(this.value)" id="paymentDateInput"> 
+        <input disabled type="number" id="paymentAmountInput" onchange="eventSelectionInput('inputs.payment.amount', this.valueAsNumber)" placeholder="Beløp" >
+        <input disabled type="date" onchange="eventSelectionInput('inputs.payment.date', this.value)" id="paymentDateInput"> 
     `
 }
 

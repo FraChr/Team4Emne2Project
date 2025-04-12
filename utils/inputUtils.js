@@ -14,7 +14,7 @@ function getInput(inputType, prop) {
 //     const [inputType, prop] = path.split('.');
 //     setInput(inputType, prop, value);
 // }
-//
+
 // function setInput(inputType, prop, value) {
 //     const inputSelection = model.inputs[inputType];
 //     if(hasProperty(inputSelection, prop)) {
@@ -25,10 +25,15 @@ function getInput(inputType, prop) {
 //     }
 // }
 
+function setInputByPath(path, value) {
+    const [dataLocation, inputType, prop] = path.split('.');
+    setInput(dataLocation, inputType, prop, value);
+}
+
 function setInput(dataLocation, inputType, prop = null, value) {
     const errorMsg = `${inputType} not property of ${dataLocation}`;
-    const test = model[dataLocation];
-    if(!hasProperty(test, inputType, errorMsg)) return;
+    const inputLocation = model[dataLocation];
+    if(!hasProperty(inputLocation, inputType, errorMsg)) return;
 
     const inputSelection = model[dataLocation][inputType];
 
@@ -38,11 +43,11 @@ function setInput(dataLocation, inputType, prop = null, value) {
             handleVariableInput(inputSelection, prop, value);
         } else {
             setError(`Unknown property ${prop}`);
-            // test[inputSelection] = value;
+            // inputLocation[inputSelection] = value;
         }
     }
     if(prop === null) {
-        test[inputType] = value;
+        inputLocation[inputType] = value;
     }
 }
 
