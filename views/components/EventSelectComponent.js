@@ -74,8 +74,7 @@ function createPaymentInput(){
 function createUpdateStatusButton(){
     return /*HTML*/`
         <button disabled id="statusButton" 
-        onclick="changeStudentStatus(document.getElementById('userChoiceStatus').value, 
-        document.getElementById('userChoiceCourse').value)">
+        onclick="changeStudentStatus()">
             Oppdater
         </button>
     `;

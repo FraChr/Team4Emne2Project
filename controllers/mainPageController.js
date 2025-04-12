@@ -12,7 +12,7 @@ function checkButtonStatus() {
 }
 
 function eventSelectionInput(input, value) {
-    setInputByPath(input, value);
+    set(input, value);
     checkButtonStatus();
 }
 // Kept original function
@@ -46,7 +46,10 @@ function eventSelectionInput(input, value) {
 
 
 
-function changeStudentStatus(newStudentStatus, studentCourse) {
+function changeStudentStatus() {
+    const newStudentStatus = model.inputs.mainPage.userChoiceStatus;
+    const studentCourse = model.inputs.mainPage.userChoiceCourse;
+
     let statusID = model.data.studentStatus[model.data.studentStatus.length - 1].id;
     let todaysDate = getNewDate();
     statusID++;
@@ -62,11 +65,13 @@ function changeStudentStatus(newStudentStatus, studentCourse) {
     }
     console.log(model.data.studentStatus)
     updateView();
-    model.inputs.mainPage.studentIds = [];
 
-    model.inputs.payment.enablePayment = false;
-    model.inputs.payment.date = '';
-    model.inputs.payment.amount = 0;
+    resetInputs ({
+        'inputs.payment.enablePayment': false,
+        'inputs.payment.date': '',
+        'inputs.payment.amount': 0,
+        'inputs.mainPage.studentIds': []
+    });
 }
 
 function addPayment(studentCourse) {
