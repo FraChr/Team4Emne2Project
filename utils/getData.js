@@ -108,20 +108,15 @@ function getPaymentData(id, allPaymentData = false){
     const errorMsg = 'id is required';
     if(nullOrUndefined(id, errorMsg)) return;
     const setLocaleDate = 'no-NB';
-    const payments = model.data.payments.filter(x => x.studentId === id);
-    let test;
+    const currentStudentPayment = model.data.payments.filter(x => x.studentId === id);
+    let payments;
 
-    if(allPaymentData) test = payments;
-    else test = getNewest(payments);
+    if(allPaymentData) payments = currentStudentPayment;
+    else payments = getNewest(currentStudentPayment);
 
-    const totalsByCourse = payments.reduce((acc, payment) => {
-        const courseId = payment.courseId;
-        acc[courseId] = (acc[courseId] || 0) + payment.amount;
-        return acc;
-    }, {});
+    const totalsByCourse = sum(currentStudentPayment);
 
-
-    return test.map(payment => {
+    return payments.map(payment => {
         return {
             amount: payment.amount,
             date: toLocaleDate(payment.date, setLocaleDate),
@@ -129,43 +124,12 @@ function getPaymentData(id, allPaymentData = false){
             sum: totalsByCourse[payment.courseId]
         }
     });
-
-    // return {
-    //     total,
-    //     payments: payments.map(payment => ({
-    //         amount: payment.amount,
-    //         date: toLocaleDate(payment.date, setLocaleDate),
-    //         course: payment.courseId,
-    //     }))
-    // }
-
 }
 
 function sum(payments) {
-    return payments.reduce((acc, x) => {
-        return acc + Number(x.amount)
-    }, 0);
-
-}
-
-function sumPayments(id) {
-    const studentPayments = model.data.payments;
-    const reduceDefault = 0;
-    const total = studentPayments
-        .filter(student => id === student.studentId)
-        .reduce((acc, student) => {
-            return acc + Number(student.amount);
-        }, reduceDefault);
-
-    let paymentId;
-    if(model.data.paymentSums.length > 0){
-        paymentId = model.data.paymentSums[model.data.paymentSums.length - 1].id;
-        paymentId++;
-    } else {
-        paymentId = 1;
-    }
-
-    model.data.paymentSums.push({id: paymentId, studentId: id, amount: total});
-
-    return total;
+    return payments.reduce((acc, payment) => {
+        const courseId = payment.courseId;
+        acc[courseId] = (acc[courseId] || 0) + payment.amount;
+        return acc;
+    }, {});
 }
