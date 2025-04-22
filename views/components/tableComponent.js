@@ -1,5 +1,5 @@
-function makeTable() {
-    return `
+function makeTable(){
+    return /*HTML*/`
         <table>
             <tr>
                 <th class="firstColumnElement">
@@ -16,7 +16,7 @@ function makeTable() {
 
 // filterSatusesBasedOnDateIut(model.inputs.mainPage.fromDate, model.inputs.mainPage.toDate)
 
-function makeTableRow() {
+function makeTableRow(){
     let rows = '';
     //model.data.filteredStudents
     for (const status of model.data.filteredStudents) {
@@ -36,16 +36,16 @@ function makeTableRow() {
                 </td>
                 <td>
                     ${getPaymentData(status.studentId).map((event) => {
-                        return `
+                        return /*HTML*/`
                             ${getCourse(event.course).name} - 
                               ${event.amount},- | ${event.date}
                             <br> 
-                        `
+                        `;
                     }).join('')}
                 </td>
                 <td>
                     ${getStatusData(status.studentId).map((x)=> {
-                        return `
+                        return /*HTML*/`
                             <span id="event">${x.event.name}</span>
                             <span id="course">${x.course.name}</span>
                             <span id="date">${x.date}</span><br>
