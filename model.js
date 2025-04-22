@@ -36,7 +36,7 @@ const model = {
                 getAcademyMail: 'karimo@getacademy.no',
                 discord: 'kariM',
                 privateMail: 'karim@gmail.com',
-                tlf: '25224515'
+                tlf: '25224515',
             },
             {
                 id: 2,
@@ -44,7 +44,7 @@ const model = {
                 getAcademyMail: 'siritip@getacademy.no',
                 discord: 'tipp',
                 privateMail: 'siri.tipp@gmail.com',
-                tlf: '22222222'
+                tlf: '22222222',
             },
             {
                 id: 3,
@@ -52,7 +52,7 @@ const model = {
                 getAcademyMail: 'kristofferlill@getacademy.no',
                 discord: 'kulekristoffer',
                 privateMail: 'kulekristofferlill@gmail.com',
-                tlf: '98444428'
+                tlf: '98444428',
             },
             {
                 id: 4,
@@ -60,7 +60,7 @@ const model = {
                 getAcademyMail: 'brianwo@getacademy.no',
                 discord: 'wolfy',
                 privateMail: 'brianwolf@hotmail.com',
-                tlf: '25364913'
+                tlf: '25364913',
             },
             {
                 id: 5,
@@ -68,7 +68,7 @@ const model = {
                 getAcademyMail: 'turidwill@getacademy.no',
                 discord: 'emogirly',
                 privateMail: 'turid.williamson@icloud.com',
-                tlf: '25227777'
+                tlf: '25227777',
             },
             {
                 id: 6,
@@ -76,7 +76,7 @@ const model = {
                 getAcademyMail: 'bethinasmoen@getacademy.com',
                 discord: 'bethinasm',
                 privateMail: 'bethinafakemail@gmail.com',
-                tlf: '12345678'
+                tlf: '12345678',
             },
             {
                 id: 7,
@@ -84,7 +84,7 @@ const model = {
                 getAcademyMail: 'juliemv@getacademy.com',
                 discord: 'juliemariaaaa',
                 privateMail: 'juliesfakemail@gmail.com',
-                tlf: '11111111'
+                tlf: '11111111',
             },
             {
                 id: 8,
@@ -92,7 +92,7 @@ const model = {
                 getAcademyMail: 'nikitat@getacademy.com',
                 discord: 'nikitato',
                 privateMail: 'nikitatofakemail@gmail.com',
-                tlf: '44444444'
+                tlf: '44444444',
             },
             {
                 id: 9,
@@ -100,7 +100,7 @@ const model = {
                 getAcademyMail: 'chrisfrank@getacademy.com',
                 discord: 'chrisc',
                 privateMail: 'chrisffakemail@gmail.com',
-                tlf: '55555555'
+                tlf: '55555555',
             },
         ],
 
