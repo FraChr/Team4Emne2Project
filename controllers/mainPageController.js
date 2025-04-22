@@ -1,20 +1,20 @@
 // refactored checkbuttonStatus()
-function checkButtonStatus() {
+function checkButtonStatus(){
     const {userChoiceStatus, userChoiceCourse} = model.inputs.mainPage;
 
     model.inputs.mainPage.enableStatusButton = !!(userChoiceStatus && userChoiceCourse);
 
     model.inputs.payment.enablePayment = userChoiceStatus === 'addPayment' || model.app.currentPage === 'profilePage';
 
-
     updatePaymentInputs();
     updateStatusButton();
 }
 
-function eventSelectionInput(input, value) {
+function eventSelectionInput(input, value){
     set(input, value);
     checkButtonStatus();
 }
+
 // Kept original function
 // function checkButtonStatus() {
 //     let userChoiceStatus = document.getElementById('userChoiceStatus');
@@ -42,11 +42,7 @@ function eventSelectionInput(input, value) {
 //     }
 // }
 
-
-
-
-
-function changeStudentStatus() {
+function changeStudentStatus(){
     const newStudentStatus = model.inputs.mainPage.userChoiceStatus;
     const studentCourse = model.inputs.mainPage.userChoiceCourse;
 
@@ -54,11 +50,11 @@ function changeStudentStatus() {
     let todaysDate = getNewDate();
     statusID++;
 
-    if (newStudentStatus === 'addPayment') {
+    if (newStudentStatus === 'addPayment'){
         addPayment(studentCourse);
     }
     else {
-        for (const chosenStudent of model.inputs.mainPage.studentIds) {
+        for (const chosenStudent of model.inputs.mainPage.studentIds){
             model.data.studentStatus.push({ id: statusID, eventId: parseInt(newStudentStatus), courseId: parseInt(studentCourse), studentId: parseInt(chosenStudent), date: todaysDate });
             statusID++;
         }
@@ -70,7 +66,7 @@ function changeStudentStatus() {
         'inputs.payment.enablePayment': false,
         'inputs.payment.date': '',
         'inputs.payment.amount': 0,
-        'inputs.mainPage.studentIds': []
+        'inputs.mainPage.studentIds': [],
     });
 }
 
@@ -80,46 +76,47 @@ function addPayment(studentCourse) {
     let paymentId = model.data.payments[model.data.payments.length - 1].id;
     paymentId++;
 
-    for (const student of model.inputs.mainPage.studentIds) {
+    for (const student of model.inputs.mainPage.studentIds){
         model.data.payments.push({ id: paymentId, courseId: parseInt(studentCourse), studentId: parseInt(student), amount: parseInt(model.inputs.payment.amount), date: model.inputs.payment.date });
         paymentId++;
     }
 }
 
-function pushStudentId(studentId, isCheckAll, checkAllState) {
+function pushStudentId(studentId, isCheckAll, checkAllState){
     const studentIds = model.inputs.mainPage.studentIds;
     const included = studentIds.includes(studentId);
 
-    if (isCheckAll && !checkAllState) {
+    if (isCheckAll && !checkAllState){
         removeFromStudentIds(studentId, studentIds);
         return;
     }
-    if (isCheckAll && !included) {
+    if (isCheckAll && !included){
         addToStudentIds(studentId, studentIds);
         return;
     }
-
-    if (!isCheckAll && included) {
+    if (!isCheckAll && included){
         removeFromStudentIds(studentId, studentIds);
         return;
     }
-    if (!isCheckAll && !included) {
+    if (!isCheckAll && !included){
         addToStudentIds(studentId, studentIds);
     }
 }
-function removeFromStudentIds(studentId, studentIds) {
+
+function removeFromStudentIds(studentId, studentIds){
     const index = studentIds.indexOf(studentId);
     studentIds.splice(index, 1);
 }
-function addToStudentIds(studentId, studentIds) {
+
+function addToStudentIds(studentId, studentIds){
     studentIds.push(studentId);
 }
 
-function handleOnclick(id, buttonsType) {
+function handleOnclick(id, buttonsType){
     let selectedButtons;
     let selectAllButtonId = 0;
 
-    switch (buttonsType) {
+    switch (buttonsType){
         case 'courses':
             selectedButtons = model.inputs.mainPage.selectedCurses;
             break;
@@ -128,22 +125,21 @@ function handleOnclick(id, buttonsType) {
             break;
     }
 
-    if (id === selectAllButtonId) {
-        if (selectedButtons[0] !== selectAllButtonId) {
+    if (id === selectAllButtonId){
+        if (selectedButtons[0] !== selectAllButtonId){
             selectedButtons.splice(1);
             selectedButtons[0] = selectAllButtonId;
         }
-    }
-
+    } 
     else {
-        if (selectedButtons.includes(id)) {
+        if (selectedButtons.includes(id)){
             if (selectedButtons.length > 1) {
                 let index = selectedButtons.indexOf(id);
                 selectedButtons.splice(index, 1);
             }
         }
         else {
-            if (selectedButtons[0] == selectAllButtonId) {
+            if (selectedButtons[0] == selectAllButtonId){
                 selectedButtons.splice(0,selectedButtons.length);
             }
             selectedButtons.push(id);
@@ -153,42 +149,42 @@ function handleOnclick(id, buttonsType) {
     updateView();
 }
 
-function filterStudentStatus() {
+function filterStudentStatus(){
     const filtered = [...filterEvents()];
     model.data.filteredStudents = removeDuplicateStudent(filtered);
     model.inputs.mainPage.studentIds = [];
 }
 
-function filterEvents() {
+function filterEvents(){
     const allEvents = 0;
     const courses = filterCourses();
     const events = model.inputs.mainPage.selectedEvents;
-    if (events.includes(allEvents)) {
+    if (events.includes(allEvents)){
         return courses;
     }
     return courses.filter(course => events.includes(course.eventId));
 }
 
-function filterCourses() {
+function filterCourses(){
     const allCourses = 0;
     const courses = model.inputs.mainPage.selectedCurses;
     const terms = filterTerms();
-    if (courses.includes(allCourses)) {
+    if (courses.includes(allCourses)){
         return terms;
     }
     return terms.filter(status => courses.includes(status.courseId));
 }
 
-function filterTerms() {
+function filterTerms(){
     const toDate = model.inputs.mainPage.toDate;
     const fromDate = model.inputs.mainPage.fromDate;
     return model.data.studentStatus.filter(status => status.date >= fromDate && status.date <= toDate);
 }
 
-function removeDuplicateStudent(filtered) {
+function removeDuplicateStudent(filtered){
      return Object.values(filtered.reduce((acc, student) => {
         const {studentId} = student;
-        if(!acc[studentId]) {
+        if(!acc[studentId]){
             acc[studentId] = student;
         }
         return acc;
@@ -196,13 +192,13 @@ function removeDuplicateStudent(filtered) {
      .sort(sortByName);
 }
 
-function sortByName(a, b) {
+function sortByName(a, b){
     const name = getStudent(a.studentId).name;
     const name2 = getStudent(b.studentId).name;
     return name.localeCompare(name2);
 }
 
-function uppdateDateAndSemesterInputs(selectedSemesterId) {
+function uppdateDateAndSemesterInputs(selectedSemesterId){
     model.inputs.mainPage.semesterId = selectedSemesterId;
     for (const semester of model.data.semesters) {
         if (semester.id === selectedSemesterId) {
@@ -225,7 +221,7 @@ function handleToDateInput(inputedDate) {
     updateView();
 }
 
-function findNewestStatusPerCourseForStudent(studentId) {
+function findNewestStatusPerCourseForStudent(studentId){
     let studentStatuses = model.data.studentStatus.filter(x => x.studentId === studentId);
     const newestStatusPerCourse = {};
     for(const status of studentStatuses){
@@ -238,7 +234,6 @@ function findNewestStatusPerCourseForStudent(studentId) {
         //         newestStatusPerCourse[courseId] = status;
         //     }
         // }
-
     }
     return newestStatusPerCourse;
 }
