@@ -75,13 +75,17 @@ function changeStudentStatus() {
 }
 
 function addPayment(studentCourse) {
-    // model.inputs.payment.amount = document.getElementById('paymentAmountInput').value
-    // model.inputs.payment.date = document.getElementById('paymentDateInput').value
     let paymentId = model.data.payments[model.data.payments.length - 1].id;
     paymentId++;
 
     for (const student of model.inputs.mainPage.studentIds) {
-        model.data.payments.push({ id: paymentId, courseId: parseInt(studentCourse), studentId: parseInt(student), amount: parseInt(model.inputs.payment.amount), date: model.inputs.payment.date });
+        model.data.payments.push({
+            id: paymentId,
+            courseId: parseInt(studentCourse),
+            studentId: parseInt(student),
+            amount: parseInt(model.inputs.payment.amount),
+            date: model.inputs.payment.date
+        });
         paymentId++;
     }
 }
