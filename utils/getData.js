@@ -1,32 +1,32 @@
-function getEntity(collection, id, typeName) {
+function getEntity(collection, id, typeName){
     if(!id) return setError(`${typeName} id not defined`);
     return collection.find(item => item.id === id || null);
 }
 
-function getStudent(id) {
+function getStudent(id){
     const errorMsg = 'id is required';
     if(nullOrUndefined(id, errorMsg)) return;
     return getEntity(model.data.students, id, 'Student');
 }
 
-function getCourse(id) {
+function getCourse(id){
     const errorMsg = 'id is required';
     if(nullOrUndefined(id, errorMsg)) return;
     return getEntity(model.data.courses, id, 'Course');
 }
 
-function getEvent(id) {
+function getEvent(id){
     const errorMsg = 'id is required';
     if(nullOrUndefined(id, errorMsg)) return;
     return getEntity(model.data.events, id, 'Event');
 }
 
-function getStatusData(id, allStudentData = false) {
+function getStatusData(id, allStudentData = false){
     const errorMsg = 'id is required';
     if (nullOrUndefined(id, errorMsg)) return;
 
-    const setLocaleDate = 'no-NB'
-    const currentStudentStatus = model.data.studentStatus.filter(x => x.studentId === id)
+    const setLocaleDate = 'no-NB';
+    const currentStudentStatus = model.data.studentStatus.filter(x => x.studentId === id);
     let studentStatus;
 
     if(allStudentData) studentStatus = currentStudentStatus
@@ -67,7 +67,7 @@ function getStatusData(id, allStudentData = false) {
 //     return newestStatusPerCourse;
 // }
 
-function getNewestStatus(currentStudentStatus) {
+function getNewestStatus(currentStudentStatus){
     // const filteredEvents = filterEvents();
     // const courseIds = new Set(filteredEvents.map(x => `${x.courseId}|${x.eventId}`));
     //
@@ -86,10 +86,10 @@ function getNewestStatus(currentStudentStatus) {
 }
 
 
-function getPaymentData(id) {
+function getPaymentData(id){
     const errorMsg = 'id is required';
     if(nullOrUndefined(id, errorMsg)) return;
-    const setLocaleDate = 'no-NB'
+    const setLocaleDate = 'no-NB';
     return model.data.payments
         .filter(payment => payment.studentId === id)
         .map(payment => {
