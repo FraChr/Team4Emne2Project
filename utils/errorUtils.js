@@ -1,4 +1,4 @@
-function setError(message) {
+function setError(message){
     return console.error(`Error: ${message}`);
 }
 
@@ -20,7 +20,7 @@ const defaultErrors = [
     {code: errorCodes.objPropNotFound, exit: true, message: 'Object property not found'},
 ];
 
-function triggerError(errorCode, message) {
+function triggerError(errorCode, message){
     const error = defaultErrors.find(error => error.code === errorCode);
 
     if(!error) setError('Unexpected error');

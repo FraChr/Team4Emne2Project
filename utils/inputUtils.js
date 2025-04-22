@@ -1,9 +1,9 @@
-function get(path) {
+function get(path){
     const [dataLocation, inputType, prop] = path.split('.');
     return getInput(dataLocation, inputType, prop);
 }
 
-function getInput(dataLocation, inputType, prop = null) {
+function getInput(dataLocation, inputType, prop = null){
     const errorMsg = `${inputType} not property of ${dataLocation}`;
     const test = model[dataLocation];
     if(!hasProperty(test, inputType, errorMsg)) return;
@@ -18,12 +18,12 @@ function getInput(dataLocation, inputType, prop = null) {
     return inputSelection;
 }
 
-function set(path, value) {
+function set(path, value){
     const [dataLocation, inputType, prop] = path.split('.');
     setInput(dataLocation, inputType, prop, value);
 }
 
-function setInput(dataLocation, inputType, prop = null, value) {
+function setInput(dataLocation, inputType, prop = null, value){
     const errorMsg = `${inputType} not property of ${dataLocation}`;
     const inputLocation = model[dataLocation];
     if(!hasProperty(inputLocation, inputType, errorMsg)) return;
@@ -38,18 +38,18 @@ function setInput(dataLocation, inputType, prop = null, value) {
     }
 }
 
-function handleArrayInput(inputSelection, prop, value) {
+function handleArrayInput(inputSelection, prop, value){
     if(Array.isArray(inputSelection[prop])) {
         inputSelection[prop] = Array.isArray(value) ? value : [value];
     }
 }
 
-function handleVariableInput(inputSelection, prop, value) {
+function handleVariableInput(inputSelection, prop, value){
     if(validateInput(value, typeof(inputSelection[prop]))) return;
     inputSelection[prop] = value;
 }
 
-function resetInputs(toReset) {
+function resetInputs(toReset){
     Object.entries(toReset).forEach(([path, value]) => {
         set(path, value);
     });
