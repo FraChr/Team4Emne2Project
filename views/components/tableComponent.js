@@ -39,7 +39,7 @@ function makeTableRow() {
                         return `
                             ${getCourse(event.course).name} - 
                               ${event.amount},- | ${event.date}
-                            <br> 
+                            <br>
                         `
                     }).join('')}
                 </td>
