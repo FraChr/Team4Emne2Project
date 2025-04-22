@@ -37,7 +37,7 @@ function getStatusData(id, allStudentData = false){
             return {
                 event: getEvent(status.eventId),
                 course: getCourse(status.courseId),
-                date: toLocaleDate(status.date, setLocaleDate)
+                date: status.date//toLocaleDate(status.date, setLocaleDate)
             }
         });
 }

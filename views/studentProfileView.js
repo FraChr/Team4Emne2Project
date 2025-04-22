@@ -167,14 +167,51 @@ function drawCourseInfo(studentId){
     `;
 }
 
+// function drawHistory(studentId){ 
+//     return /*HTML*/ `
+//         <table> 
+//             <tr>
+//                 <th> Historikk <button> ↑↓ </button> </th> 
+//             </tr>
+            
+//                 ${getStatusData(studentId, true).map(x => {
+//                     return /*HTML*/`
+//                         <tr>
+//                             <td>
+//                                 ${x.event.name}
+//                             </td>
+//                             <td>
+//                                 ${x.course.name}
+//                             </td>
+//                             <td>
+//                                 ${x.date}
+//                             </td>
+//                         </tr>
+//                     `;
+//                 }).join('')}
+//         </table>
+//     `;
+// }
+
 function drawHistory(studentId){ 
+    const historyData = getStatusData(studentId, true);
+    historyData.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+    
+        if (model.inputs.studentPage.currentSortDirection === 'asc') {
+            return dateA - dateB; 
+        } else {
+            return dateB - dateA; 
+        }
+    });
     return /*HTML*/ `
         <table> 
             <tr>
-                <th> Historikk <button> ↑↓ </button> </th> 
+                <th> Historikk <button onclick='sortHistory()'> ↑↓ </button> </th> 
             </tr>
             
-                ${getStatusData(studentId, true).map(x => {
+                ${historyData.map(x => {
                     return /*HTML*/`
                         <tr>
                             <td>
@@ -184,7 +221,7 @@ function drawHistory(studentId){
                                 ${x.course.name}
                             </td>
                             <td>
-                                ${x.date}
+                                ${toLocaleDate(x.date)}
                             </td>
                         </tr>
                     `;
