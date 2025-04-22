@@ -121,7 +121,7 @@ function getPaymentData(id, allPaymentData = false){
             amount: payment.amount,
             date: toLocaleDate(payment.date, setLocaleDate),
             course: payment.courseId,
-            sum: totalsByCourse[payment.courseId]
+            sum: totalsByCourse[payment.courseId],
         }
     });
 }
