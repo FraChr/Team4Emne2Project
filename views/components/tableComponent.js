@@ -48,7 +48,7 @@ function makeTableRow(){
                         return /*HTML*/`
                             <span id="event">${x.event.name}</span>
                             <span id="course">${x.course.name}</span>
-                            <span id="date">${x.date}</span><br>
+                            <span id="date">${toLocaleDate(x.date)}</span><br>
                         `;
                     }).join('')}
                 </td>

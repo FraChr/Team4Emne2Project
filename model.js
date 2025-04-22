@@ -25,6 +25,7 @@ const model = {
             studentId: 0,
             paymentAmount: 0,
             paymentDate: '',
+            currentSortDirection: 'asc',
         },
     },
 
