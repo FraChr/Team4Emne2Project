@@ -90,13 +90,45 @@ function getPaymentData(id){
     const errorMsg = 'id is required';
     if(nullOrUndefined(id, errorMsg)) return;
     const setLocaleDate = 'no-NB';
-    return model.data.payments
+    const payments = model.data.payments
+    let total = sum(payments);
+    return payments
         .filter(payment => payment.studentId === id)
         .map(payment => {
             return {
                 amount: payment.amount,
                 date: toLocaleDate(payment.date, setLocaleDate),
-                course: payment.courseId
+                course: payment.courseId,
+                sum: total
             }
         });
+}
+
+function sum(payments) {
+    return payments.reduce((acc, x) => {
+        return acc + Number(x.amount)
+    }, 0);
+
+}
+
+function sumPayments(id) {
+    const studentPayments = model.data.payments;
+    const reduceDefault = 0;
+    const total = studentPayments
+        .filter(student => id === student.studentId)
+        .reduce((acc, student) => {
+            return acc + Number(student.amount);
+        }, reduceDefault);
+
+    let paymentId;
+    if(model.data.paymentSums.length > 0){
+        paymentId = model.data.paymentSums[model.data.paymentSums.length - 1].id;
+        paymentId++;
+    } else {
+        paymentId = 1;
+    }
+
+    model.data.paymentSums.push({id: paymentId, studentId: id, amount: total});
+
+    return total;
 }

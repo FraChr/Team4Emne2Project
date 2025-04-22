@@ -173,6 +173,7 @@ const model = {
             { id: 5, name: 'Get It' },
         ],
 
+        paymentSums: [],
 
         payments: [
             { id: 1, courseId: 1, studentId: 1, amount: 200, date: '2024-12-14' },

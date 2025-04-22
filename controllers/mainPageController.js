@@ -237,3 +237,5 @@ function findNewestStatusPerCourseForStudent(studentId){
     }
     return newestStatusPerCourse;
 }
+
+
