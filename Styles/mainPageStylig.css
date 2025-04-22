@@ -114,6 +114,11 @@ input:focus{
     color: white;
 }
 
+.orangeTextColor{
+    color: orange;
+}
+
+
 .tableNameMainPage{
     cursor: pointer; 
 }

@@ -38,8 +38,8 @@ function makeTableRow(){
                     ${getPaymentData(status.studentId).map((event) => {
                         return /*HTML*/`
                             ${getCourse(event.course).name} - 
-                              ${event.amount},- | ${event.date}
-                              sum: ${event.sum}
+                            <span class="orangeTextColor">  Kr: ${event.amount},-</span> ${event.date} -
+                            <span class="orangeTextColor">Sum: ${event.sum},-</span>
                             <br> 
                         `;
                     }).join('')}
@@ -48,7 +48,7 @@ function makeTableRow(){
                     ${getStatusData(status.studentId).map((x)=> {
                         return /*HTML*/`
                             <span id="event">${x.event.name}</span>
-                            <span id="course">${x.course.name}</span>
+                            <span class="orangeTextColor">${x.course.name}</span>
                             <span id="date">${toLocaleDate(x.date)}</span><br>
                         `;
                     }).join('')}
