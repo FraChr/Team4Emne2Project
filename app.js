@@ -1,13 +1,13 @@
-function init() {
+function init(){
     model.data.semesters[0].end = getNewDate();
     model.inputs.mainPage.toDate = getNewDate();
     filterStudentStatus();
     updateView();
 }
 
-function updateView() {
+function updateView(){
     let currentView = '';
-    switch (model.app.currentPage) {
+    switch (model.app.currentPage){
         case 'mainPage':
             currentView = mainPageView();
             break;
@@ -16,7 +16,7 @@ function updateView() {
             break;
     }
     const app = document.getElementById('app');
-    app.innerHTML = /*html*/ `
+    app.innerHTML = /*html*/`
         <div>
             ${currentView}
         </div>
