@@ -1,9 +1,8 @@
 // studentView(studentId);
 function studentViewTest(){
     let studentId = model.inputs.studentPage.studentId;
-    console.log(studentId)
+    console.log(studentId);
     // model.app.currentPage = 'profilePage';
-
 
     return /*HTML*/`
         <div>
@@ -41,7 +40,7 @@ function drawStudentInfo(studentId){
     }
     
     return /*HTML*/ `
-        <table id="studentPeronalInfo"> 
+        <table id='studentPeronalInfo'> 
             <tr> 
                 <th> Navn: </th>
                 <td> ${studentInfo.name} </td>
@@ -68,7 +67,7 @@ function drawStudentInfo(studentId){
 
 function makeCourseInfo(){
     return /*HTML*/ `
-        <table id="studentCourseInfo"> 
+        <table id='studentCourseInfo'> 
             
             <tr>
                 <th> Status: </th>
@@ -136,7 +135,7 @@ function drawCourseInfo(studentId){
     }
 
     return /*HTML*/ `
-        <table id="studentCourseInfo"> 
+        <table id='studentCourseInfo'> 
             <tr>
                 <th>Status:</th>
                 <td>
@@ -169,8 +168,6 @@ function drawCourseInfo(studentId){
     `;
 }
 
-
-
 function drawHistory(studentId){ 
     return /*HTML*/ `
         <table> 
@@ -179,19 +176,19 @@ function drawHistory(studentId){
             </tr>
             
                 ${getStatusData(studentId, true).map(x => {
-                    return `
-                    <tr>
-                        <td>
-                            ${x.event.name}
-                        </td>
-                        <td>
-                            ${x.course.name}
-                        </td>
-                        <td>
-                            ${x.date}
-                        </td>
-                    </tr>
-                    `
+                    return /*HTML*/`
+                        <tr>
+                            <td>
+                                ${x.event.name}
+                            </td>
+                            <td>
+                                ${x.course.name}
+                            </td>
+                            <td>
+                                ${x.date}
+                            </td>
+                        </tr>
+                    `;
                 }).join('')}
         </table>
     `;
