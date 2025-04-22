@@ -115,5 +115,10 @@ input:focus{
 }
 
 .tableNameMainPage{
-    cursor: pointer;
+    cursor: pointer; 
+}
+
+.tableNameMainPage:hover{
+    color: #f96d00;
+    transition: all ease 0.5s;
 }
