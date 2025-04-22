@@ -39,7 +39,7 @@ function makeTableRow(){
                         return /*HTML*/`
                             ${getCourse(event.course).name} - 
                               ${event.amount},- | ${event.date}
-                              ${event.sum}
+                              sum: ${event.sum}
                             <br> 
                         `;
                     }).join('')}
