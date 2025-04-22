@@ -31,7 +31,7 @@ function getStatusData(id, allStudentData = false){
 
     if(allStudentData) studentStatus = currentStudentStatus
     //else studentStatus = Object.values(getNewestStatus(currentStudentStatus));
-    else studentStatus = getNewestStatus(currentStudentStatus);
+    else studentStatus = getNewest(currentStudentStatus);
     return studentStatus
         .map(status => {
             return {
@@ -67,7 +67,7 @@ function getStatusData(id, allStudentData = false){
 //     return newestStatusPerCourse;
 // }
 
-function getNewestStatus(currentStudentStatus){
+function getNewest(currentStudentStatus){
     // const filteredEvents = filterEvents();
     // const courseIds = new Set(filteredEvents.map(x => `${x.courseId}|${x.eventId}`));
     //
@@ -86,22 +86,59 @@ function getNewestStatus(currentStudentStatus){
 }
 
 
-function getPaymentData(id){
+// function getPaymentData(id){
+//     const errorMsg = 'id is required';
+//     if(nullOrUndefined(id, errorMsg)) return;
+//     const setLocaleDate = 'no-NB';
+//     const payments = model.data.payments
+//     let total = sum(payments);
+//     return payments
+//         .filter(payment => payment.studentId === id)
+//         .map(payment => {
+//             return {
+//                 amount: payment.amount,
+//                 date: toLocaleDate(payment.date, setLocaleDate),
+//                 course: payment.courseId,
+//                 sum: total
+//             }
+//         });
+// }
+
+function getPaymentData(id, allPaymentData = false){
     const errorMsg = 'id is required';
     if(nullOrUndefined(id, errorMsg)) return;
     const setLocaleDate = 'no-NB';
-    const payments = model.data.payments
-    let total = sum(payments);
-    return payments
-        .filter(payment => payment.studentId === id)
-        .map(payment => {
-            return {
-                amount: payment.amount,
-                date: toLocaleDate(payment.date, setLocaleDate),
-                course: payment.courseId,
-                sum: total
-            }
-        });
+    const payments = model.data.payments.filter(x => x.studentId === id);
+    let test;
+
+    if(allPaymentData) test = payments;
+    else test = getNewest(payments);
+
+    const totalsByCourse = payments.reduce((acc, payment) => {
+        const courseId = payment.courseId;
+        acc[courseId] = (acc[courseId] || 0) + payment.amount;
+        return acc;
+    }, {});
+
+
+    return test.map(payment => {
+        return {
+            amount: payment.amount,
+            date: toLocaleDate(payment.date, setLocaleDate),
+            course: payment.courseId,
+            sum: totalsByCourse[payment.courseId]
+        }
+    });
+
+    // return {
+    //     total,
+    //     payments: payments.map(payment => ({
+    //         amount: payment.amount,
+    //         date: toLocaleDate(payment.date, setLocaleDate),
+    //         course: payment.courseId,
+    //     }))
+    // }
+
 }
 
 function sum(payments) {
