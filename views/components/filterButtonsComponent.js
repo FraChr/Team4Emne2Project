@@ -1,24 +1,23 @@
-function makeFilterButtonHtml() {
-    return `
+function makeFilterButtonHtml(){
+    return /*HTML*/`
         <div class="buttons">
             <div>
                 ${createButtonsHTML('courses')} 
             </div>
-    
             <div>
                 ${createButtonsHTML('events')} 
             </div>
         </div>
-    `
+    `;
 }
 
-function createButtonHTML(name, id, buttonsType, buttonClass) {
+function createButtonHTML(name, id, buttonsType, buttonClass){
     return /*HTML*/ `
         <button class='${buttonClass ?? ''}' onclick='handleOnclick(${id}, "${buttonsType}")'>${name}</button>
     `;
 }
 
-function createButtonsHTML(buttonsType) {
+function createButtonsHTML(buttonsType){
     let html = '';
     let selectedButtons;
     let dataSet;

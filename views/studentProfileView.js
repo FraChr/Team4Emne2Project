@@ -17,7 +17,6 @@ function studentViewTest(){
             <div>${drawHistory(studentId)} </div>
         </div>
     `;
-    
 }
 
 function getMainView(){
