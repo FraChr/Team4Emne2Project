@@ -26,7 +26,7 @@ const model = {
             paymentAmount: 0,
             paymentDate: '',
             paymentCourseId: 0,
-            currentSortDirection: 'asc',
+            currentSortDirection: 'desc',
             userChoiceStatus: '',
             userChoiceCourse: '',
         },

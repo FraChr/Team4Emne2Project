@@ -158,12 +158,12 @@ function filterTerms(){
 }
 
 function removeDuplicateStudent(filtered){
-     return Object.values(filtered.reduce((acc, student) => {
+     return Object.values(filtered.reduce((res, student) => {
         const {studentId} = student;
-        if(!acc[studentId]){
-            acc[studentId] = student;
+        if(!res[studentId]){
+            res[studentId] = student;
         }
-        return acc;
+        return res;
     }, {}))
      .sort(sortByName);
 }
