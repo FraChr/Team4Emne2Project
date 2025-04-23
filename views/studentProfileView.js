@@ -6,15 +6,16 @@ function studentViewTest(){
 
     return /*HTML*/`
         <div>
-            <button onclick="getMainView()"> ← </button>
-        </div>
-
-        <div class="profile">
             <div>
-                <div> ${drawStudentInfo(studentId)} </div>
-                <div> ${drawCourseInfo(studentId)} </div>
+                <button onclick='getMainView()' class='backButton'> ← </button>
             </div>
-            <div>${drawHistory(studentId)} </div>
+            <div class="profile">
+                <div>
+                    <div> ${drawStudentInfo(studentId)} </div>
+                    <div> ${drawCourseInfo(studentId)} </div>
+                </div>
+                <div class='historyContainer'> ${drawHistory(studentId)} </div>
+            </div>
         </div>
     `;
 }
@@ -60,32 +61,6 @@ function drawStudentInfo(studentId){
                 <th> Privat Mail: </th>
                 <td> ${studentInfo.privateMail} </td>
             </tr>
-        </table>
-    `;
-}
-
-function makeCourseInfo(){
-    return /*HTML*/ `
-        <table id='studentCourseInfo'> 
-            
-            <tr>
-                <th> Status: </th>
-                <td> 
-                    Fagskole - Startet - 10.01.25 
-                    <button> Legg til hendelse </button>
-                </td>
-            </tr>
-                <tr>
-                    <th> Betalt: </th>
-                    <td> 
-                        Sum: 3000 kr
-                        <button> Legg til hendelse </button>
-                            <ul>
-                                <li> 1000 kr - 02.02.25 </li>
-                                <li> 2000 kr - 24.01.25 </li>
-                            </ul>
-                    </td>
-                </tr>
         </table>
     `;
 }
@@ -136,25 +111,25 @@ function drawCourseInfo(studentId){
     return /*HTML*/ `
         <table id='studentCourseInfo'> 
             <tr>
-                <th>Status:</th>
+                <th style='width: 80px'> Status: </th>
                 <td>
                     ${courseName} - ${eventName} - ${toLocaleDate(latestStatus.date)}  
                 </td>
-                <td>
+                <td style='width: 200px'>
                     ${drawEventSelectorProfile()}
                     ${drawCourseSelectorProfile()}
                     ${drawUpdateButtonProfile()}
                 </td>
             </tr>
             <tr>
-                <th>Betalt:</th>
+                <th style='width: 80px'> Betalt: </th>
                 <td>
                     Sum: ${totalPaid} kr
                     <ul>
                         ${paymentListHTML}
                     </ul>
                 </td>
-                <td>
+                <td  style='width: 200px'>
                     ${drawPaymentSelectorProfile()}
                 </td>
             </tr>
@@ -164,32 +139,6 @@ function drawCourseInfo(studentId){
         </table>
     `;
 }
-
-// function drawHistory(studentId){ 
-//     return /*HTML*/ `
-//         <table> 
-//             <tr>
-//                 <th> Historikk <button> ↑↓ </button> </th> 
-//             </tr>
-            
-//                 ${getStatusData(studentId, true).map(x => {
-//                     return /*HTML*/`
-//                         <tr>
-//                             <td>
-//                                 ${x.event.name}
-//                             </td>
-//                             <td>
-//                                 ${x.course.name}
-//                             </td>
-//                             <td>
-//                                 ${x.date}
-//                             </td>
-//                         </tr>
-//                     `;
-//                 }).join('')}
-//         </table>
-//     `;
-// }
 
 function drawHistory(studentId){ 
     const historyData = getStatusData(studentId, true);
@@ -204,9 +153,9 @@ function drawHistory(studentId){
         }
     });
     return /*HTML*/ `
-        <table> 
+        <table class='historyTable'> 
             <tr>
-                <th> Historikk <button onclick='sortHistory()'> ↑↓ </button> </th> 
+                <th> Historikk <button onclick='sortHistory()' class='buttonOrange'> ↑↓ </button> </th> 
             </tr>
             
                 ${historyData.map(x => {

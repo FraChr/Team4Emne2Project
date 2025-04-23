@@ -127,3 +127,39 @@ input:focus{
     color: #f96d00;
     transition: all ease 0.5s;
 }
+
+.buttonOrange{
+    background-color: #f96d00;
+    border-radius: 5px;
+    border: #393e46 1.5px outset;
+    color: #222831;
+    box-shadow: -1px 0px 5px rgba(46, 44, 44, 0.2);
+    padding: 4px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.backButton{
+    background-color: #f96d00;
+    border-radius: 5px;
+    border: #393e46 1.5px outset;
+    color: #222831;
+    box-shadow: -1px 0px 5px rgba(46, 44, 44, 0.2);
+    width: 50px;
+    padding: 5px;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.profile{
+    display: flex;
+    flex-direction: row;
+}
+
+.historyTable {
+    width: 500px;
+}
+
+#studentPeronalInfo, #studentCourseInfo {
+    width: 600px;
+}
