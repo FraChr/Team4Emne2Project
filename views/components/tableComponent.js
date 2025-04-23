@@ -14,11 +14,9 @@ function makeTable(){
     `;
 }
 
-// filterSatusesBasedOnDateIut(model.inputs.mainPage.fromDate, model.inputs.mainPage.toDate)
 
 function makeTableRow(){
     let rows = '';
-    //model.data.filteredStudents
     for (const status of model.data.filteredStudents) {
         rows += /*html*/ `
             <tr>
@@ -38,7 +36,7 @@ function makeTableRow(){
                     ${getPaymentData(status.studentId).map((event) => {
                         return /*HTML*/`
                             ${getCourse(event.course).name} - 
-                            <span class="orangeTextColor">  Kr: ${event.amount},-</span> ${event.date} -
+                            <span class="orangeTextColor">  Kr: ${event.amount},-</span> ${toLocaleDate(event.date)} -
                             <span class="orangeTextColor">Sum: ${event.sum},-</span>
                             <br> 
                         `;

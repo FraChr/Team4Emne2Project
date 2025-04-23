@@ -1,6 +1,5 @@
 function nullOrUndefined(value, message){
-    if(value === null) triggerError(errorCodes.noValue, message);
-    // if(value === undefined) triggerError(errorCodes.noValue, message);
+    if(value === null || value === undefined) triggerError(errorCodes.noValue, message);
     return errorCodes.noError;
 }
 

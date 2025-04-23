@@ -1,4 +1,3 @@
-// refactored checkbuttonStatus()
 function checkButtonStatus(){
     const {userChoiceStatus, userChoiceCourse} = model.inputs.mainPage;
 
@@ -14,33 +13,6 @@ function eventSelectionInput(input, value){
     set(input, value);
     checkButtonStatus();
 }
-
-// Kept original function
-// function checkButtonStatus() {
-//     let userChoiceStatus = document.getElementById('userChoiceStatus');
-//     let userChoiceCourse = document.getElementById('userChoiceCourse');
-//     let paymentAmountInput = document.getElementById('paymentAmountInput');
-//     let paymentDateInput = document.getElementById('paymentDateInput');
-//     if (userChoiceStatus.value && userChoiceCourse.value) {
-//         statusButton.disabled = false;
-//     }
-//     else {
-//         statusButton.disabled = true;
-//     }
-//
-//     if (userChoiceStatus.value === 'addPayment') {
-//         paymentAmountInput.disabled = false;
-//         paymentDateInput.disabled = false;
-//     }
-//     else if(model.app.currentPage === 'profilePage'){
-//         paymentAmountInput.disabled = false;
-//         paymentDateInput.disabled = false;
-//     }
-//     else {
-//         paymentAmountInput.disabled = true;
-//         paymentDateInput.disabled = true;
-//     }
-// }
 
 function changeStudentStatus(){
     const newStudentStatus = model.inputs.mainPage.userChoiceStatus;
@@ -59,9 +31,8 @@ function changeStudentStatus(){
             statusID++;
         }
     }
-    console.log(model.data.studentStatus)
-    updateView();
 
+    updateView();
     resetInputs ({
         'inputs.payment.enablePayment': false,
         'inputs.payment.date': '',
@@ -71,13 +42,18 @@ function changeStudentStatus(){
 }
 
 function addPayment(studentCourse) {
-    // model.inputs.payment.amount = document.getElementById('paymentAmountInput').value
-    // model.inputs.payment.date = document.getElementById('paymentDateInput').value
     let paymentId = model.data.payments[model.data.payments.length - 1].id;
     paymentId++;
 
     for (const student of model.inputs.mainPage.studentIds){
-        model.data.payments.push({ id: paymentId, courseId: parseInt(studentCourse), studentId: parseInt(student), amount: parseInt(model.inputs.payment.amount), date: model.inputs.payment.date });
+        model.data.payments.push(
+            {
+                id: paymentId,
+                courseId: parseInt(studentCourse),
+                studentId: parseInt(student),
+                amount: parseInt(model.inputs.payment.amount),
+                date: model.inputs.payment.date
+            });
         paymentId++;
     }
 }
@@ -192,10 +168,10 @@ function removeDuplicateStudent(filtered){
      .sort(sortByName);
 }
 
-function sortByName(a, b){
-    const name = getStudent(a.studentId).name;
-    const name2 = getStudent(b.studentId).name;
-    return name.localeCompare(name2);
+function sortByName(firstVal, secondVal){
+    const firstName = getStudent(firstVal.studentId).name;
+    const secondName = getStudent(secondVal.studentId).name;
+    return firstName.localeCompare(secondName);
 }
 
 function uppdateDateAndSemesterInputs(selectedSemesterId){
@@ -220,22 +196,4 @@ function handleToDateInput(inputedDate) {
     model.inputs.mainPage.toDate = inputedDate;
     updateView();
 }
-
-function findNewestStatusPerCourseForStudent(studentId){
-    let studentStatuses = model.data.studentStatus.filter(x => x.studentId === studentId);
-    const newestStatusPerCourse = {};
-    for(const status of studentStatuses){
-        const courseId = status.courseId.toString();
-        if (!newestStatusPerCourse[courseId] || status.date > newestStatusPerCourse[courseId].date) {
-            newestStatusPerCourse[courseId] = status;
-        }
-        // else {
-        //     if (status.date > newestStatusPerCourse[courseId].date) {
-        //         newestStatusPerCourse[courseId] = status;
-        //     }
-        // }
-    }
-    return newestStatusPerCourse;
-}
-
 

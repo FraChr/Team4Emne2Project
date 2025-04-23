@@ -25,19 +25,17 @@ function getStatusData(id, allStudentData = false){
     const errorMsg = 'id is required';
     if (nullOrUndefined(id, errorMsg)) return;
 
-    const setLocaleDate = 'no-NB';
     const currentStudentStatus = model.data.studentStatus.filter(x => x.studentId === id);
     let studentStatus;
 
     if(allStudentData) studentStatus = currentStudentStatus
-    //else studentStatus = Object.values(getNewestStatus(currentStudentStatus));
     else studentStatus = getNewest(currentStudentStatus);
     return studentStatus
         .map(status => {
             return {
                 event: getEvent(status.eventId),
                 course: getCourse(status.courseId),
-                date: status.date//toLocaleDate(status.date, setLocaleDate)
+                date: status.date,
             }
         });
 }
@@ -76,38 +74,19 @@ function getNewest(currentStudentStatus){
     // )
 
     return Object.values(currentStudentStatus
-        .reduce((acc, status) => {
+        .reduce((res, status) => {
             const { courseId, date } = status;
-            if (!acc[courseId] || date > acc[courseId].date) {
-                acc[courseId] = status;
+            if (!res[courseId] || date > res[courseId].date) {
+                res[courseId] = status;
             }
-            return acc;
+            return res;
         }, {}));
 }
-
-
-// function getPaymentData(id){
-//     const errorMsg = 'id is required';
-//     if(nullOrUndefined(id, errorMsg)) return;
-//     const setLocaleDate = 'no-NB';
-//     const payments = model.data.payments
-//     let total = sum(payments);
-//     return payments
-//         .filter(payment => payment.studentId === id)
-//         .map(payment => {
-//             return {
-//                 amount: payment.amount,
-//                 date: toLocaleDate(payment.date, setLocaleDate),
-//                 course: payment.courseId,
-//                 sum: total
-//             }
-//         });
-// }
 
 function getPaymentData(id, allPaymentData = false){
     const errorMsg = 'id is required';
     if(nullOrUndefined(id, errorMsg)) return;
-    const setLocaleDate = 'no-NB';
+
     const currentStudentPayment = model.data.payments.filter(x => x.studentId === id);
     let payments;
 
@@ -119,7 +98,7 @@ function getPaymentData(id, allPaymentData = false){
     return payments.map(payment => {
         return {
             amount: payment.amount,
-            date: toLocaleDate(payment.date, setLocaleDate),
+             date: payment.date,
             course: payment.courseId,
             sum: totalsByCourse[payment.courseId],
         }
@@ -127,9 +106,9 @@ function getPaymentData(id, allPaymentData = false){
 }
 
 function sum(payments) {
-    return payments.reduce((acc, payment) => {
+    return payments.reduce((res, payment) => {
         const courseId = payment.courseId;
-        acc[courseId] = (acc[courseId] || 0) + payment.amount;
-        return acc;
+        res[courseId] = (res[courseId] || 0) + payment.amount;
+        return res;
     }, {});
 }
