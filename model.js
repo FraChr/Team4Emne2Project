@@ -25,6 +25,7 @@ const model = {
             studentId: 0,
             paymentAmount: 0,
             paymentDate: '',
+            paymentCourseId: 0,
             currentSortDirection: 'asc',
             userChoiceStatus: '',
             userChoiceCourse: '',
