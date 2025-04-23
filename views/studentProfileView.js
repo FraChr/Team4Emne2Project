@@ -57,7 +57,7 @@ function drawStudentInfo(studentId){
                 <th> Mobil: </th>
                 <td> ${studentInfo.tlf} </td>
             </tr>
-            <tr> 
+            <tr>
                 <th> Privat Mail: </th>
                 <td> ${studentInfo.privateMail} </td>
             </tr>

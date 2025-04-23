@@ -137,6 +137,7 @@ input:focus{
     padding: 4px;
     font-size: 14px;
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .backButton{
@@ -149,6 +150,7 @@ input:focus{
     padding: 5px;
     font-size: 20px;
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .profile{
