@@ -141,9 +141,9 @@ function drawCourseInfo(studentId){
                     ${courseName} - ${eventName} - ${toLocaleDate(latestStatus.date)}  
                 </td>
                 <td>
-                    ${createEventSelector()}
-                    ${createCourseSelector()}
-                    ${createUpdateStatusButton()}
+                    ${drawEventSelectorProfile()}
+                    ${drawCourseSelectorProfile()}
+                    ${drawUpdateButtonProfile()}
                 </td>
             </tr>
             <tr>
@@ -155,9 +155,7 @@ function drawCourseInfo(studentId){
                     </ul>
                 </td>
                 <td>
-                    ${createCourseSelector()}
-                    ${createPaymentInput()}
-                    ${createUpdateStatusButton()}
+                    ${drawPaymentSelectorProfile()}
                 </td>
             </tr>
             <tr>
@@ -232,7 +230,7 @@ function drawHistory(studentId){
 
 function drawEventSelectorProfile(){
     return /*HTML*/`
-    <select id="userChoiceStatus" onchange="eventSelectionInput('inputs.mainPage.userChoiceStatus', this.value)" required>
+    <select id="userChoiceStatusProfile" onchange="model.inputs.studentPage.userChoiceStatus = this.value" required>
         <option value="" disabled selected> Legg til hendelse </option>
         <option value="1"> Søkt </option>
         <option value="2"> Godkjent </option>
@@ -246,7 +244,7 @@ function drawEventSelectorProfile(){
 
 function drawCourseSelectorProfile(){
     return /*HTML */`
-    <select id="userChoiceCourse" onchange="eventSelectionInput('inputs.mainPage.userChoiceCourse', this.value)" required>
+    <select id="userChoiceCourseProfile" onchange="model.inputs.studentPage.userChoiceCourse = this.value" required>
         <option value="" disabled selected> Velg kurs </option>
         <option value="1"> Start IT </option>
         <option value="2"> Frontend </option>
@@ -259,8 +257,8 @@ function drawCourseSelectorProfile(){
 
 function drawUpdateButtonProfile(){
     return /*HTML*/`
-        <button disabled id="statusButton" 
-            onclick="changeStudentStatus()">
+        <button id="statusButtonProfile" 
+            onclick="changeStudentStatusProfile()">
             Oppdater
         </button>
     `;
@@ -268,7 +266,21 @@ function drawUpdateButtonProfile(){
 
 function drawPaymentSelectorProfile(){
     return /*HTML*/`
-    <input disabled type="number" id="paymentAmountInput" onchange="eventSelectionInput('inputs.payment.amount', this.valueAsNumber)" placeholder="Beløp" >
-    <input disabled type="date" onchange="eventSelectionInput('inputs.payment.date', this.value)" id="paymentDateInput"> 
+    <select id="userChoiceCourseProfile" onchange="model.inputs.studentPage.userChoiceCourse = this.value" required>
+        <option value="" disabled selected> Velg kurs </option>
+        <option value="1"> Start IT </option>
+        <option value="2"> Frontend </option>
+        <option value="3"> Fagskolen </option>
+        <option value="4"> Get Prepared </option>
+        <option value="5"> Get IT </option>
+    </select>
+    
+    <input type="number" id="paymentAmountInputProfile" onchange="model.inputs.paymentAmount = this.value" placeholder="Beløp" >
+    <input type="date" onchange="model.inputs.profilePage.paymentDate" id="paymentDateInputProfile">
+    
+    <button id="statusButtonProfile" 
+        onclick="addPaymentProfile()">
+        Oppdater
+    </button>
     `;
 }
