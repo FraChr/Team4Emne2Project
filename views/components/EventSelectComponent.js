@@ -1,9 +1,11 @@
 function makeEventButtonsHtml(){
     return /*HTML*/`
+    <div>
         ${createEventSelector(true)}
         ${createCourseSelector()}
         ${createPaymentInput()}
         ${createUpdateStatusButton()}
+    </div>
     `;
 }
 
