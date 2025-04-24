@@ -35,7 +35,6 @@ function changeStudentStatus(){
                     studentId: parseInt(chosenStudent),
                     date: todaysDate
                 });
-            statusID++;
         }
     }
 
