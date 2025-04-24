@@ -106,7 +106,7 @@ function drawCourseInfo(studentId){
                 paymentListHTML += /*HTML*/`
                 ${course.name} sum: ${totalPaid},-
                 <li>
-                    ${payment.amount},- ${payment.date}
+                ${payment.amount},- ${payment.date}
                 </li>
                 `;
                 totalPaid = '';
