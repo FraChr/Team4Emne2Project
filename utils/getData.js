@@ -25,7 +25,7 @@ function getStatusData(id, allStudentData = false){
     const errorMsg = 'id is required';
     if (nullOrUndefined(id, errorMsg)) return;
 
-    const currentStudentStatus = model.data.studentStatus.filter(x => x.studentId === id);
+    const currentStudentStatus = model.data.studentStatus.filter(status => status.studentId === id);
     let studentStatus;
 
     if(allStudentData) studentStatus = currentStudentStatus
@@ -66,13 +66,6 @@ function getStatusData(id, allStudentData = false){
 // }
 
 function getNewest(currentStudentStatus){
-    // const filteredEvents = filterEvents();
-    // const courseIds = new Set(filteredEvents.map(x => `${x.courseId}|${x.eventId}`));
-    //
-    // const filteredStatuses = currentStudentStatus.filter(status =>
-    //     courseIds.has(`${status.courseId}|${status.eventId}`)
-    // )
-
     return Object.values(currentStudentStatus
         .reduce((res, status) => {
             const { courseId, date } = status;

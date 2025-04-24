@@ -1,10 +1,10 @@
 function mainPageView(){
     return /*HTML*/`
         <div class='mainPageBody'>
-        ${makeFilterButtonHtml()}
-        ${makeDateAndSemesterSelect()}
-        ${makeEventButtonsHtml()}
-        ${makeTable()}
+            ${makeFilterButtonHtml()}
+            ${makeDateAndSemesterSelect()}
+            ${makeEventButtonsHtml()}
+            ${makeTable()}
         </div>
     `;
 }

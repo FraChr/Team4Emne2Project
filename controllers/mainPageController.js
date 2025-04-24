@@ -18,16 +18,23 @@ function changeStudentStatus(){
     const newStudentStatus = model.inputs.mainPage.userChoiceStatus;
     const studentCourse = model.inputs.mainPage.userChoiceCourse;
 
-    let statusID = model.data.studentStatus[model.data.studentStatus.length - 1].id;
+    let statusID = generateId('data.studentStatus');
     let todaysDate = getNewDate();
-    statusID++;
+
 
     if (newStudentStatus === 'addPayment'){
         addPayment(studentCourse);
     }
     else {
         for (const chosenStudent of model.inputs.mainPage.studentIds){
-            model.data.studentStatus.push({ id: statusID, eventId: parseInt(newStudentStatus), courseId: parseInt(studentCourse), studentId: parseInt(chosenStudent), date: todaysDate });
+            model.data.studentStatus.push(
+                {
+                    id: statusID,
+                    eventId: parseInt(newStudentStatus),
+                    courseId: parseInt(studentCourse),
+                    studentId: parseInt(chosenStudent),
+                    date: todaysDate
+                });
             statusID++;
         }
     }
@@ -41,9 +48,15 @@ function changeStudentStatus(){
     });
 }
 
+function generateId(path) {
+    const pathVar = get(path);
+    const currentMaxId = pathVar.reduce((res, val) => Math.max(res, val.id), 0);
+    const nextAvailableId = currentMaxId + 1;
+    return nextAvailableId;
+}
+
 function addPayment(studentCourse) {
-    let paymentId = model.data.payments[model.data.payments.length - 1].id;
-    paymentId++;
+    let paymentId = generateId('data.payments');
 
     for (const student of model.inputs.mainPage.studentIds){
         model.data.payments.push(
@@ -54,7 +67,6 @@ function addPayment(studentCourse) {
                 amount: parseInt(model.inputs.payment.amount),
                 date: model.inputs.payment.date
             });
-        paymentId++;
     }
 }
 
