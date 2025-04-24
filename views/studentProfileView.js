@@ -100,12 +100,18 @@ function drawCourseInfo(studentId){
     let totalPaid = 0;
     
     for (const payment of payments) {
-        paymentListHTML += /*HTML*/ `
-            <li>
-                ${payment.amount} kr - ${payment.date}
-            </li>
-        `;
-        totalPaid += payment.amount;
+        for(const course of model.data.courses){
+            if(course.id === payment.courseId){
+                totalPaid += payment.amount
+                paymentListHTML += /*HTML*/`
+                ${course.name} sum: ${totalPaid},-
+                <li>
+                    ${payment.amount},- ${payment.date}
+                </li>
+                `;
+                totalPaid = '';
+            }
+        }
     }
 
     return /*HTML*/ `
@@ -124,7 +130,7 @@ function drawCourseInfo(studentId){
             <tr>
                 <th style='width: 80px'> Betalt: </th>
                 <td>
-                    Sum: ${totalPaid} kr
+                    
                     <ul>
                         ${paymentListHTML}
                     </ul>
@@ -215,7 +221,7 @@ function drawUpdateButtonProfile(){
 
 function drawPaymentSelectorProfile(){
     return /*HTML*/`
-    <select id="userChoiceCourseProfile" onchange="model.inputs.studentPage.userChoiceCourse = this.value" required>
+    <select id="userChoiceCourseProfile2" onchange="model.inputs.studentPage.userChoiceCourse = this.value" required>
         <option value="" disabled selected> Velg kurs </option>
         <option value="1"> Start IT </option>
         <option value="2"> Frontend </option>
@@ -224,11 +230,11 @@ function drawPaymentSelectorProfile(){
         <option value="5"> Get IT </option>
     </select>
     
-    <input type="number" id="paymentAmountInputProfile" onchange="model.inputs.paymentAmount = this.value" placeholder="Beløp" >
-    <input type="date" onchange="model.inputs.profilePage.paymentDate" id="paymentDateInputProfile">
+    <input type="number" id="paymentAmountInputProfile" placeholder="Beløp" >
+    <input type="date" id="paymentDateInputProfile">
     
     <button id="statusButtonProfile" 
-        onclick="addPaymentProfile()">
+        onclick="addPaymentProfile(document.getElementById('userChoiceCourseProfile2').value)">
         Oppdater
     </button>
     `;

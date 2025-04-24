@@ -32,7 +32,12 @@ function changeStudentStatusProfile(studentId){
 }
 
 function addPaymentProfile(courseIdinput){
+    model.inputs.payment.amount = document.getElementById('paymentAmountInputProfile').value;
+    model.inputs.payment.date = document.getElementById('paymentDateInputProfile').value;
+
     let paymentId = model.data.studentStatus[model.data.studentStatus.length - 1].id + 1;
 
-    model.data.payments.push({id: paymentId, courseId})
+    model.data.payments.push({id: paymentId, courseId: parseInt(courseIdinput), studentId: model.inputs.studentPage.studentId, amount: parseInt(model.inputs.payment.amount), date: model.inputs.payment.date})
+
+    updateView();
 }
