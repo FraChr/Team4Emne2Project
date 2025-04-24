@@ -17,3 +17,8 @@ function hasProperty(obj, prop, message){
         return false;
     }
 }
+
+function isArray(value, message) {
+    if(!Array.isArray(value)) return triggerError(errorCodes.notValidArray, message);
+    return errorCodes.noError;
+}
