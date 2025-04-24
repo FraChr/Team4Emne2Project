@@ -47,14 +47,8 @@ function changeStudentStatus(){
     });
 }
 
-function generateId(path) {
-    const pathVar = get(path);
-    const currentMaxId = pathVar.reduce((res, val) => Math.max(res, val.id), 0);
-    const nextAvailableId = currentMaxId + 1;
-    return nextAvailableId;
-}
-
 function addPayment(studentCourse) {
+    const maxDecimalPlaces = 2;
     let paymentId = generateId('data.payments');
 
     for (const student of model.inputs.mainPage.studentIds){
@@ -63,7 +57,7 @@ function addPayment(studentCourse) {
                 id: paymentId,
                 courseId: parseInt(studentCourse),
                 studentId: parseInt(student),
-                amount: parseInt(model.inputs.payment.amount),
+                amount: Number(model.inputs.payment.amount).toFixed(maxDecimalPlaces),
                 date: model.inputs.payment.date
             });
     }

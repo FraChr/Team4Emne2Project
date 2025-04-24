@@ -5,8 +5,8 @@ function get(path){
 
 function getInput(dataLocation, inputType, prop = null){
     const errorMsg = `${inputType} not property of ${dataLocation}`;
-    const test = model[dataLocation];
-    if(!hasProperty(test, inputType, errorMsg)) return;
+    const inputLocation = model[dataLocation];
+    if(!hasProperty(inputLocation, inputType, errorMsg)) return;
 
     const inputSelection = model[dataLocation][inputType];
 

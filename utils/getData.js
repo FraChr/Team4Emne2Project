@@ -105,3 +105,10 @@ function sum(payments) {
         return res;
     }, {});
 }
+
+function generateId(path) {
+    const pathVar = get(path);
+    const currentMaxId = pathVar.reduce((res, val) => Math.max(res, val.id), 0);
+    const nextAvailableId = currentMaxId + 1;
+    return nextAvailableId;
+}
