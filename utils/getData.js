@@ -101,7 +101,7 @@ function getPaymentData(id, allPaymentData = false){
 function sum(payments) {
     return payments.reduce((res, payment) => {
         const courseId = payment.courseId;
-        res[courseId] = (res[courseId] || 0) + payment.amount;
+        res[courseId] = (res[courseId] || 0) + Number(payment.amount);
         return res;
     }, {});
 }
