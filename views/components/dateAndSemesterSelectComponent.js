@@ -1,12 +1,13 @@
 function makeDateAndSemesterSelect(){
-    let list = '';
-    for (const semester of model.data.semesters) {
-        list += /*HTML*/`
+    let list = model.data.semesters.reduce((result, semester) => {
+        result += /*HTML*/`
             <option ${semester.id === model.inputs.mainPage.semesterId ? "selected" : ""} value=${semester.id}>
                 ${semester.name}
             </option>
         `;
-    }
+        return result;
+    }, '');
+
     return /*HTML*/ `
         <div>
             <input type='date' onchange='handleFromDateInput(this.value)' value='${model.inputs.mainPage.fromDate}' max='${model.inputs.mainPage.toDate}'>
