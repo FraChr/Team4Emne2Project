@@ -66,60 +66,74 @@ function drawStudentInfo(studentId){
 }
 
 function drawCourseInfo(studentId){
-    let payments = [];
-    for (let payment of model.data.payments){
-        if (payment.studentId === studentId){
-            payments.push(payment);
-        }
-    }
+    // let payments = [];
+    // for (let payment of model.data.payments){
+    //     if (payment.studentId === studentId){
+    //         payments.push(payment);
+    //     }
+    // }
+
+    let payments = getPaymentData(studentId, true).pay;
+    console.log("Payments: ", payments);
    
-    let studentStatuses = [];
-    for (let status of model.data.studentStatus){
-        if (status.studentId === studentId){
-            studentStatuses.push(status);
-        }
-    }
+    // let studentStatuses = [];
+    // for (let status of model.data.studentStatus){
+    //     if (status.studentId === studentId){
+    //         studentStatuses.push(status);
+    //     }
+    // }
+
+    let studentStatuses = getStatusData(studentId, true);
+
+    let total = getPaymentData(studentId).sum;
+    console.log("Total: ",total);
 
     studentStatuses.sort((a,b) => new Date(a.date) - new Date(b.date));
     let latestStatus = studentStatuses.pop();
-    let courseName = '';
-    for (let course of model.data.courses){
-        if (course.id === latestStatus.courseId){
-            courseName = course.name;
-        }
-    }
 
-    let eventName = '';
-    for (let event of model.data.events){
-        if (event.id === latestStatus.eventId){
-            eventName = event.name;
-        }
-    }
+
+    // let courseName = '';
+    // for (let course of model.data.courses){
+    //     if (course.id === latestStatus.courseId){
+    //         courseName = course.name;
+    //     }
+    // }
+
+    // let eventName = '';
+    // for (let event of model.data.events){
+    //     if (event.id === latestStatus.eventId){
+    //         eventName = event.name;
+    //     }
+    // }
 
     let paymentListHTML = '';
     let totalPaid = 0;
-    
-    for (const payment of payments) {
-        for(const course of model.data.courses){
-            if(course.id === payment.courseId){
-                totalPaid += payment.amount
-                paymentListHTML += /*HTML*/`
-                ${course.name} sum: ${totalPaid},-
-                <li>
-                ${payment.amount},- ${payment.date}
-                </li>
-                `;
-                totalPaid = '';
-            }
-        }
-    }
 
+
+
+    // for (const payment of payments) {
+    //     for(const course of model.data.courses){
+    //         if(course.id === payment.courseId){
+    //             totalPaid += payment.amount
+    //             paymentListHTML += /*HTML*/`
+    //             ${course.name} sum: ${totalPaid},-
+    //             <li>
+    //             ${payment.amount},- ${payment.date}
+    //             </li>
+    //             `;
+    //             totalPaid = '';
+    //         }
+    //     }
+    // }
+
+
+    // ${getCourse(payment.course).name} sum: ${total}
     return /*HTML*/ `
         <table id='studentCourseInfo'> 
             <tr>
                 <th style='width: 80px'> Status: </th>
                 <td>
-                    ${courseName} - ${eventName} - ${toLocaleDate(latestStatus.date)}  
+                    ${latestStatus.course.name} - ${latestStatus.event.name} - ${toLocaleDate(latestStatus.date)}
                 </td>
                 <td style='width: 200px'>
                     ${drawEventSelectorProfile()}
@@ -132,7 +146,20 @@ function drawCourseInfo(studentId){
                 <td>
                     
                     <ul>
-                        ${paymentListHTML}
+                        ${Object.keys(total).map(key => {
+                            console.log(typeof(key));
+                            const course = getCourse(Number(key))
+                            return `${course.name} - sum: ${total[key]}`
+                        }).join(`<br>`)}
+                        
+                        ${payments.map((payment) => {
+                            return `
+                                <li>
+                                    ${getCourse(payment.course).name} - ${payment.amount},- ${toLocaleDate(payment.date)}
+                                </li>
+                            `
+                        }).join('')}
+                        
                     </ul>
                 </td>
                 <td  style='width: 200px'>

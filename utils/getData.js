@@ -88,14 +88,16 @@ function getPaymentData(id, allPaymentData = false){
 
     const totalsByCourse = sum(currentStudentPayment);
 
-    return payments.map(payment => {
-        return {
-            amount: payment.amount,
-             date: payment.date,
-            course: payment.courseId,
-            sum: totalsByCourse[payment.courseId],
-        }
-    });
+    return  {
+        sum: totalsByCourse,
+        pay: payments.map(payment => {
+            return {
+                amount: payment.amount,
+                date: payment.date,
+                course: payment.courseId,
+            }
+        })
+    }
 }
 
 function sum(payments) {

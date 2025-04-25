@@ -33,11 +33,12 @@ function makeTableRow(){
                     <span>${getStudent(status.studentId).name}</span>
                 </td>
                 <td>
-                    ${getPaymentData(status.studentId).map((event) => {
+                    ${getPaymentData(status.studentId).pay.map((event) => {
+                        const total = getPaymentData(status.studentId).sum[event.course];
                         return /*HTML*/`
                             ${getCourse(event.course).name} - 
                             <span class="orangeTextColor">  Kr: ${event.amount},-</span> ${toLocaleDate(event.date)} -
-                            <span class="orangeTextColor">Sum: ${event.sum},-</span>
+                            <span class="orangeTextColor">Sum: ${total},-</span>
                             <br> 
                         `;
                     }).join('')}

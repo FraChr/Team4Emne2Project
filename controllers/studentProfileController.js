@@ -11,7 +11,14 @@ function changeStudentStatusProfile(studentId){
     let todaysDate = getNewDate();
     statusID++;
 
-    model.data.studentStatus.push({ id: statusID, eventId: parseInt(newStudentStatus), courseId: parseInt(studentCourse), studentId: model.inputs.studentPage.studentId, date: todaysDate })
+    model.data.studentStatus.push(
+        {
+            id: statusID,
+            eventId: parseInt(newStudentStatus),
+            courseId: parseInt(studentCourse),
+            studentId: model.inputs.studentPage.studentId,
+            date: todaysDate
+        })
     updateView();
     // if (newStudentStatus === 'addPayment'){
     //     addPayment(studentCourse);
@@ -37,7 +44,14 @@ function addPaymentProfile(courseIdinput){
 
     let paymentId = model.data.studentStatus[model.data.studentStatus.length - 1].id + 1;
 
-    model.data.payments.push({id: paymentId, courseId: parseInt(courseIdinput), studentId: model.inputs.studentPage.studentId, amount: parseInt(model.inputs.payment.amount), date: model.inputs.payment.date})
+    model.data.payments.push(
+        {
+            id: paymentId,
+            courseId: parseInt(courseIdinput),
+            studentId: model.inputs.studentPage.studentId,
+            amount: parseInt(model.inputs.payment.amount),
+            date: model.inputs.payment.date
+        })
 
     updateView();
 }
