@@ -148,7 +148,7 @@ function drawCourseInfo(studentId){
                         ${Object.keys(total).map(key => {
                             console.log(typeof(key));
                             const course = getCourse(Number(key))
-                            return `${course.name} - sum: ${total[key]}`
+                            return `<span class="orangeTextColor">${course.name}</span> - Total sum: <span class="orangeTextColor">${total[key]},-</span>`
                         }).join(`<br>`)}
                         
                         ${payments.map((payment) => {
