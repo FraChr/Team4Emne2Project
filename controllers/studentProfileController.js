@@ -3,7 +3,7 @@ function sortHistory() {
     updateView();
 }
 
-function changeStudentStatusProfile(studentId){
+function changeStudentStatusProfile(){
     const newStudentStatus = model.inputs.studentPage.userChoiceStatus;
     const studentCourse = model.inputs.studentPage.userChoiceCourse;
 
@@ -19,17 +19,8 @@ function changeStudentStatusProfile(studentId){
             studentId: model.inputs.studentPage.studentId,
             date: todaysDate
         })
-    updateView();
-    // if (newStudentStatus === 'addPayment'){
-    //     addPayment(studentCourse);
-    // }
-    // else {
-    //     for (const chosenStudent of model.inputs.mainPage.studentIds){
-    //         model.data.studentStatus.push({ id: statusID, eventId: parseInt(newStudentStatus), courseId: parseInt(studentCourse), studentId: parseInt(chosenStudent), date: todaysDate });
-    //         statusID++;
-    //     }
-    // }
 
+    updateView();
     resetInputs ({
         'inputs.payment.enablePayment': false,
         'inputs.payment.date': '',
