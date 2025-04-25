@@ -52,6 +52,7 @@ tr:nth-child(even){
     padding-right: 10px;
     margin-right: 5px;
     margin-top: 5px;
+    cursor: pointer;
 }
 
 .filterbuttons{
@@ -64,6 +65,7 @@ tr:nth-child(even){
     padding-right: 10px;
     margin-right: 5px;
     margin-top: 5px;
+    cursor: pointer;
 }
 
 select{
@@ -94,6 +96,13 @@ input{
     color: #f2f2f2;
     border-radius: 5px;
     border: #393e46 1.5px solid;
+    cursor: pointer;
+}
+
+input:disabled,
+input[disanled]{
+    background-color: #2B2E34;
+    cursor:default;
 }
 
 input:focus{
@@ -175,6 +184,15 @@ input:focus{
 }
 
 button{
+    border: #393e46 outset 1px;
     border-radius: 5px;
     background-color: #f96d00;
+    cursor: pointer;
+    color: #222831;
+}
+
+button :disabled,
+button[disabled]{
+    color: rgba(27, 28, 30, 0.5);
+    cursor:default;
 }
