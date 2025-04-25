@@ -9,7 +9,7 @@ function makeEventButtonsHtml(){
     `;
 }
 
-function createEventSelector(payment){
+function createEventSelector(payment = false){
     return /*HTML*/`
         <select id="userChoiceStatus" onchange="eventSelectionInput('inputs.mainPage.userChoiceStatus', this.value)" required>
             <option value="" disabled selected> Legg til hendelse </option>
