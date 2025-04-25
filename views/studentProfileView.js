@@ -126,7 +126,6 @@ function drawCourseInfo(studentId){
     //     }
     // }
 
-
     // ${getCourse(payment.course).name} sum: ${total}
     return /*HTML*/ `
         <table id='studentCourseInfo'> 
@@ -172,6 +171,17 @@ function drawCourseInfo(studentId){
         </table>
     `;
 }
+
+function makePayment(studentId) {
+    debugger;
+    let payments = getPaymentData(studentId, true);
+    console.log(payments);
+}
+
+function makePayment(studentId) {
+
+}
+
 
 function drawHistory(studentId){ 
     const historyData = getStatusData(studentId, true);
