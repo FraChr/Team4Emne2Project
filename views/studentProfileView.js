@@ -110,7 +110,6 @@ function drawCourseInfo(studentId){
     let totalPaid = 0;
 
 
-
     // for (const payment of payments) {
     //     for(const course of model.data.courses){
     //         if(course.id === payment.courseId){
@@ -143,22 +142,8 @@ function drawCourseInfo(studentId){
             <tr>
                 <th style='width: 80px'> Betalt: </th>
                 <td>
-                    
                     <ul>
-                        ${Object.keys(total).map(key => {
-                            console.log(typeof(key));
-                            const course = getCourse(Number(key))
-                            return `<span class="orangeTextColor">${course.name}</span> - Total sum: <span class="orangeTextColor">${total[key]},-</span>`
-                        }).join(`<br>`)}
-                        
-                        ${payments.map((payment) => {
-                            return `
-                                <li>
-                                    ${getCourse(payment.course).name} - ${payment.amount},- ${toLocaleDate(payment.date)}
-                                </li>
-                            `
-                        }).join('')}
-                        
+                      ${makePaymentHtml(studentId)}
                     </ul>
                 </td>
                 <td  style='width: 200px'>
@@ -172,14 +157,31 @@ function drawCourseInfo(studentId){
     `;
 }
 
-function makePayment(studentId) {
-    debugger;
-    let payments = getPaymentData(studentId, true);
-    console.log(payments);
+function paymentListElementHtml(coursePayments) {
+    return coursePayments.map(payment => {
+        return `
+            <li>
+                ${getCourse(payment.course).name} - ${payment.amount},- ${toLocaleDate(payment.date)}
+            </li>
+        `
+    }).join('');
 }
 
-function makePayment(studentId) {
+function makePaymentHtml(studentId) {
+    let payments = getPaymentData(studentId, true);
 
+    return Object.keys(payments.sum).map(courseId => {
+        const course = getCourse(Number(courseId));
+        const total = payments.sum[courseId];
+
+        const coursePayments = payments.pay.filter(p => Number(p.course) === Number(courseId));
+
+        return `
+            <span class="orangeTextColor">${course.name}</span> - Total sum: <span class="orangeTextColor">${total},-</span>
+            
+            ${paymentListElementHtml(coursePayments)}
+        `
+    }).join(`<br>`)
 }
 
 
