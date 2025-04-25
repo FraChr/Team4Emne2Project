@@ -29,7 +29,7 @@ function makeTableRow(){
                         onclick="updateCheckAll()"
                     />
                 </td>
-                <td onclick="test(${status.studentId})" class="tableNameMainPage">
+                <td onclick="getStudentView(${status.studentId})" class="tableNameMainPage">
                     <span>${getStudent(status.studentId).name}</span>
                 </td>
                 <td>

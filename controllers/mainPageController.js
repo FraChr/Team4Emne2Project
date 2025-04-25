@@ -201,3 +201,8 @@ function handleToDateInput(inputedDate) {
     updateView();
 }
 
+function getStudentView(studentId){
+    model.inputs.studentPage.studentId = studentId;
+    model.app.currentPage = 'profilePage';
+    updateView();
+}

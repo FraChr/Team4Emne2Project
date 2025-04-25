@@ -1,8 +1,5 @@
-// studentView(studentId);
-function studentViewTest(){
+function studentView(){
     let studentId = model.inputs.studentPage.studentId;
-    console.log(studentId);
-    // model.app.currentPage = 'profilePage';
 
     return /*HTML*/`
         <div>
@@ -18,17 +15,6 @@ function studentViewTest(){
             </div>
         </div>
     `;
-}
-
-function getMainView(){
-    model.app.currentPage = 'mainPage';
-    updateView();
-}
-
-function test(studentId){
-    model.inputs.studentPage.studentId = studentId;
-    model.app.currentPage = 'profilePage';
-    updateView();
 }
 
 function drawStudentInfo(studentId){

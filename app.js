@@ -12,7 +12,7 @@ function updateView(){
             currentView = mainPageView();
             break;
         case 'profilePage':
-            currentView = studentViewTest();
+            currentView = studentView();
             break;
     }
     const app = document.getElementById('app');

@@ -30,19 +30,20 @@ function changeStudentStatusProfile(studentId){
     //     }
     // }
 
-    // resetInputs ({
-    //     'inputs.payment.enablePayment': false,
-    //     'inputs.payment.date': '',
-    //     'inputs.payment.amount': 0,
-    //     'inputs.mainPage.studentIds': [],
-    // });
+    resetInputs ({
+        'inputs.payment.enablePayment': false,
+        'inputs.payment.date': '',
+        'inputs.payment.amount': 0,
+        'inputs.mainPage.studentIds': [],
+    });
 }
 
 function addPaymentProfile(courseIdinput){
     model.inputs.payment.amount = document.getElementById('paymentAmountInputProfile').value;
     model.inputs.payment.date = document.getElementById('paymentDateInputProfile').value;
 
-    let paymentId = model.data.studentStatus[model.data.studentStatus.length - 1].id + 1;
+    let paymentId = generateId('data.payments')
+
 
     model.data.payments.push(
         {
@@ -53,5 +54,10 @@ function addPaymentProfile(courseIdinput){
             date: model.inputs.payment.date
         })
 
+    updateView();
+}
+
+function getMainView(){
+    model.app.currentPage = 'mainPage';
     updateView();
 }
