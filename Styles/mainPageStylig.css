@@ -108,14 +108,14 @@ input:focus{
     color: white;
 }
 #course{
-    color: orange;
+    color: #f96d00;
 }
 #event{
     color: white;
 }
 
 .orangeTextColor{
-    color: orange;
+    color: #f96d00;
 }
 
 
@@ -172,4 +172,9 @@ input:focus{
     display: flex;
     flex-direction: column;
     align-items: center;  
+}
+
+button{
+    border-radius: 5px;
+    background-color: #f96d00;
 }
