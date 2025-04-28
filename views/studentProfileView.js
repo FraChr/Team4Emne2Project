@@ -69,9 +69,6 @@ function drawCourseInfo(studentId){
                     ${createCourseSelector()}
                     
                 </td>
-                <td style="background-color: #2E3440">
-                    
-                </td>
             </tr>
             <tr>
                 <th style='width: 80px'> Betalt: </th>
@@ -83,12 +80,15 @@ function drawCourseInfo(studentId){
                 <td  style='width: 200px'>
                     ${drawPaymentSelectorProfile2()}
                 </td>
-                <td style="border-top: none; background-color: #2E3440;">
+            </tr>
+            <tr style='border: none;  background-color: #222831;' >
+                <td style='border: none;'>
+                </td>
+                <td style='border: none;'>
+                </td>
+                <td style='border: none;'>
                     ${createUpdateStatusButton()}
                 </td>
-            </tr>
-            <tr>
-            
             </tr>
         </table>
     `;

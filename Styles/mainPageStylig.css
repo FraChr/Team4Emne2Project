@@ -12,7 +12,7 @@ body{
 
 table{
     width: 75vw;
-    border: 1.5px solid #393e46;
+    /* border: 1.5px solid #393e46; */
     border-collapse: collapse;
     text-align: left;
     margin: 10px;
