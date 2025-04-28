@@ -11,7 +11,7 @@ function makeEventButtonsHtml() {
 
 function createEventSelector(payment) {
     let html = /*HTML*/` 
-        <select id="userChoiceStatus" onchange="eventSelectionInput('inputs.mainPage.userChoiceStatus', this.value)" required>
+        <select id="userChoiceStatus" onchange="eventSelectionInput('inputs.common.userChoiceStatus', this.value)" required>
         <option value="" disabled selected> Legg til hendelse </option>`;
     let counter = 0;
     html += model.data.events.map(event => {
@@ -27,7 +27,7 @@ function createEventSelector(payment) {
 
 function createCourseSelector() {
     let html = /*HTML*/` 
-        <select onchange="eventSelectionInput('inputs.mainPage.userChoiceCourse', this.value)" required>
+        <select onchange="eventSelectionInput('inputs.common.userChoiceCourse', this.value)" required>
         <option value="" disabled selected> Velg kurs </option>
     `;
     let counter = 0;

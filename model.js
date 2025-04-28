@@ -4,6 +4,12 @@ const model = {
     },
 
     inputs: {
+        common: {
+            enablePayment: false,
+            enableStatusButton: false,
+            userChoiceStatus: '',
+            userChoiceCourse: '',
+        },
         mainPage: {
             studentIds: [],
             selectedCurses: [0],
@@ -11,12 +17,8 @@ const model = {
             toDate: '',
             fromDate: '2017-01-20',
             semesterId: 0,
-            enableStatusButton: false,
-            userChoiceStatus: '',
-            userChoiceCourse: '',
         },
         payment: {
-            enablePayment: false,
             amount: 0,
             date: ''
         },
@@ -26,8 +28,6 @@ const model = {
             paymentDate: '',
             paymentCourseId: 0,
             currentSortDirection: 'desc',
-            userChoiceStatus: '',
-            userChoiceCourse: '',
         },
     },
 
