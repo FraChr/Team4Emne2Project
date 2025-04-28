@@ -29,13 +29,18 @@ function createButtonsHTML(buttonsType) {
     let selectedButtons = buttonsType === 'courses' ? selectedCoursesButtons : selectedEventsButtons;
     let dataSet = buttonsType === 'courses' ? coursesData : eventsData;
 
-    for (const data of dataSet) {
-        let buttonClass = 'filterbuttons';
-        if (selectedButtons.includes(data.id) || selectedButtons.at(0) === showAllButtonId) {
-            buttonClass = 'pushedButton';
-        }
-        html += /*HTML*/` ${createButtonHTML(data.name, data.id, buttonsType, buttonClass)}`;
-    }
+    // for (const data of dataSet) {
+    //     let buttonClass = 'filterbuttons';
+    //     if (selectedButtons.includes(data.id) || selectedButtons.at(0) === showAllButtonId) {
+    //         buttonClass = 'pushedButton';
+    //     }
+    //     html += /*HTML*/` ${createButtonHTML(data.name, data.id, buttonsType, buttonClass)}`;
+    // }
+
+    html = dataSet.map(data => {
+        let buttonClass = (selectedButtons.includes(data.id) || selectedButtons.at(0) === showAllButtonId) ? 'pushedButton' : 'filterbuttons';
+        return /*HTML*/` ${createButtonHTML(data.name, data.id, buttonsType, buttonClass)}`
+    }).join('');
 
     let buttonClass = selectedButtons.at(0) === showAllButtonId ? 'pushedButton' : 'filterbuttons';
     html += /*HTML*/` ${createButtonHTML(ShowAllButtonName, showAllButtonId, buttonsType, buttonClass)}`;
