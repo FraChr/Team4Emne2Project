@@ -65,9 +65,12 @@ function drawCourseInfo(studentId){
                     ${latestStatus.course.name} - ${latestStatus.event.name} - ${toLocaleDate(latestStatus.date)}
                 </td>
                 <td style='width: 200px'>
-                    ${drawEventSelectorProfile()}
-                    ${drawCourseSelectorProfile()}
-                    ${drawUpdateButtonProfile()}
+                    ${createEventSelector()}
+                    ${createCourseSelector()}
+                    
+                </td>
+                <td style="background-color: #2E3440">
+                    
                 </td>
             </tr>
             <tr>
@@ -78,7 +81,10 @@ function drawCourseInfo(studentId){
                     </ul>
                 </td>
                 <td  style='width: 200px'>
-                    ${drawPaymentSelectorProfile()}
+                    ${drawPaymentSelectorProfile2()}
+                </td>
+                <td style="border-top: none; background-color: #2E3440;">
+                    ${createUpdateStatusButton()}
                 </td>
             </tr>
             <tr>
@@ -86,6 +92,13 @@ function drawCourseInfo(studentId){
             </tr>
         </table>
     `;
+}
+
+function drawPaymentSelectorProfile2() {
+    const courseSelector = createCourseSelector();
+    const paymentInput = createPaymentInput(false);
+
+    return courseSelector + paymentInput;
 }
 
 function paymentListElementHtml(coursePayments) {
@@ -153,59 +166,4 @@ function drawHistory(studentId){
     `;
 }
 
-function drawEventSelectorProfile(){
-    return /*HTML*/`
-    <select id="userChoiceStatusProfile" onchange="model.inputs.studentPage.userChoiceStatus = this.value" required>
-        <option value="" disabled selected> Legg til hendelse </option>
-        <option value="1"> Søkt </option>
-        <option value="2"> Godkjent </option>
-        <option value="3"> Startet </option>
-        <option value="4"> Avbrutt </option>
-        <option value="5"> Fullført </option>
-    </select>
-        `;
-        // ${payment ? `<option value="addPayment">Betal</option>` : ''}
-    }
 
-function drawCourseSelectorProfile(){
-    return /*HTML */`
-    <select id="userChoiceCourseProfile" onchange="model.inputs.studentPage.userChoiceCourse = this.value" required>
-        <option value="" disabled selected> Velg kurs </option>
-        <option value="1"> Start IT </option>
-        <option value="2"> Frontend </option>
-        <option value="3"> Fagskolen </option>
-        <option value="4"> Get Prepared </option>
-        <option value="5"> Get IT </option>
-    </select>
-    `;
-}
-
-function drawUpdateButtonProfile(){
-    return /*HTML*/`
-        <button id="statusButtonProfile" 
-            onclick="changeStudentStatusProfile()">
-            Oppdater
-        </button>
-    `;
-}
-
-function drawPaymentSelectorProfile(){
-    return /*HTML*/`
-    <select id="userChoiceCourseProfile2" onchange="model.inputs.studentPage.userChoiceCourse = this.value" required>
-        <option value="" disabled selected> Velg kurs </option>
-        <option value="1"> Start IT </option>
-        <option value="2"> Frontend </option>
-        <option value="3"> Fagskolen </option>
-        <option value="4"> Get Prepared </option>
-        <option value="5"> Get IT </option>
-    </select>
-    
-    <input type="number" id="paymentAmountInputProfile" placeholder="Beløp" >
-    <input type="date" id="paymentDateInputProfile">
-    
-    <button id="statusButtonProfile" 
-        onclick="addPaymentProfile(document.getElementById('userChoiceCourseProfile2').value)">
-        Oppdater
-    </button>
-    `;
-}

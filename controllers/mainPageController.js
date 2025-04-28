@@ -1,9 +1,10 @@
 function checkButtonStatus(){
     const {userChoiceStatus, userChoiceCourse} = model.inputs.mainPage;
 
-    model.inputs.mainPage.enableStatusButton = !!(userChoiceStatus && userChoiceCourse);
+    model.inputs.mainPage.enableStatusButton = !!(userChoiceStatus || userChoiceCourse);
 
     model.inputs.payment.enablePayment = userChoiceStatus === 'addPayment' || model.app.currentPage === 'profilePage';
+
 
     updatePaymentInputs();
     updateStatusButton();
@@ -21,10 +22,11 @@ function changeStudentStatus(){
     let statusID = generateId('data.studentStatus');
     let todaysDate = getNewDate();
 
-    if (newStudentStatus === 'addPayment'){
+    if (newStudentStatus === 'addPayment' || newStudentStatus === ""){
         addPayment(studentCourse);
     }
     else {
+        model.inputs.mainPage.studentIds.push(model.inputs.studentPage.studentId)
         for (const chosenStudent of model.inputs.mainPage.studentIds){
             model.data.studentStatus.push(
                 {
@@ -43,12 +45,17 @@ function changeStudentStatus(){
         'inputs.payment.date': '',
         'inputs.payment.amount': 0,
         'inputs.mainPage.studentIds': [],
+        'inputs.mainPage.userChoiceStatus': ''
     });
 }
 
 function addPayment(studentCourse) {
     const maxDecimalPlaces = 2;
     let paymentId = generateId('data.payments');
+
+    if(model.app.currentPage === 'profilePage'){
+        model.inputs.mainPage.studentIds.push(model.inputs.studentPage.studentId)
+    }
 
     for (const student of model.inputs.mainPage.studentIds){
         model.data.payments.push(

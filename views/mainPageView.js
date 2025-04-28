@@ -15,7 +15,7 @@ function updatePaymentInputs(){
     document.getElementById('paymentDateInput').disabled = !enable;
 }
 
-function updateStatusButton(){
+function updateStatusButton() {
     let enable = model.inputs.mainPage.enableStatusButton;
     document.getElementById('statusButton').disabled = !enable;
 }
