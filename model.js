@@ -20,7 +20,6 @@ const model = {
             amount: 0,
             date: ''
         },
-        // kanskje fjerne studentPage
         studentPage: {
             studentId: 0,
             paymentAmount: 0,
